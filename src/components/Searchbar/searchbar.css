@@ -1,0 +1,153 @@
+.searchbar {
+    width: 100%;
+    display: flex;
+    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+    background: #E7E7E7;
+}
+
+.searchbar-input-form {
+    display: flex;
+    align-items: flex-start;
+
+    background-color: #fff;
+    padding: 1.25rem 1rem;
+    border-radius: 18px;
+
+    width: 100%;
+}
+
+.searchbar-input {
+    gap: 8px;
+}
+
+.basic-single input {
+    overflow: hidden !important;
+    resize: none !important;
+}
+
+.searchbar-input-form .region {
+    width: 45%;
+}
+
+.searchbar-input-lower {
+    width: 55%;
+}
+
+.searchbar-input-form .date {
+    width: 65%;
+    margin-top: 6px;
+}
+
+.searchbar-input-form .guests {
+    width: 35%;
+    margin-top: 6px;
+}
+
+.searchbar-input-form .date input, select, textarea{
+    color: grey;
+}
+
+.searchbar-input-form .basic-single {
+    width: 85%;
+}
+
+.searchbar-input-form .basic-single .css-13cymwt-control {
+    border: none !important;
+    outline: none !important;
+}
+
+
+.css-1jqq78o-placeholder, .css-1hb7zxy-IndicatorsContainer {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.searchbar-input input {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.searchbar-search a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.search-button {
+    display: flex;
+    margin-top: 0.8rem;
+    padding: 0.5rem 4rem;
+    flex-direction: column;
+    align-items: flex-start;
+
+    border-radius: 6px;
+    background: #40918B;
+
+    transition: all 0.3s ease;
+
+}
+
+.search-button:hover {
+    background: rgb(50, 109, 102);
+}
+
+@media screen and (max-width: 768px) {
+    .searchbar-input-form {
+        flex-direction: column;
+    }
+
+    .searchbar-input-form .region {
+        width: 100%;
+    }
+
+    .searchbar-input-form .basic-single {
+        width: 100%;
+    }
+
+    .searchbar-input-lower {
+        width: 100%;
+    }
+
+    .searchbar-input-form .date {
+        width: 50%;
+    }
+
+    .searchbar-input-form .guests {
+        width: 50%;
+    }
+
+    .searchbar-search {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .searchbar-input-form .date {
+        width: 65%;
+        border-right: 1px grey solid;
+        /* font-size: 14px; */
+    }
+
+    .searchbar-input-form .guests {
+        margin-left: 10px;
+        width: 35%;
+        /* font-size: 14px; */
+    }
+
+    .searchbar-input-form .date img, .searchbar-input-form .guests img {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 392px) {
+    .searchbar-input-form .date {
+        font-size: 14px;
+    }
+
+    .searchbar-input-form .guests {
+        font-size: 14px;
+    }
+}

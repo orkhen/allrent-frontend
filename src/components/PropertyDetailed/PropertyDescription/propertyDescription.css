@@ -1,0 +1,65 @@
+.property-detailed-overview p {
+    margin: 0;
+}
+
+.property-detailed-overview-icons {
+    gap: 1rem;
+}
+
+.property-detailed-overview-icon {
+    display: flex;
+
+    padding: 7px 14px;
+    gap: 7px;
+
+    background: #F8F7F7;
+    border-radius: 6px;
+    border: 1px solid #E7E7E7;
+
+    cursor: pointer;
+}
+
+.propert-detailed-description-text {
+    margin: 2rem 0;
+}
+
+.propert-detailed-description-text p {
+    color: #212529;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.property-detailed-owner {
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-top: 1px solid #F1F1F1;
+    border-bottom: 1px solid #F1F1F1;
+}
+
+/* .property-detailed-owner .owner-profile  */
+
+.property-detailed-owner .owner-name {
+    color: #212529;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+}
+
+.property-detailed-owner .owner-rating {
+    gap: 7px;
+}
+
+.property-detailed-owner .owner-languages {
+    color: #1D1D1D;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.property-detailed-owner .owner-languages span {
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+}

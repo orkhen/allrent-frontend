@@ -1,0 +1,98 @@
+.whyus {
+    margin: 1rem 0;
+}
+
+.whyus-container {
+    margin: 4rem auto;
+    width: 100%;
+}
+
+.whyus-header h1 {
+    color: #282d31;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 27x;
+}
+
+.whyus-elements {
+    margin-top: 2rem;
+}
+
+.elements-container {
+    margin: 0 4rem;
+}
+
+.whyus-element {
+    margin: 0 1rem;
+}
+
+.whyus-element img {
+    width: 60px;
+    height: 60px;
+}
+
+.whyus-element h4 {
+    color: #212529;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 21.6px;
+}
+
+.whyus-element p {
+    max-width: 306px;
+    color: #212529;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.whyus-slideshow {
+    display: none;
+}
+
+.whyus-carousel {
+    margin-top: 2.5rem;
+}
+
+.whyus-slideshow img{
+    height: 120px;
+    width: 120px;
+}
+
+@media screen and (max-width: 1050px) {
+
+    .elements-container {
+        margin: 0;
+    }
+
+    .whyus-element {
+        margin: 0 2rem;
+    }
+
+    .whyus-slideshow {
+        width: 60%;
+    }
+
+    .whyus-carousel {
+        margin-top: 4rem;
+    }
+
+    .whyus-container {
+        margin: 4rem 0;
+    }
+}
+
+@media screen and (max-width: 672px) {
+    .whyus {
+        height: 450px;
+    }
+
+    .whyus-elements {
+        display: none;
+    }
+
+    .whyus-slideshow {
+        display: block;
+        width: 80%;
+    }
+}   

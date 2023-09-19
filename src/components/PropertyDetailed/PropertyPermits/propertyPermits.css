@@ -1,0 +1,32 @@
+.property-detailed-permits {
+    margin-top: 1rem;
+}
+
+.property-detailed-permits h5 {
+    color: #1D1D1D;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+}
+
+.property-detailed-permits img {
+    width: 25px;
+    height: 25px;
+}
+
+.permits-icon-true {
+    padding: 0.5rem;
+    margin: 0;
+    
+    border-radius: 8px;
+    border: 1px solid #40918B;
+    background: #F7F7F7;
+}
+
+.permits-icon-false {
+    padding: 0.5rem;
+
+    border-radius: 8px;
+    border: 1px solid #EB6B69;
+    background: #F7F7F7;
+}

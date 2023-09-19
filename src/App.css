@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Mulish:wght@200;400;500;600;700;800;900&family=Reem+Kufi:wght@400;500;600;700&family=Roboto:wght@100&display=swap');
+@import "react-alice-carousel/lib/alice-carousel.css";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  width: 100hv;
+  font-family: Inter;
+}

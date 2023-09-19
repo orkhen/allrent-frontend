@@ -1,0 +1,28 @@
+.property-detailed-conditions img {
+    width: 24px;
+    height: 24px;
+}
+
+.conditions-header {
+    margin-top: 2rem;
+}
+
+.conditions-header h5 {
+    color: #1D1D1D;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+}
+
+.conditions-icons {
+    margin-top: 2rem;
+    gap: 1rem 0;
+}
+
+.conditions-icon {
+    width: 50%;
+}
+
+.conditions-icons p {
+    margin: 0;
+}

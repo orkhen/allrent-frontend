@@ -1,0 +1,34 @@
+.property-detailed-category {
+    margin-top: 1rem;
+}
+
+.property-detailed-category-text h5 {
+    font-size: 18px;
+}
+
+.property-detailed-price {
+    background-color: #DAEFEE;
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+    gap: 7px;
+}
+
+.property-detailed-price p {
+    margin: 0;
+    padding: 0;
+    
+    color: #35605e;
+    vertical-align: middle;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.property-detailed-price p svg {
+    margin-right: 5px;
+    margin-bottom: 4px;
+}
+
+.property-detailed-price p span {
+    font-size: 14px;
+    font-weight: 500;
+}

@@ -1,0 +1,21 @@
+.property-detailed-guests-opinion {
+    background: rgba(190, 216, 214, 0.35);
+    border-radius: 18px;
+    margin-top: 1rem;
+    /* width: 60%; */
+}
+
+.property-detailed-guests-opinion .opinion-text {
+    margin: 0.5rem 2rem;
+    margin-left: 1rem;
+}
+
+.property-detailed-guests-opinion h5, 
+.property-detailed-guests-opinion p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.property-detailed-guests-opinion .opinion-icon {
+    margin-left: 1rem;
+}
