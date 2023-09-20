@@ -1,40 +1,57 @@
 import React from 'react'
 import './propertyDescription.css'
 
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';    
+
 const PropertyDescription = () => {
   return (
-    <div className="property-detailed-description">
+    <div className="property-detailed-description mt-4">
         <div className="property-detailed-overview">
-            <div className="property-detailed-overview-icons d-flex flex-wrap">
-                    <div className="property-detailed-overview-icon">
-                        <img src="https://allrent.io/homepage/images/svg/details/guest_count.svg" alt="detail icon"/>
-                        <p>9</p>
-                    </div>
+            <div className="property-detailed-overview-icons">
+                <Splide options={{ type: 'slide',perPage: 2, rewind: false, drag: 'free', speed: 3000, gap: 0, arrows: false, pagination: false, start: 0}}>
+                    <SplideSlide>
+                        <div className="property-detailed-overview-icon">
+                            <img src="https://allrent.io/homepage/images/svg/details/guest_count.svg" alt="detail icon"/>
+                            <p>9</p>
+                        </div>
+                    </SplideSlide>
+                    
+                    <SplideSlide>
+                        <div className='property-detailed-overview-icon'>
+                            <img src="https://allrent.io/homepage/images/svg/details/bedroom_count.svg" alt="detail icon"/>
+                            <p>3</p>
+                        </div>
+                    </SplideSlide>
 
-                    <div className='property-detailed-overview-icon'>
-                        <img src="https://allrent.io/homepage/images/svg/details/bedroom_count.svg" alt="detail icon"/>
-                        <p>3</p>
-                    </div>
+                    <SplideSlide>
+                        <div className='property-detailed-overview-icon'>
+                            <img src="https://allrent.io/homepage/images/svg/details/bed_count.svg" alt="detail icon"/>
+                            <p>0</p>
+                        </div>
+                    </SplideSlide>
 
-                    <div className='property-detailed-overview-icon'>
-                        <img src="https://allrent.io/homepage/images/svg/details/bed_count.svg" alt="detail icon"/>
-                        <p>0</p>
-                    </div>
+                    <SplideSlide>
+                        <div className='property-detailed-overview-icon'>
+                            <img src="https://allrent.io/homepage/images/svg/details/double_bed_count.svg" alt="detail icon"/>
+                            <p>3</p>
+                        </div>
+                    </SplideSlide>
 
-                    <div className='property-detailed-overview-icon'>
-                        <img src="https://allrent.io/homepage/images/svg/details/double_bed_count.svg" alt="detail icon"/>
-                        <p>3</p>
-                    </div>
+                    <SplideSlide>
+                        <div className='property-detailed-overview-icon'>
+                            <img src="https://allrent.io/homepage/images/svg/details/bathroom_count.svg" alt="detail icon"/>
+                            <p>1</p>
+                        </div>
+                    </SplideSlide>
 
-                    <div className='property-detailed-overview-icon'>
-                        <img src="https://allrent.io/homepage/images/svg/details/bathroom_count.svg" alt="detail icon"/>
-                        <p>1</p>
-                    </div>
-
-                    <div className='property-detailed-overview-icon'>
-                        <img src="https://allrent.io/homepage/images/svg/details/additional_room_count.svg" alt="detail icon"/>
-                        <p>2</p>
-                    </div>
+                    <SplideSlide>
+                        <div className='property-detailed-overview-icon'>
+                            <img src="https://allrent.io/homepage/images/svg/details/additional_room_count.svg" alt="detail icon"/>
+                            <p>2</p>
+                        </div>
+                    </SplideSlide>
+                </Splide>
             </div>
         </div>
 

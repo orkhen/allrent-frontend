@@ -1,0 +1,17 @@
+.property-detailed-reserve {
+    margin: 1rem 0;
+    display: none;
+}
+
+.property-detailed-reserve a {
+    text-decoration: none;
+}
+
+.property-detailed-reserve-text {
+    width: 40%;
+    background: #fd6164;
+    padding: 0.5rem 2rem;
+    border-radius: 6px;
+    color: white;
+    border: 2px solid #fd6164;
+}

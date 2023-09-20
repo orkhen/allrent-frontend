@@ -1,0 +1,25 @@
+.property-detailed-comments {
+    margin-top: 2rem;
+}
+
+.property-detailed-comments .comments-soon {
+    border-radius: 6px;
+    background: rgba(190, 216, 214, 0.35);
+    box-shadow: 0px 1px 9px 0px rgba(177, 177, 177, 0.25);
+
+    padding: 0.5rem 1rem;
+}
+
+.property-detailed-comments h5 {
+    color: #1D1D1D;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+}
+
+.property-detailed-comments p {
+    color: #212529;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+}

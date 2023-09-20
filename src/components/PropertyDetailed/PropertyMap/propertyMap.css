@@ -1,0 +1,17 @@
+.property-detailed-map .map-body {
+    width: 100%;
+    height: 266px;
+    /* background-color: #40918b; */
+}
+
+.property-detailed-map h5 {
+    color: #1D1D1D;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+}
+
+.property-map {
+    height: 100%;
+    width: 100%;
+}

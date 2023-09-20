@@ -8,12 +8,14 @@ import Soon from '../../components/Soon/Soon'
 import PageFooter from '../../components/Footer/Footer'
 
 import './mainpage.css'
+import SearchbarProperty from '../../components/SearchbarProperty/SearchbarProperty';
 
 const MainPage = () => {
   return (
     <div>
       <PageNav />
-      <Searchbar/>
+      {/* <Searchbar/> */}
+      <SearchbarProperty/>
       <WhyUs/>
       <Categories/>
       <Properties title={'Bütün evlər'}/>

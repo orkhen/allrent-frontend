@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="page">
       <Router>
-        <Routes> {/* Use 'Routes' here */}
+        <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/property/:id" element={<PropertyPage />} />
         </Routes>

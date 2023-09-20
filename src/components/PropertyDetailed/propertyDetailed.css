@@ -4,7 +4,7 @@
 
 .property-detailed-title h5 {
     color: #1D1D1D;
-    font-size: 24px;;
+    font-size: 24px;
     font-weight: 600;
     line-height: 36px;
 }
@@ -24,6 +24,10 @@
     text-align: center;
 }
 
+/* .property-detailed-options .property-detailed-like svg path {
+    filter: invert(17%) sepia(80%) saturate(7410%) hue-rotate(359deg) brightness(95%) contrast(116%);
+} */
+
 .property-detailed-options svg {
     cursor: pointer;
 }
@@ -36,32 +40,15 @@
 }
 
 .property-detailed-main {
+    width: 100%;
+}
+
+.property-detailed-content {
     width: 60%;
 }
 
-.property-detailed-reserve {
-    margin: 1rem 0;
-}
 
-.property-detailed-reserve a {
-    text-decoration: none;
-}
 
-.property-detailed-reserve-text {
-    width: 40%;
-    background: #fd6164;
-    padding: 0.5rem 2rem;
-    border-radius: 6px;
-    color: white;
-    border: 2px solid #fd6164;
-}
-
-.property-detailed-dates .dates-header h5 {
-    color: #1D1D1D;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 27px;
-}
 
 .property-detailed-dates p {
     margin: 0;
@@ -81,23 +68,48 @@
     margin: auto 0;
 }
 
+.footer-main {
+    margin-top: 2rem;
+}
+
 @media screen and (max-width: 992px) {
     .images-more-text {
         font-size: 14px;
+    }  
+
+    .property-detailed-container {
+        margin: 0 2rem;
     }
 }
 
 @media screen and (max-width: 778px) {
     .property-detailed-main {
+        flex-direction: column;
+    }
+
+    .property-detailed-reservation {
+        width: 100% !important;  
+        margin-top: 1rem;
+    }
+
+    .property-detailed-content {
         width: 100%;
     }
 
     .property-detailed-container {
-        margin: 0 2rem;
+        margin: 0 1rem;
     }
 
     .property-detailed-reserve-text {
         width: 60%;
+    }
+
+    .property-image-secondary {
+        display: none;
+    }
+
+    .property-detailed-reserve {
+        display: block !important;
     }
 }
 
@@ -108,5 +120,23 @@
 
     .property-detailed-reserve-text {
         width: 100%;
+    }
+
+    .property-detailed-title {
+        width: 100%;
+        
+    }
+
+    .property-detailed-title h5 {
+        font-size: 18px;
+        justify-content: space-between;
+    }
+
+    .property-detailed-options {
+        display: none !important;
+    }
+
+    .property-detailed-reserve-text {
+        width: 80% !important;
     }
 }

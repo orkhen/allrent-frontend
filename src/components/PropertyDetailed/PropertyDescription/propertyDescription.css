@@ -6,10 +6,15 @@
     gap: 1rem;
 }
 
+.property-detailed-overview-icons .splide__slide {
+    width: auto !important;
+}
+
 .property-detailed-overview-icon {
     display: flex;
 
     padding: 7px 14px;
+    margin-right: 8px;
     gap: 7px;
 
     background: #F8F7F7;
