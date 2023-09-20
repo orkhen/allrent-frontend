@@ -1,7 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-date-range/dist/styles.css';
-import 'react-date-range/dist/theme/default.css';
+// import 'react-date-range/dist/styles.css';
+// import 'react-date-range/dist/theme/default.css';
 import 'rsuite/dist/rsuite-no-reset.min.css';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
