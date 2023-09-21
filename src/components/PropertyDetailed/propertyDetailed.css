@@ -47,34 +47,13 @@
     width: 60%;
 }
 
-
-
-
-.property-detailed-dates p {
-    margin: 0;
-}
-
-.property-detailed-dates .green-line {
-    width: 24px;
-    height: 1.5px;
-    background: #40918b;
-    margin: auto 0;
-}
-
-.property-detailed-dates .red-line {
-    width: 24px;
-    height: 1.5px;
-    background: #FE4343;
-    margin: auto 0;
-}
-
 .footer-main {
     margin-top: 2rem;
 }
 
 @media screen and (max-width: 992px) {
     .images-more-text {
-        font-size: 14px;
+        font-size: 14px !important;
     }  
 
     .property-detailed-container {
@@ -89,7 +68,7 @@
 
     .property-detailed-reservation {
         width: 100% !important;  
-        margin-top: 1rem;
+        margin-top: 1rem !important;
     }
 
     .property-detailed-content {
@@ -101,7 +80,7 @@
     }
 
     .property-detailed-reserve-text {
-        width: 60%;
+        width: 60% !important;
     }
 
     .property-image-secondary {
@@ -119,7 +98,7 @@
     }
 
     .property-detailed-reserve-text {
-        width: 100%;
+        width: 100% !important;
     }
 
     .property-detailed-title {

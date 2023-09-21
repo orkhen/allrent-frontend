@@ -1,0 +1,60 @@
+.navbar-bottom {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 1.5rem;
+    width: 100%;
+    transition: transform 0.3s;
+    z-index: 1000;
+}
+
+.navbar-bottom.visible {
+transform: translateY(0);
+}
+
+.navbar-bottom.hidden {
+transform: translateY(100%);
+}
+
+.navbar-bottom-container {
+    margin: 0 auto;
+}
+
+.navbar-bottom-nav {
+    color: rgb(176, 176, 176) !important;
+    gap: 5rem;
+}
+
+.navbar-bottom-nav a {
+    text-decoration: none;
+    color: rgb(176, 176, 176);
+}
+
+.navbar-bottom-search svg,
+.navbar-bottom-liked svg {
+    display: block; 
+    fill: none; 
+    height: 24px; 
+    width: 24px; 
+    stroke: currentcolor; 
+    stroke-width: 4; 
+    overflow: visible;
+}
+
+.navbar-bottom-account svg {
+    display: block; 
+    height: 24px; 
+    width: 24px; 
+    fill: currentcolor;
+    stroke: currentColor;
+    stroke-width: 1;
+}
+
+@media screen and (max-width: 576px) {
+    .navbar-bottom {
+        display: flex;
+    }
+}

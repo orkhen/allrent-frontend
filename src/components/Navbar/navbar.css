@@ -178,6 +178,15 @@
     left: 0;
 }
   
+.daterangepicker td.disabled {
+    text-decoration: none !important;
+}
+
+/* td.off.available,
+td.off.ends.off.disabled {
+    color: transparent;
+    display: none;
+} */
 
 @media screen and (max-width: 992px) {
     .navbar-brand {
@@ -206,12 +215,6 @@
 
     .navbar-menu-toggler {
         display: block !important;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .fixed-navbar {
-        position: static;
     }
 }
 

@@ -11,7 +11,7 @@ const Searchbar = () => {
   ]
 
   return (
-    <div className="searchbar">
+    <div className="searchbar" id='searchbar'>
       <div className="searchbar-container d-flex flex-column align-items-center">
         <div className='searchbar-input-form d-flex'>
           <div className='searchbar-input region d-flex'>

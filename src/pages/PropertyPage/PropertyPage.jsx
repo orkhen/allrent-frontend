@@ -4,6 +4,8 @@ import SearchbarProperty from '../../components/SearchbarProperty/SearchbarPrope
 
 import './propertypage.css'
 import PropertyDetailed from '../../components/PropertyDetailed/PropertyDetailed';
+import BottomNav from '../../components/BottomNav/BottomNav';
+import PageFooter from '../../components/Footer/Footer';
 
 const PropertyPage = () => {
   return (
@@ -11,6 +13,8 @@ const PropertyPage = () => {
       <PageNav/>
       <SearchbarProperty/>
       <PropertyDetailed/>
+      <PageFooter/>
+      <BottomNav/>
     </div>
   )
 }

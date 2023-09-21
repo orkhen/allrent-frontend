@@ -20,6 +20,7 @@
     "react": "^18.2.0",
     "react-alice-carousel": "^2.7.1",
     "react-bootstrap": "^2.8.0",
+    "react-datepicker": "^4.18.0",
     "react-daterangepicker": "^0.1.2",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",

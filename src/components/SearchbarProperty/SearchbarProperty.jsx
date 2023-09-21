@@ -20,7 +20,7 @@ const SearchbarProperty = () => {
       }, []);
 
   return (
-    <div className={`searchbar-property d-flex flex-column align-items-center ${isSearchbarFixed ? 'fixed-searchbar' : ''}`}>
+    <div className={`searchbar-property d-flex flex-column align-items-center ${isSearchbarFixed ? 'fixed-searchbar' : ''}`} id='searchbar'>
       <div className="searchbar-property-container">
         <div className="searchbar-property-input-form d-flex">
             <div className="searchbar-property-input">

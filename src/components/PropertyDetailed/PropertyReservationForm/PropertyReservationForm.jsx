@@ -1,9 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import './propertyReservationForm.css'
 
+import { DateRange } from 'react-date-range';
+import { range } from 'lodash';
 
 const PropertyReservationForm = () => {
     const [guests, setGuests] = useState(1)
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+    const [selectedDates, setSelectedDates] = useState([
+    {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection'
+    }
+    ]);
+
+    // const calendarRef = useRef(null);
 
     const handleIncrement = () => {
         if (guests < 9) {
@@ -19,10 +31,8 @@ const PropertyReservationForm = () => {
 
     const handleInputChange = (event) => {
         const inputValue = event.target.value;
-        // Ensure the input value is a number
         if (!isNaN(inputValue)) {
-          // Limit the number of guests to a minimum of 1 and a maximum of 5
-          const newGuests = Math.min(Math.max(parseInt(inputValue, 10), 1), 5);
+          const newGuests = Math.min(Math.max(parseInt(inputValue, 10), 1), 9);
           if (isNaN(newGuests)) {
             setGuests('')
           } else {
@@ -30,6 +40,19 @@ const PropertyReservationForm = () => {
           }
         }
       };
+
+    const handleCalendarToggle = () => {
+        setIsCalendarOpen(!isCalendarOpen);
+    };
+
+    const handleDateSelect = (ranges) => {
+        setSelectedDates([ranges.selection])
+        if ([ranges.selection][0].startDate != [ranges.selection][0].endDate) {
+            setIsCalendarOpen(false)
+        }
+    };
+
+    var today = new Date();
   return (
     <div className="property-detailed-reservation">
         <div className="property-reservation-form">
@@ -54,30 +77,45 @@ const PropertyReservationForm = () => {
                     </div>
                 </div>
 
-                <div className="reservation-form-inputs">
+                <div className="reservation-form-inputs noselect">
                     <div className="reservation-form-dates d-flex">
-                        <div className="reservation-move-in">
+                        <div className="reservation-move-in" onClick={handleCalendarToggle}>
                             <h5>Giriş</h5>
-                            <input type='text' placeholder='Kalendardan tarix seçin'/>
+                            <p className='m-0' onClick={handleCalendarToggle}>{selectedDates[0].startDate ? selectedDates[0].startDate.toLocaleDateString() : "Kalendardan tarix seçin"}</p>
                         </div>
 
-                        <div className="reservation-move-out">
+                        <div className="reservation-move-out" onClick={handleCalendarToggle}>
                             <h5>Çıxış</h5>
-                            <input type='text' placeholder='Kalendardan tarix seçin'/>
+                            <p className='m-0' onClick={handleCalendarToggle}>{selectedDates[0].endDate ? selectedDates[0].endDate.toLocaleDateString() : ''}</p>
                         </div>
                     </div>
+
+                    {isCalendarOpen && (
+                        <DateRange
+                            // ref={calendarRef}
+                            className="daterange-custom"
+                            editableDateInputs={true}
+                            onChange={handleDateSelect} 
+                            moveRangeOnFirstSelection={false}
+                            ranges={selectedDates}
+                            months={1}
+                            direction="horizontal"
+                            rangeColors={['#FE4343']}
+                            minDate={today}
+                        />
+                    )}
 
                     <div className="reservation-form-guests">
                         <h5>Qonaq sayı</h5>
 
                         <div className="guests-number-input d-flex gap-2">
-                            <div className="guests-number-decrement" onClick={handleDecrement}>
+                            <div className="guests-number-decrement noselect" onClick={handleDecrement}>
                                 -
                             </div>
 
                             <input type='text' value={guests} onChange={handleInputChange} />
 
-                            <div className="guests-number-increment" onClick={handleIncrement}>
+                            <div className="guests-number-increment noselect" onClick={handleIncrement}>
                                 +
                             </div>
                         </div>

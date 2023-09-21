@@ -1,0 +1,18 @@
+.property-detailed-dates p {
+    margin: 0;
+}
+
+.property-detailed-dates .green-line {
+    width: 24px;
+    height: 1.5px;
+    background: #40918b;
+    margin: auto 0;
+}
+
+.property-detailed-dates .red-line {
+    width: 24px;
+    height: 1.5px;
+    background: #FE4343;
+    margin: auto 0;
+}
+

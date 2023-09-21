@@ -35,12 +35,14 @@ const PropertyImages = () => {
         'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
         'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.15.55-f8d8-decb-2c38-d3c4.webp',
         'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
-        'https://allrent.io/storage/medium_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
+        // 'https://allrent.io/storage/medium_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
         'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
         'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
         'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.15.55-f8d8-decb-2c38-d3c4.webp',
         'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
     ]
+
+    const propertySlidePhotos = propertyPhotos.slice(1, propertyPhotos.length - 1)
 
     const propertyPhotosSecondary = propertyPhotos.slice(1, 4)
 
@@ -49,7 +51,7 @@ const PropertyImages = () => {
           <div className="row property-image-main">
             {windowWidth <= 778 ? (
               <Carousel touch={true} interval={null} className="property-images-carousel">
-                {propertyPhotos.map((photo, index) => (
+                {propertySlidePhotos.map((photo, index) => (
                   <Carousel.Item
                     interval={10}
                     className="property-images-carousel-item"
@@ -92,8 +94,8 @@ const PropertyImages = () => {
             <Modal.Body>
               {/* <img src={propertyPhotos[selectedImageIndex]} alt="property image" /> */}
               <div className="modal-image-container d-flex align-items-center">
-              <Carousel data-bs-theme="dark" indicators={false} touch={true} interval={null} className="property-modal-carousel">
-                {propertyPhotos.map((photo, index) => (
+              <Carousel data-bs-theme={windowWidth > 992 ? "dark" : undefined} indicators={false} touch={true} interval={null} className="property-modal-carousel">
+                {propertySlidePhotos.map((photo, index) => (
                   <Carousel.Item
                     interval={10}
                     className="property-images-carousel-item"

@@ -75,13 +75,17 @@
         flex-direction: column;
         text-align: center;
         align-items: center;
-    }
 
-    .footer-content {
         gap: 2rem;
     }
 
     .footer-rights {
         margin-top: 2rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .footer-container {
+        margin: 0 2rem;
     }
 }

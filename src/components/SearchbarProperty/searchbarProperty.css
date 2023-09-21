@@ -16,7 +16,7 @@
     display: flex;
     border-radius: 20px;
     border: 1px solid #E7E7E7;
-    padding: 0.5rem 1rem;
+    padding: 0.3rem 1rem;
     padding-right: 0.5rem;
 }
 
@@ -39,7 +39,7 @@
     /* background-color: transparent; */
     background: #40918B;
     border-radius: 50%;
-    padding: 0.5rem;
+    padding: 0.7rem;
 }
 
 .searchbar-property-input svg {
@@ -105,7 +105,7 @@
         width: 40%;
         height: 35px;
     }
-    .fixed-searchbar {
+    /* .fixed-searchbar {
         position: sticky;
         top: 0;
         left: 0;
@@ -115,5 +115,5 @@
         box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.234);   
     
         padding: 2rem 0;
-    }
+    } */
 }

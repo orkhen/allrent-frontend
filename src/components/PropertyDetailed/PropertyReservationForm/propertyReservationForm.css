@@ -35,10 +35,7 @@
 .reservation-form-dates {
     width: 100%;
     border-bottom: 1px solid #E7E7E7;
-}
-
-.reservation-form-dates div {
-    padding: 1rem;
+    position: relative;
 }
 
 .reservation-form-inputs h5 {
@@ -74,6 +71,7 @@
 .reservation-move-in,
 .reservation-move-out {
     width: 50%;
+    margin: 1rem;
 }
 
 .reservation-form-guests {
@@ -149,4 +147,86 @@
 
     font-size: 18px;
     font-weight: 700;
+}
+
+.daterange-custom {
+    width: 100%;
+}
+.rdrMonthAndYearWrapper  {
+    padding: 0 !important;
+}
+
+.rdrCalendarWrapper {
+    margin: 0 auto;
+    /* position: absolute; */
+}
+
+.rdrMonths, .rdrMonth {
+    width: 100%;
+    margin: 0 auto;
+    /* width: 100%; */
+}
+
+/* .rdrMonth {
+    width: 100%;
+} */
+
+.rdrDateDisplayWrapper {
+    background: transparent;
+}
+
+.rdrDateDisplay {
+    margin: 0;
+}
+
+.element.style {
+    border: none;
+    outline: none;
+}
+
+.rdrDateDisplayItem + .rdrDateDisplayItem {
+    margin: 0;
+}
+
+.rdrDateDisplayItemActive {
+    border: none;
+}
+
+.rdrDayToday .rdrDayNumber span:after {
+    background-color: rgb(254, 67, 67);
+}
+
+.rdrDateDisplayWrapper {
+    display: none;
+}
+
+/* .rdrDayHovered .rdrDayNumber {
+    border-color: transparent !important;
+    outline: none !important;
+    background-color: black;
+} */
+
+@media screen and (max-width: 778px) {
+    .rdrMonths  {
+        margin: 0 2rem;
+        width: auto;
+        /* width: 100%; */
+    }
+    
+    .rdrMonth {
+        margin: 0;
+        width: 100%;
+    }    
+}
+
+@media screen and (max-width: 576px) {
+    .rdrMonths  {
+        margin: 0 0rem;
+        /* width: 100%; */
+    }
+    
+    .rdrMonth {
+        margin: 0;
+        width: 100%;
+    }    
 }

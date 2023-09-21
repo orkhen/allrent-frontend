@@ -9,19 +9,21 @@ import PageFooter from '../../components/Footer/Footer'
 
 import './mainpage.css'
 import SearchbarProperty from '../../components/SearchbarProperty/SearchbarProperty';
+import BottomNav from '../../components/BottomNav/BottomNav';
 
 const MainPage = () => {
   return (
     <div>
       <PageNav />
-      {/* <Searchbar/> */}
-      <SearchbarProperty/>
+      <Searchbar/>
+      {/* <SearchbarProperty/> */}
       <WhyUs/>
       <Categories/>
       <Properties title={'Bütün evlər'}/>
       <Soon/>
       <Properties title={'Yaxınlıqda olan evlər'}/>
       <PageFooter/>
+      <BottomNav/>
     </div>
   )
 }
