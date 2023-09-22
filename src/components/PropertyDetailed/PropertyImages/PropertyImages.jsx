@@ -5,6 +5,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button'
 import ModalHeader from 'react-bootstrap/esm/ModalHeader';
+import CarouselItem from 'react-bootstrap/esm/CarouselItem';
 
 const PropertyImages = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -94,7 +95,7 @@ const PropertyImages = () => {
             <Modal.Body>
               {/* <img src={propertyPhotos[selectedImageIndex]} alt="property image" /> */}
               <div className="modal-image-container d-flex align-items-center">
-              <Carousel data-bs-theme={windowWidth > 992 ? "dark" : undefined} indicators={false} touch={true} interval={null} className="property-modal-carousel">
+              <Carousel fade data-bs-theme={windowWidth > 992 ? "dark" : undefined} indicators={false} touch={true} interval={null} className="property-modal-carousel">
                 {propertySlidePhotos.map((photo, index) => (
                   <Carousel.Item
                     interval={10}

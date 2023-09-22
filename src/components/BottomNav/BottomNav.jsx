@@ -9,10 +9,11 @@ const BottomNav = () => {
 
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
+      const scrollDifference = prevScrollPos - currentScrollPos;
 
-      if (prevScrollPos > currentScrollPos) {
+      if (scrollDifference > 5) {
         setIsVisible(true);
-      } else {
+      } else if (scrollDifference < -15) {
         setIsVisible(false);
       }
 
