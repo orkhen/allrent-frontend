@@ -117,11 +117,11 @@ const PageNav = ({activeLink}) => {
 
                         <div className="side-menu-buttons">
                             <div className="side-menu-button-top text-center">
-                                <a href=''>Daxil ol</a>
+                                <a href='/login'>Daxil ol</a>
                             </div>
 
                             <div className="side-menu-button-bottom text-center">
-                                <a href=''>Qeydiyyatdan keç</a>
+                                <a href='/register'>Qeydiyyatdan keç</a>
                             </div>
                         </div>
                     </div>
