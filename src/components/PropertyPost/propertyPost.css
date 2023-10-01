@@ -1,0 +1,68 @@
+.property-post {
+    width: 100%;
+    /* height: 100vh; */
+}
+
+.property-post-container {
+    width: 70%;
+    gap: 6rem;
+}
+
+.property-post-upper {
+    gap: 4rem;
+}
+
+.property-post-content {
+    width: 50%;
+    margin-top: 4rem;
+}
+
+.property-post-header {
+    background: var(--Main-color, #FE4343);
+}
+
+.property-post-header h4 {
+    color: var(--BG-color, #FEFEFE);
+    font-size: 32px;
+    font-weight: 700;
+    padding: 0.5rem;
+    line-height: 46px;
+}
+
+.property-post-description {
+    margin-top: 2rem;
+}
+
+.property-post-description p {
+    color: var(--Gray, #6C6C6C);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 145%;
+}
+
+.property-post-points {
+    margin-top: 2.5rem;
+    gap: 0.8rem;
+}
+
+.property-post-point p {
+    color: var(--Gray, #6C6C6C);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.property-post-point svg {
+    margin-top: 6px;
+}
+
+.property-post-button {
+    color: var(--BG-color, #FEFEFE);
+    font-size: 18px;
+    font-weight: 600;
+
+    border-radius: 50px;
+    background: var(--Main-green, #40918B);
+
+    padding: 1rem 2.5rem;
+    margin-bottom: 6rem;
+}

@@ -1,0 +1,140 @@
+.signinform-container {
+    margin: 4rem auto;
+    width: 60%;
+}
+
+.signinform-header h4 {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.signinform-inputs {
+    width: 50%;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+.signinform-inputs input {
+    display: flex;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    align-items: center;
+    flex-shrink: 0;
+
+    border-radius: 5px;
+    border: 1px solid var(--Ds-color, #D9D9D9);
+
+    transition: 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.signinform-inputs input::placeholder {
+    color: var(--Ds-color, #D9D9D9);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.signinform-inputs input:focus {
+    border: 1px solid #40918b;
+    outline: none;
+}
+
+.signinform-inputs .input-error {
+    border: 1px solid var(--Ds-color, #FE4343) !important;   
+}
+
+.signinform-inputs label {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.signinform-inputs .error-message {
+    color: red;
+    font-size: 12px;
+}
+
+.signinform-inputs .password-input {
+    position: relative;
+}
+
+.signinform-inputs .showPassword, .hidePassword {
+    position: absolute;
+    right: 3%;
+    font-size: 30px;
+    top: 36px;
+    cursor: pointer;
+}
+
+.signinform-buttons {
+    width: 50%;
+    gap: 0.5rem;
+}
+
+.signinform-buttons .signin-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50px;
+
+    width: 100%;
+    padding: 1rem 2rem;
+
+    cursor: pointer;
+}
+
+.signinform-buttons .signin {
+    background: var(--Ds-color, #D9D9D9);
+    color: var(--BG-color, #FEFEFE);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.signinform-buttons .google {
+    border: 1px solid black;
+}
+
+.active-button {
+    background: var(--Main-color, #FE4343) !important;
+}
+
+.signinform-others {
+    margin-top: 1.5rem;
+}
+
+.signinform-others p {
+    color: var(--Font-color, #1D1D1D);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.signinform-others a {
+    color: var(--Main-color, #40918B);
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 992px) {
+    .signinform-inputs, .signinform-buttons {
+        width: 65%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .signinform-inputs, .signinform-buttons {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .signinform-container {
+        width: 75%;
+    }
+
+    .signinform-inputs, .signinform-buttons {
+        width: 100%;
+    }
+}

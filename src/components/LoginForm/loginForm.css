@@ -1,0 +1,140 @@
+.loginform-container {
+    margin: 4rem auto;
+    width: 60%;
+}
+
+.loginform-header h4 {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.loginform-inputs {
+    width: 50%;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+.loginform-inputs input {
+    display: flex;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    align-items: center;
+    flex-shrink: 0;
+
+    border-radius: 5px;
+    border: 1px solid var(--Ds-color, #D9D9D9);
+
+    transition: 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.loginform-inputs .input-error {
+    border: 1px solid var(--Ds-color, #FE4343) !important;   
+}
+
+.loginform-inputs input::placeholder {
+    color: var(--Ds-color, #D9D9D9);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.loginform-inputs input:focus {
+    border: 1px solid #40918b;
+    outline: none;
+}
+
+.loginform-inputs label {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.loginform-inputs .error-message {
+    color: red;
+    font-size: 12px;
+}
+
+.loginform-inputs .password-input {
+    position: relative;
+}
+
+.loginform-inputs .showPassword, .hidePassword {
+    position: absolute;
+    right: 3%;
+    font-size: 30px;
+    top: 36px;
+    cursor: pointer;
+}
+
+.loginform-buttons {
+    width: 50%;
+    gap: 0.5rem;
+}
+
+.loginform-buttons .login-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50px;
+
+    width: 100%;
+    padding: 1rem 2rem;
+
+    cursor: pointer;
+}
+
+.loginform-buttons .login {
+    background: var(--Ds-color, #D9D9D9);
+    color: var(--BG-color, #FEFEFE);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.loginform-buttons .google {
+    border: 1px solid black;
+}
+
+.active-button {
+    background: var(--Main-color, #FE4343) !important;
+}
+
+.loginform-others {
+    margin-top: 1.5rem;
+}
+
+.loginform-others .create-account p {
+    color: var(--Font-color, #1D1D1D);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.loginform-others .create-account a, .loginform-others .forgot-password a {
+    color: var(--Main-color, #FE4343);
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 992px) {
+    .loginform-inputs, .loginform-buttons {
+        width: 65%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .loginform-inputs, .loginform-buttons {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .loginform-container {
+        width: 75%;
+    }
+
+    .loginform-inputs, .loginform-buttons {
+        width: 100%;
+    }
+}

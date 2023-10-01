@@ -5,7 +5,9 @@ import { RxHamburgerMenu } from 'react-icons/rx'
 import { AiOutlineClose } from 'react-icons/ai'
 import './navbar.css'
 
-const PageNav = () => {
+const PageNav = ({activeLink}) => {
+    const [isLogged, setIsLogged] = useState(true)
+
     const [menuToggled, setMenuToggled] = useState(false)
     const [isNavbarFixed, setIsNavbarFixed] = useState(false);
 
@@ -41,16 +43,43 @@ const PageNav = () => {
                         <a href='' className='navbar-link'>
                             <img src='https://allrent.io/homepage/images/svg/world.svg' alt='language' className='navbar-img-language'/>
                         </a>
-                        <a href='' className='navbar-link'>Daxil ol</a>
-                        <a href='' className='create-account-button'>Hesab yarat</a>
+                        <a href='/login' className='navbar-link'>Daxil ol</a>
+                        <a href='/register' className='create-account-button'>Hesab yarat</a>
                     </nav>
                     
                     <nav className='navbar-links-bottom d-flex justify-content-center align-items-center'>
-                        <a href='' className='navbar-link' id='active-page'>Ana səhifə</a>
-                        <a href='' className='navbar-link'>Xəritə</a>
-                        <a href='' className='navbar-link'>Rezervasiyalar</a>
-                        <a href='' className='navbar-link'>Bəyənilər</a>
-                        <a href='' className='post-property-button'>Ev paylaş</a>
+                        <a href='/' className='navbar-link' id={activeLink === 'home' ? 'active-page' : 'none'}>Ana səhifə</a>
+                        <a href={isLogged ? '/map' : ''} className='navbar-link' id={activeLink === 'map' ? 'active-page' : 'none'}
+                        onClick={(e) => {
+                            if (!isLogged) {
+                                e.preventDefault();
+                                console.log('Clicked');}}}>
+                            Xəritə
+                        </a>
+
+                        <a href={isLogged ? '/reservations' : ''} className='navbar-link' id={activeLink === 'reservations' ? 'active-page' : 'none'}
+                        onClick={(e) => {
+                            if (!isLogged) {
+                                e.preventDefault();
+                                console.log('Clicked');}}}>
+                            Rezervasiyalar
+                        </a>
+                        
+                        <a href={isLogged ? '/favorites' : ''} className='navbar-link' id={activeLink === 'favorites' ? 'active-page' : 'none'} 
+                        onClick={(e) => {
+                            if (!isLogged) {
+                                e.preventDefault();
+                                console.log('Clicked');}}}>
+                            Bəyənilər
+                        </a>
+                        
+                        <a href={isLogged ? '/property/post' : ''} className='post-property-button' 
+                        onClick={(e) => {
+                            if (!isLogged) {
+                                e.preventDefault();
+                                console.log('Clicked');}}}>
+                            Ev paylaş
+                        </a>
                     </nav>
                 </div>
 

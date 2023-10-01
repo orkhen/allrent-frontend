@@ -105,7 +105,7 @@
         width: 40%;
         height: 35px;
     }
-    /* .fixed-searchbar {
+    .fixed-searchbar {
         position: sticky;
         top: 0;
         left: 0;
@@ -115,5 +115,5 @@
         box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.234);   
     
         padding: 2rem 0;
-    } */
+    }
 }

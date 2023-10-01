@@ -11,7 +11,7 @@ const Properties = ({ title, properties }) => {
             <div className="card">
             <img src='https://allrent.io/storage/mini_frame_house3-2fa5-b5e2-c56f-b290.webp' className="card-img-top" alt='img' />
             <div className="card-body">
-                <div className="card-info">
+                <div className="card-info d-flex flex-column">
                     <div className="info-top d-flex justify-content-between">
                         <h5 className="card-title">Property Title</h5>
 
@@ -25,12 +25,16 @@ const Properties = ({ title, properties }) => {
                         <p>5 nəfər • 4 otaq • 3 tualet</p>
                     </div>
 
-                    <div className="info-bottom">
-                        <p>
+                    <div className="info-bottom d-flex justify-content-between">
+                        <p className='m-0'>
                             <span className='card-price'>150 azn</span> 
                             <span className='card-price-per'>Günlük</span>
                         </p>
                     </div>
+
+                    {/* <div className="info-reserve mx-auto mt-3">
+                      <a className='card-reserve' href=''>Rezerv et</a>
+                    </div> */}
                 </div>
             </div>
             </div>

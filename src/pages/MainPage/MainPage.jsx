@@ -14,9 +14,9 @@ import BottomNav from '../../components/BottomNav/BottomNav';
 const MainPage = () => {
   return (
     <div>
-      <PageNav />
+      <PageNav activeLink={'home'} />
       <Searchbar/>
-      {/* <SearchbarProperty/> */}
+      <SearchbarProperty/>
       <WhyUs/>
       <Categories/>
       <Properties title={'Bütün evlər'}/>

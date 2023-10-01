@@ -107,6 +107,23 @@
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.234);
 }
 
+.info-reserve {
+    width: 100%;
+    text-align: center;
+}
+
+.card-reserve {
+    text-decoration: none;
+    /* color: #fff; */
+    padding: 0.5rem 2rem;
+    border: 1px solid;
+    border-radius: 16px;
+    background-color: #fd6164;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
 .properties-more a::before {
     content: "";
     position: absolute;
@@ -127,12 +144,21 @@
     .properties-container {
         margin: 4rem 2rem;
     }
+    
+    .card-reserve {
+        padding: 0.5rem 1rem;
+    }
 }
 
 @media screen and (max-width: 768px) {
     .properties-more-button {
         width: 80%;
     }
+
+    .card-reserve {
+        padding: 0.5rem 4rem;
+    }
+
 }
 
 @media screen and (max-width: 672px) {

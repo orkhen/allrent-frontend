@@ -1,0 +1,13 @@
+.searchbar-property {
+    display: none !important;
+}
+
+@media screen and (max-width: 576px) {
+    .searchbar-property {
+        display: flex !important;
+    }
+
+    .searchbar {
+        display: none !important;
+    }
+}
