@@ -14,6 +14,7 @@ import PropertyPostPage from './pages/PropertyPostPage/PropertyPostPage';
 
 
 function App() {
+
   return (
     <div className="page">
       <Router>

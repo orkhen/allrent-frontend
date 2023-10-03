@@ -6,6 +6,9 @@ const SigninForm = () => {
 
     const [showPassword, setShowPassword] = useState(false)
     const [password, setPassword] = useState('')
+    // const [name, setName] = useState('');
+    // const [mobileFormat, setMobileFormat] = useState('');
+    
 
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');

@@ -14,7 +14,7 @@ const PropertyPage = () => {
       <SearchbarProperty/>
       <PropertyDetailed/>
       <PageFooter/>
-      <BottomNav/>
+      {/* <BottomNav/> */}
     </div>
   )
 }

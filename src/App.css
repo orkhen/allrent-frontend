@@ -9,6 +9,7 @@
 .page {
   width: 100hv;
   font-family: Inter;
+  position: relative;
 }
 
 .noselect {

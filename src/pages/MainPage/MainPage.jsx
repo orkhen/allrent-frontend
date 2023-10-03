@@ -23,7 +23,7 @@ const MainPage = () => {
       <Soon/>
       <Properties title={'Yaxınlıqda olan evlər'}/>
       <PageFooter/>
-      <BottomNav/>
+      {/* <BottomNav/> */}
     </div>
   )
 }

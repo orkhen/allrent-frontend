@@ -25,7 +25,7 @@ transform: translateY(100%);
 
 .navbar-bottom-nav {
     color: rgb(176, 176, 176) !important;
-    gap: 5rem;
+    gap: 3.5rem;
 }
 
 .navbar-bottom-nav a {
