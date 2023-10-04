@@ -11,10 +11,10 @@ import './mainpage.css'
 import SearchbarProperty from '../../components/SearchbarProperty/SearchbarProperty';
 import BottomNav from '../../components/BottomNav/BottomNav';
 
-const MainPage = () => {
+const MainPage = ({ isLogged }) => {
   return (
     <div>
-      <PageNav activeLink={'home'} />
+      <PageNav activeLink={'home'} isLogged={isLogged} />
       <Searchbar/>
       <SearchbarProperty/>
       <WhyUs/>

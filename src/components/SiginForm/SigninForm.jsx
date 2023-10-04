@@ -56,7 +56,7 @@ const SigninForm = () => {
     <div className='signinform d-flex align-items-center justify-content-center'>
       <div className="signinform-container d-flex flex-column align-items-center justify-content-center">
         <div className="signinform-header text-center">
-            <h4>Giriş</h4>
+            <h4>Qeydiyyat</h4>
         </div>
 
         <div className="signinform-inputs d-flex flex-column mt-3">
@@ -112,7 +112,8 @@ const SigninForm = () => {
             </div>
 
             <div className="signin-button google">
-                Google ilə daxil ol
+                <img src="https://img.icons8.com/?size=512&id=17949&format=png" width={30} height={30} alt="Google" />
+                <p className='m-0'>Google ilə daxil ol</p>
             </div>
         </div>
 

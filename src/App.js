@@ -14,12 +14,13 @@ import PropertyPostPage from './pages/PropertyPostPage/PropertyPostPage';
 
 
 function App() {
+  const isLogged = false
 
   return (
     <div className="page">
       <Router>
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<MainPage isLogged={isLogged} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<SigninPage />} />
           <Route path="/property/post" element={<PropertyPostPage />} />
