@@ -5,6 +5,7 @@ import 'react-date-range/dist/theme/default.css';
 import 'rsuite/dist/rsuite-no-reset.min.css';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react'
 
 import MainPage from './pages/MainPage/MainPage'
 import PropertyPage from './pages/PropertyPage/PropertyPage'
@@ -14,7 +15,13 @@ import PropertyPostPage from './pages/PropertyPostPage/PropertyPostPage';
 
 
 function App() {
-  const isLogged = false
+  const [isLogged, setIsLogged] = useState(false);
+
+  useEffect(() => {
+    // Check if the user is authenticated in localStorage
+    const authenticated = localStorage.getItem('isLogged') === 'true';
+    setIsLogged(authenticated);
+  }, []);
 
   return (
     <div className="page">
@@ -23,8 +30,8 @@ function App() {
           <Route path="/" element={<MainPage isLogged={isLogged} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<SigninPage />} />
-          <Route path="/property/post" element={<PropertyPostPage />} />
-          <Route path="/property/:id" element={<PropertyPage />} />
+          <Route path="/property/post" element={<PropertyPostPage isLogged={isLogged} />} />
+          <Route path="/property/:id" element={<PropertyPage isLogged={isLogged} />} />
         </Routes>
       </Router>
     </div>

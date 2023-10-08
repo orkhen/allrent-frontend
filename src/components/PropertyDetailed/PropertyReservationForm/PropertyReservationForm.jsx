@@ -141,7 +141,7 @@ const PropertyReservationForm = () => {
                     </div>
                 </div>
 
-                <div className="reservation-form-button mt-3">
+                <div className="reservation-form-button mt-3 red-button-animation noselect">
                     Rezerv et
                 </div>
             </div>

@@ -1,0 +1,46 @@
+.property-post-conditions-container {
+    margin-top: 3rem;
+    width: 70%;
+    gap: 3rem;
+}
+
+.property-post-conditions-container h4 {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.margin-top {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: space-between;
+    gap: 25px;
+
+    margin-top: 3rem;
+}
+
+.property-conditions-checkboxes .conditions-checkbox,
+.property-permits-checkboxes .permits-checkbox {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.property-conditions-checkboxes .conditions-checkbox input,
+.property-permits-checkboxes .permits-checkbox input {
+    accent-color: #1f8078;
+    width: 24px;
+    height: 24px;
+}
+
+.property-checkin,
+.property-checkout {
+    width: 50%;
+}
+
+.checkin-from,
+.checkin-until,
+.checkout-from,
+.checkout-until {
+    width: 50%;
+}

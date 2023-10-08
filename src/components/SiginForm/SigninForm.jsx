@@ -107,7 +107,7 @@ const SigninForm = () => {
         </div>
 
         <div className="signinform-buttons d-flex flex-column mt-4 noselect">
-            <div className={`signin-button signin ${isValid && 'active-button'}`}>
+            <div className={`signin-button signin red-button-subtle-animation ${isValid && 'active-button'}`}>
                 Hesab yarat
             </div>
 

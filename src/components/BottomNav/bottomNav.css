@@ -44,6 +44,15 @@ transform: translateY(100%);
     overflow: visible;
 }
 
+.navbar-bottom-logo svg {
+    display: block; 
+    height: 24px; 
+    width: 24px; 
+    fill: currentcolor;
+    stroke: currentColor;
+    stroke-width: 2.5;
+}
+
 .navbar-bottom-account svg {
     display: block; 
     height: 24px; 

@@ -73,7 +73,7 @@ const Properties = ({ title, properties }) => {
         </div> */}
 
         <div className='properties-more-button-container d-flex align-items-center justify-content-center'>
-            <div className="properties-more-button">
+            <div className="properties-more-button red-button-animation">
               <a href=''>
                 <div className="text-center">
                   Hamısına bax

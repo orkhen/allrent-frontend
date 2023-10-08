@@ -1,9 +1,9 @@
 import React from 'react'
 import './propertyPost.css'
 
-const PropertyPost = () => {
+const PropertyPost = ({ switchStep, step }) => {
   return (
-    <div className='property-post d-flex justify-content-center'>
+    <div className={`property-post d-flex justify-content-center ${step !== 1 && 'hide'}`}>
       <div className="property-post-container d-flex flex-column mt-5">
         <div className="property-post-upper d-flex">
             <div className="property-post-content">
@@ -58,7 +58,7 @@ const PropertyPost = () => {
         </div>
 
         <div className="property-post-lower d-flex justify-content-end">
-            <button className="property-post-button" onClick={() => {}}>
+            <button className="property-post-button" onClick={() => switchStep(1)}>
                 Obyekt paylaş
             </button>
         </div>

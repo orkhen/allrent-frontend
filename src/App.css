@@ -21,3 +21,21 @@
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+.red-button-animation {
+  transition: all 0.3s ease;
+}
+
+.red-button-animation:hover {
+  background-color: #ee2d2d;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.234);
+}
+
+.red-button-subtle-animation {
+  transition: all 0.3s ease;
+}
+
+.red-button-subtle-animation:hover {
+  background-color: #ed3c3c !important;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.234);
+}

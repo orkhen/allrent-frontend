@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './propertyPostPage.css'
 import PageNav from '../../components/Navbar/Navbar'
 import PropertyPost from '../../components/PropertyPost/PropertyPost'
+import PropertyInputsGeneral from '../../components/PropertyPost/PropertyInputsGeneral/PropertyInputsGeneral'
+import PropertyPostNav from '../../components/PropertyPost/PropertyPostNav/PropertyPostNav'
+import PropertyPostRooms from '../../components/PropertyPost/PropertyPostRooms/PropertyPostRooms'
+import PropertyPostConditions from '../../components/PropertyPost/PropertyPostConditions/PropertyPostConditions'
 
-const PropertyPostPage = () => {
+const PropertyPostPage = ({ isLogged }) => {
+  const [step, setStep] = useState(1)
+
+  const switchStep = (val) => {
+    setStep(step + val)
+  }
   return (
-    <div>
-        <PageNav />
-        <PropertyPost />
+    <div className='property-post-main'>
+        <PageNav isLogged={isLogged} />
+        <PropertyPost step={step} switchStep={switchStep} />
+        <PropertyInputsGeneral step={step} switchStep={switchStep} />
+        <PropertyPostRooms step={step} switchStep={switchStep} />
+        <PropertyPostConditions step={step} />
     </div>
   )
 }

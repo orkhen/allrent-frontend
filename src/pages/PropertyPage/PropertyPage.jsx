@@ -7,10 +7,10 @@ import PropertyDetailed from '../../components/PropertyDetailed/PropertyDetailed
 import BottomNav from '../../components/BottomNav/BottomNav';
 import PageFooter from '../../components/Footer/Footer';
 
-const PropertyPage = () => {
+const PropertyPage = ({ isLogged }) => {
   return (
     <div>
-      <PageNav/>
+      <PageNav isLogged={isLogged} />
       <SearchbarProperty/>
       <PropertyDetailed/>
       <PageFooter/>

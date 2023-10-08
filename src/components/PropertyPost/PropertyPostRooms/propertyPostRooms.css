@@ -1,0 +1,123 @@
+.property-post-rooms-container {
+    margin-top: 3rem;
+    width: 70%;
+    gap: 3rem;
+}
+
+.property-post-rooms-container h4 {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.property-post-inputs-rooms {
+    gap: 4rem;
+}
+
+.property-post-rooms-container .property-post-rooms-boxes {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.property-post-rooms-container .room-box {
+    gap: 4rem;
+    justify-content: space-between;
+}
+
+.property-post-rooms-container .room-box h4 {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.property-post-rooms-container .room-box .control-number {
+    color: var(--Font-color, #1D1D1D);
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.property-post-rooms-container .control-increment {
+    border-radius: 5.6px;
+    border: 1.4px solid var(--Gray, #6C6C6C);
+    cursor: pointer;
+}
+
+.property-post-rooms-container .control-decrement {
+    border-radius: 5.6px;
+    border: 1.4px solid var(--Stroke-color, #E7E7E7);
+    cursor: pointer;
+}
+
+.inputs-property-buttons {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 4rem;
+    margin-bottom: 6rem;
+}
+
+.inputs-property-buttons .button-back {
+    padding: 1rem 4rem;
+
+    border-radius: 56px;
+    border: 1px solid var(--Main-color, #FE4343);
+    background: var(--BG-p-color, #FFF3F3);
+    color: var(--Main-color, #FE4343);
+    font-size: 18px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.inputs-property-buttons .button-next {
+    padding: 1rem 4rem;
+
+    border-radius: 56px;
+    background: var(--Ds-color, #D9D9D9);
+
+    color: var(--BG-color, #FEFEFE);
+
+    font-size: 18px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.enabled {
+    background: var(--Main-color, #FE4343) !important;
+}
+
+@media screen and (max-width: 768px) {
+    .property-post-rooms-container {
+        width: 80%;
+    }
+
+    .property-post-rooms-container .property-post-rooms-boxes {
+        grid-template-columns: repeat(2, 50%);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .property-post-rooms-container {
+        width: 65%;
+    }
+
+    .property-post-rooms-container .property-post-rooms-boxes {
+        grid-template-columns: repeat(1, 100%);
+        /* justify-content: center; */
+    }
+
+    .inputs-property-buttons .button-back,
+    .inputs-property-buttons .button-next {
+        padding: 0.75rem 2.5rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .property-post-rooms-container {
+        width: 90%;
+    }
+}

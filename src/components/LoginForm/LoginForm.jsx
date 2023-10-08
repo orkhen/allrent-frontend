@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './loginForm.css'
 
 const LoginForm = () => {
@@ -42,6 +43,17 @@ const LoginForm = () => {
         validateEmail(email);
       };
 
+    const handleLogin = () => {
+    if (email === 'user@example.com' && password === 'user1234') {
+        setIsValid(true);
+        localStorage.setItem('isLogged', 'true');
+        // navigate('/')
+        window.location.href = '/'
+    } else {
+        setIsValid(false);
+        setEmailError('Email or password is incorrect');
+    }
+    };
     
   return (
     <div className='loginform d-flex align-items-center justify-content-center'>
@@ -80,7 +92,7 @@ const LoginForm = () => {
         </div>
 
         <div className="loginform-buttons d-flex flex-column mt-4 noselect">
-            <div className={`login-button login ${isValid && 'active-button'}`}>
+            <div className={`login-button login red-button-subtle-animation ${isValid && 'active-button'}`} onClick={handleLogin}>
                 Daxil ol
             </div>
 
