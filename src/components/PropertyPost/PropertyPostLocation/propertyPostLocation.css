@@ -1,0 +1,13 @@
+.property-post-location-container {
+    gap: 2rem !important;
+}
+
+.location-city-input {
+    width: 50%;
+}
+
+@media screen and (max-width: 576px) {
+    .location-city-input {
+        width: 100%;
+    }
+}

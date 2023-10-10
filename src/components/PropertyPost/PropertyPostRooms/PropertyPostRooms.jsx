@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './propertyPostRooms.css'
 
 const PropertyPostRooms = ({ switchStep, step }) => {
@@ -26,9 +26,15 @@ const PropertyPostRooms = ({ switchStep, step }) => {
         return isValid
     }
 
+    useEffect(() => {
+        if (step === 3) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        }, [step]);
+
   return (
-    <div className={`property-post-rooms d-flex justify-content-center ${step !== 3 && 'hide'}`}>
-      <div className="property-post-rooms-container">
+    <div className={`property-post-rooms d-flex justify-content-center ${step !== 3 ? 'hide' : 'slide-top'}`}>
+      <div className="property-post-rooms-container property-post-container">
         <div className="property-post-inputs-rooms d-flex flex-column">
             <div className="property-post-rooms-title">
                 <h4>Obyekt haqqında bəzi əsas məlumatları qeyd edin</h4>
@@ -173,7 +179,7 @@ const PropertyPostRooms = ({ switchStep, step }) => {
                     <p className='m-0'>Geri</p>
                 </div>
 
-                <div className={`button-next d-flex align-items-start gap-2 ${validate() && 'enabled'}`} onClick={() => validate() &&   switchStep(1)}>
+                <div className={`button-next d-flex align-items-start gap-2 ${validate() && 'enabled'}`} onClick={() => validate() && switchStep(1)}>
                     <p className='m-0'>Davam et</p>
                 </div>
             </div>

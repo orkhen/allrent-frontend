@@ -1,21 +1,12 @@
-.property-post-conditions-container {
-    margin-top: 3rem;
-    width: 70%;
-    gap: 3rem;
-}
-
-.property-post-conditions-container h4 {
-    color: var(--Font-color, #1D1D1D);
-    font-size: 24px;
-    font-weight: 600;
-}
-
-.margin-top {
+.property-conditions-checkboxes,
+.property-permits-checkboxes {
     display: grid;
     grid-template-columns: repeat(3, auto);
     justify-content: space-between;
     gap: 25px;
+}
 
+.margin-top {
     margin-top: 3rem;
 }
 
@@ -35,7 +26,13 @@
 
 .property-checkin,
 .property-checkout {
+    width: 100%;
+}
+
+.property-checkin-time,
+.property-checkout-time {
     width: 50%;
+    gap: 2rem;
 }
 
 .checkin-from,
@@ -43,4 +40,40 @@
 .checkout-from,
 .checkout-until {
     width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+    .property-post-conditions-container {
+        width: 65%;
+    }
+
+    .property-conditions-checkboxes {
+        grid-template-columns: repeat(2, auto);
+        gap: 20px 0;
+    }
+
+    .property-permits-checkboxes {
+        grid-template-columns: repeat(1, auto);
+    }
+
+    .property-checkin-time,
+    .property-checkout-time {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .property-conditions-checkboxes {
+        grid-template-columns: repeat(1, auto);
+        gap: 20px 0;
+    }
+
+    .property-post-conditions-container {
+        width: 90%;
+    }
+
+    .property-checkin-time,
+    .property-checkout-time {
+        width: 100%;
+    }
 }

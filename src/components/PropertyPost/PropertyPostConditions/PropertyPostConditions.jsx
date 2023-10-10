@@ -77,10 +77,16 @@ const PropertyPostConditions = ({ switchStep, step }) => {
             },
         })
       };
+    
+    useEffect(() => {
+    if (step === 4) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    }, [step]);
 
   return (
-    <div className={`property-post-conditions d-flex justify-content-center ${step !== 4 && 'hide'}`}>
-      <div className="property-post-conditions-container d-flex flex-column">
+    <div className={`property-post-conditions d-flex justify-content-center ${step !== 4 ? 'hide' : 'slide-top'}`}>
+      <div className="property-post-conditions-container property-post-container d-flex flex-column">
         <div className="property-conditions">
             <div className="property-conditions-title">
                 <h4>Obyektdə olan şərait</h4>
@@ -120,13 +126,13 @@ const PropertyPostConditions = ({ switchStep, step }) => {
                 <h4>Obyektə daxil olma vaxtı üçün uyğun aralığı təyin edin</h4>
             </div>
 
-            <div className="property-checkin-time margin-top d-flex">
+            <div className="property-checkin-time margin-top d-flex justify-content-between">
                 <div className="checkin-from">
-                    <Select value={timeOptions[0]} styles={customStyles} options={timeOptions} isSearchable={false} />
+                    <Select defaultValue={timeOptions[0]} styles={customStyles} options={timeOptions} isSearchable={false} />
                 </div>
 
                 <div className="checkin-until">
-                    <Select defaultValue={0} styles={customStyles} options={timeOptions} isSearchable={false} />
+                    <Select defaultValue={timeOptions[timeOptions.length - 1]} styles={customStyles} options={timeOptions} isSearchable={false} />
                 </div>
             </div>
         </div>
@@ -138,12 +144,22 @@ const PropertyPostConditions = ({ switchStep, step }) => {
 
             <div className="property-checkout-time margin-top d-flex">
                 <div className="checkout-from">
-                    <Select options={timeOptions} />
+                    <Select defaultValue={timeOptions[0]} styles={customStyles} options={timeOptions} isSearchable={false} />
                 </div>
 
                 <div className="checkout-until">
-                    <Select options={timeOptions} />
+                    <Select defaultValue={timeOptions[3]} styles={customStyles} options={timeOptions} isSearchable={false} />
                 </div>
+            </div>
+        </div>
+
+        <div className="inputs-property-buttons d-flex justify-content-between">
+            <div className="button-back d-flex align-items-start gap-2" onClick={() => switchStep(-1)}>
+                <p className='m-0'>Geri</p>
+            </div>
+
+            <div className={`button-next d-flex align-items-start gap-2 ${'enabled'}`} onClick={() => switchStep(1)}>
+                <p className='m-0'>Davam et</p>
             </div>
         </div>
       </div>

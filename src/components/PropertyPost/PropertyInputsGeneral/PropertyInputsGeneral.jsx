@@ -38,10 +38,16 @@ const PropertyInputsGeneral = ({ switchStep, step }) => {
           });
         });
       }, []);
+    
+    useEffect(() => {
+    if (step === 2) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    }, [step]);
 
   return (
-    <div className={`property-inputs-general d-flex justify-content-center ${step !== 2 && 'hide'}`}>
-      <div className="property-inputs-general-container d-flex flex-column">
+    <div className={`property-inputs-general d-flex justify-content-center ${step !== 2 ? 'hide' : 'slide-top'}`}>
+      <div className="property-inputs-general-container property-post-container d-flex flex-column">
         <div className="inputs-property-title">
             <h4>Obyekt başlığı</h4>
 
@@ -100,7 +106,7 @@ const PropertyInputsGeneral = ({ switchStep, step }) => {
             </div>
         </div>
 
-        <div className="inputs-property-buttons">
+        <div className="inputs-property-buttons d-flex flex-row">
             <div className="button-back d-flex align-items-start gap-2" onClick={() => switchStep(-1)}>
                 <p className='m-0'>Geri</p>
             </div>
