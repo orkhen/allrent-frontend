@@ -1,10 +1,12 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import './propertyPostLocation.css'
 
 import Select from 'react-select';
 import { GoogleMap, LoadScript, Marker, Autocomplete  } from '@react-google-maps/api';
 
-const PropertyPostLocation = ({ step, switchStep }) => {
+const PropertyPostLocation = ({ step, switchStep, setData, data }) => {
+    const [location, setLocation] = useState('')
+
     const valuesList = [
       "Ağcabədi",
       "Ağdam",
@@ -107,6 +109,23 @@ const PropertyPostLocation = ({ step, switchStep }) => {
       }
     };
 
+    const handleLocation = (selectedOption) => {
+      setLocation(selectedOption.label);
+    }
+
+    const validate = () => {
+      return (location !== '')
+    }
+
+    const confirmData = () => {
+      setData({
+          ...data,
+          location: location
+      })
+
+      switchStep(1)
+    }
+    
     useEffect(() => {
       if (step === 5) {
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -135,6 +154,7 @@ const PropertyPostLocation = ({ step, switchStep }) => {
                         name="color"
                         options={options}
                         placeholder='Regionu daxil edin'
+                        onChange={handleLocation}
                     />
                 </div>
             </div>
@@ -179,7 +199,7 @@ const PropertyPostLocation = ({ step, switchStep }) => {
                 <p className='m-0'>Geri</p>
             </div>
 
-            <div className={`button-next d-flex align-items-start gap-2 ${'enabled'}`} onClick={() => switchStep(1)}>
+            <div className={`button-next d-flex align-items-start gap-2 ${validate() && 'enabled'}`} onClick={() => validate() && confirmData()}>
                 <p className='m-0'>Davam et</p>
             </div>
         </div>

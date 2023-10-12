@@ -1,0 +1,61 @@
+.property-post-photos-container {
+    gap: 2rem !important;
+}
+
+.property-post-photos-container h4 {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.property-post-photos-container .property-photos {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    gap: 10px;
+}
+
+.property-post-photos-container .property-photos .property-photos-row1 {
+    display: grid;
+    grid-template-columns: repeat(2, 49.5%);
+    gap: 1%;
+}
+
+.property-post-photos-container .property-photos .property-photos-row2 {
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    gap: 1%;
+}
+
+.property-post-photos-container .property-photo {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+
+    border-radius: 6px;
+    border: 2px dashed var(--Ds-color, #D9D9D9);
+    background: var(--BG-color, #FEFEFE);
+
+    padding: 2rem 0;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.property-post-photos-container .property-photo:hover {
+    box-shadow:  0px 0px 10px 1px rgba(0, 0, 0, 0.234);
+}
+
+.property-post-photos-container .property-photo p {
+    color: var(--Main-green, #40918B);
+    text-align: center;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 576px) {
+    .property-post-photos-container .property-photos .property-photos-row1,
+    .property-post-photos-container .property-photos .property-photos-row2 {
+        grid-template-columns: repeat(1, auto);
+    }
+    
+}

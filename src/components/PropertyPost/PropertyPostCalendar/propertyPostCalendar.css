@@ -1,0 +1,19 @@
+.property-post-calendar .rdrCalendarWrapper {
+    width: 100%;
+}
+
+.property-post-calendar .rdrSelected {
+    background-color: rgb(254, 67, 67);
+    outline: none !important;
+    border: none !important;
+}
+
+.property-post-calendar .rdrDayHovered {
+    outline: none !important;
+    border: none !important;
+}
+
+.property-post-calendar .rdrDayNumber::after {
+    outline: none !important;
+    border: none !important;
+}

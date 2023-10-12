@@ -38,12 +38,31 @@
     border-radius: 5.6px;
     border: 1.4px solid var(--Gray, #6C6C6C);
     cursor: pointer;
+    padding: 0.4rem;
 }
 
 .property-post-rooms-container .control-decrement {
     border-radius: 5.6px;
-    border: 1.4px solid var(--Stroke-color, #E7E7E7);
+    /* border: 1.4px solid var(--Stroke-color, #E7E7E7); */
+    border: 1.4px solid var(--Gray, #6C6C6C);
     cursor: pointer;
+    padding: 0.4rem;
+
+    transition: all 0.3s ease;
+}
+
+.control-decrement-disabled {
+    border: 1.4px solid var(--Stroke-color, #E7E7E7) !important;
+}
+
+.property-post-rooms-container .control-decrement .path-deactive {
+    fill: #E7E7E7;
+    transition: all 0.3s ease;
+}
+
+.property-post-rooms-container .control-decrement .path-active {
+    fill: #6C6C6C;
+    transition: all 0.3s ease;
 }
 
 @media screen and (max-width: 768px) {

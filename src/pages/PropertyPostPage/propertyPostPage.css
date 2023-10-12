@@ -32,6 +32,13 @@
     font-weight: 700;
 
     cursor: pointer;
+
+    transition: all 0.5s ease;
+}
+
+.inputs-property-buttons .button-back:hover {
+    background-color: #f5ecec;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.234);
 }
 
 .inputs-property-buttons .button-next {
@@ -46,10 +53,19 @@
     font-weight: 700;
 
     cursor: pointer;
+
+    transition: all 0.5s ease;
 }
 
 .enabled {
     background: var(--Main-color, #FE4343) !important;
+
+    transition: all 0.5s ease;
+}
+
+.enabled:hover {
+    background-color: #ed3c3c !important;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.234);
 }
 
 @media screen and (max-width: 768px) {

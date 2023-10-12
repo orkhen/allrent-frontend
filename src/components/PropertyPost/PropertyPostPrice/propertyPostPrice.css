@@ -1,0 +1,202 @@
+
+.property-post-price-container {
+    gap: 2.5rem !important;
+    margin-bottom: 8rem;
+}
+
+.property-post-price-container h4 {
+    color: #1D1D1D;  
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.property-post-price-container .property-price-title p {
+    color: #6C6C6C;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.property-post-price-container .property-price-setter h5,
+.property-price-rules h5 {
+    color: #1D1D1D;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.price-setter-box {
+    margin-top: 2rem;
+    /* display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    display: none; */
+}
+
+.price-setter-box input {
+    font-size: 24px;
+    padding: 10px;
+    padding-left: 60px;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='15' viewBox='0 0 12 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.83447 13.3337V7.50033C1.83447 6.39526 2.27346 5.33545 3.05486 4.55405C3.83626 3.77265 4.89607 3.33366 6.00114 3.33366C7.10621 3.33366 8.16602 3.77265 8.94742 4.55405C9.72882 5.33545 10.1678 6.39526 10.1678 7.50033V13.3337M6.00114 1.66699V13.3337' stroke='%23AEAEAE' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-size: 23px;
+    background-repeat: no-repeat;
+    background-position: 6% 44%;
+
+    border: none;
+    outline: 1px solid #d9d9d9;;
+    border-radius: 5px;
+    color: black;
+    /* padding: 0.75rem 1rem; */
+    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.price-setter-box input:focus {
+    outline-color: #40918b;
+}
+
+.price-setter-box p {
+    color: var(--Gray, #6C6C6C);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.price-error {
+    color: #FE4343 !important;
+    font-size: 18px !important;
+}
+
+.rules-box {
+    width: 45%;
+    border-radius: 6px;
+    border: 1px solid var(--Dark-green, #1E4B4A);
+    background: #E4F0F0;
+    padding: 1rem 0 1rem 1rem;
+}
+
+.rules-box p {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+
+    margin: 0;
+}
+
+.property-post-price-container .card {
+    width: 25%;
+    cursor: pointer;
+}
+
+.property-post-price-container .card-img-top {
+    padding: 0.5rem;
+    border-radius: 14px;
+}
+
+.property-post-price-container .card-title {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.property-post-price-container .card p {
+    color: var(--Gray, #6C6C6C);
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 1.5px;
+}
+
+.property-post-price-container .card span {
+    color: var(--Main-color, #FE4343);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.property-post-success-message img {
+    width: 155px;
+    height: 155px;
+}
+
+.property-post-success-message .modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.property-post-success-message .success-text {
+    margin-top: 4rem;
+}
+
+.property-post-success-message h5 {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.property-post-success-message p {
+    color: var(--Gray, #6C6C6C);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 145%;
+}
+
+.property-post-success-message .success-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.property-post-success-message .main-page-button {
+    color: var(--Main-color, #FE4343);
+    font-size: 18px;
+    font-weight: 600;
+
+    border-radius: 50px;
+    border: 1px solid var(--Main-color, #FE4343);
+    background: var(--BG-p-color, #FFF3F3);
+
+    padding: 0.75rem 4rem;
+
+    cursor: pointer;
+}
+
+.property-post-success-message .reservations-button {
+    color: var(--BG-color, #FEFEFE);
+    font-size: 18px;
+    font-weight: 600;
+
+    border-radius: 50px;
+    background: var(--Main-color, #FE4343);
+
+    padding: 0.75rem 4rem;
+
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .rules-box {
+        width: 70%;
+    }
+
+    .property-post-price-container .card {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .price-setter-box input {
+        width: 99%;
+    }
+
+    .rules-box {
+        width: 100%;
+    }
+
+    .property-post-price-container .card {
+        width: 50%;
+    }
+}
