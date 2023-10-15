@@ -52,6 +52,14 @@
     font-size: 16px;
 }
 
+@media screen and (max-width: 768px) {
+    .property-post-photos-container .property-photos .property-photos-row1,
+    .property-post-photos-container .property-photos .property-photos-row2,
+    .property-post-photos-container .property-photos {
+        gap: 1rem;
+    }
+}
+
 @media screen and (max-width: 576px) {
     .property-post-photos-container .property-photos .property-photos-row1,
     .property-post-photos-container .property-photos .property-photos-row2 {
