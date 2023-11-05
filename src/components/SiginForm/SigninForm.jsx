@@ -2,56 +2,61 @@ import React, { useState } from 'react'
 import './signinForm.css'
 
 const SigninForm = () => {
-    const [isValid, setIsValid] = useState(false)
-
     const [showPassword, setShowPassword] = useState(false)
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
-    // const [name, setName] = useState('');
-    // const [mobileFormat, setMobileFormat] = useState('');
     
 
-    const [email, setEmail] = useState('');
-    const [emailError, setEmailError] = useState('');
-
-    const [mobile, setMobile] = useState('+994')
-
-    const validatePassword = (e) => {
-        setPassword(e.target.value)
-
-        if (validateEmail(email) && e.target.value !== '') {
-            setIsValid(true)
-        } else {
-            setIsValid(false)
-        }
+    const handleError = (type, bool) => {
+        if (bool) {
+        switch (type) {
+            case 'name':
+                return 'Daxil etdiyiniz Ad və Soyad yanlışdır'
+            case 'email':
+                return "Daxil etdiyiniz E-mail yanlışdır"
+            case 'phone':
+                return "Daxil etdiyiniz Mobil nömrə yanlışdır"
+            default:
+                break;
+        }}
     }
 
-    const validateEmail = (inputEmail) => {
-        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const validateInput = (val, type) => {
+        let format
+        let error
 
-        if (emailPattern.test(inputEmail)) {
-        setEmailError('');
-        password && setIsValid(true)
-        return true;
-        } else {
-        setEmailError('Daxil etdiyiniz E-mail yalnışdır , zəhmət olmasa yenidən yoxlayın');
-        return false;
+        switch (type) {
+            case 'name':
+                format = /^[A-Za-z]+\s[A-Za-z]+$/
+                error = 'Daxil etdiyiniz Ad və Soyad yanlışdır'
+                break;
+            case 'email':
+                format = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+                error = "Daxil etdiyiniz E-mail yanlışdır"
+                break;
+            case 'phone':
+                format = /^\+994\d{6}$/
+                error = "Daxil etdiyiniz Mobil nömrə yanlışdır"
+                break;
+            default:
+                break;
         }
-    };
 
-    const handleEmailChange = (e) => {
-        const newEmail = e.target.value;
-        setEmail(newEmail);
-    };
+        if (!format.test(val)) {
+            return error
+        }
 
-    const handleEmailBlur = () => {
-        validateEmail(email);
-      };
-
-    const handleMobileChange = (e) => {
-        const newMobile = e.target.value.slice(4);
-        const prefix = '+994'
-        setMobile(prefix+newMobile)
+        return true
     }
+
+    const handleInput = (e, func) => {
+        const newVal = e.target.value
+        func(newVal)
+    }
+    
   return (
     <div className='signinform d-flex align-items-center justify-content-center'>
       <div className="signinform-container d-flex flex-column align-items-center justify-content-center">
@@ -64,18 +69,19 @@ const SigninForm = () => {
                 <div className="name-input-header d-flex justify-content-between">
                     <label htmlFor="name">Ad və Soyad *</label>
 
-                    {/* {emailError && <p className="error-message m-0">{emailError}</p>} */}
                 </div>
-                <input className='mt-2' type="text" name='name' placeholder='Ad və soyadınızı qeyd edin'/>
+                <input className='mt-2' type="text" name='name' placeholder='Ad və soyadınızı qeyd edin' value={name} onChange={(e) => {handleInput(e, setName)}} onBlur={handleError()}/>
+            
+                {<p className="error-message mt-2 mb-0">{validateInput(name, 'name')}</p>}
             </div>
 
             <div className="email-input">
                 <div className="email-input-header d-flex justify-content-between">
                     <label htmlFor="email">Elektron poçt *</label>
                 </div>
-                <input className={`mt-2 ${emailError && 'input-error'}`} type="text" name='email' placeholder='E-mailiniz qeyd edin' value={email} onChange={handleEmailChange} onBlur={handleEmailBlur} />
+                <input className={`mt-2 ${'input-error'}`} type="text" name='email' placeholder='E-mailiniz qeyd edin' value={email} onChange={(e) => {handleInput(e, setEmail)}} />
                 
-                {emailError && <p className="error-message mt-2 mb-0">{emailError}</p>}
+                {<p className="error-message mt-2 mb-0">{validateInput(email, 'email')}</p>}
             </div>
 
             <div className="number-input">
@@ -84,12 +90,12 @@ const SigninForm = () => {
 
                     {/* {emailError && <p className="error-message m-0">{emailError}</p>} */}
                 </div>
-                <input className='mt-2' type="text" name='number' value={mobile} onChange={handleMobileChange} />
+                <input className='mt-2' type="text" name='number' value={() => {}} onChange={() => {}} />
             </div>
             
             <div className="password-input">
                 <label htmlFor="password">Şifrə *</label>
-                <input className='mt-2' type={showPassword ? 'text' : 'password'} name='password' placeholder='Şifrənizi daxil edin' onChange={validatePassword}/>
+                <input className='mt-2' type={showPassword ? 'text' : 'password'} name='password' placeholder='Şifrənizi daxil edin' onChange={() => {}}/>
 
                 { !showPassword &&
                 <div className="showPassword">
@@ -107,7 +113,7 @@ const SigninForm = () => {
         </div>
 
         <div className="signinform-buttons d-flex flex-column mt-4 noselect">
-            <div className={`signin-button signin red-button-subtle-animation ${isValid && 'active-button'}`}>
+            <div className={`signin-button signin red-button-subtle-animation ${'active-button'}`}>
                 Hesab yarat
             </div>
 

@@ -2,24 +2,63 @@
     margin-top: 2rem;
 }
 
-.property-detailed-comments .comments-soon {
-    border-radius: 6px;
-    background: rgba(190, 216, 214, 0.35);
-    box-shadow: 0px 1px 9px 0px rgba(177, 177, 177, 0.25);
 
-    padding: 0.5rem 1rem;
+.comments-rating h5 {
+    color: var(--Main-green, #40918B);
+    font-size: 28px;
+    font-weight: 600;
 }
 
-.property-detailed-comments h5 {
-    color: #1D1D1D;
-    font-size: 18px;
+.comments-count p {
+    color: var(--Gray, #6C6C6C);
+    font-size: 14px;
     font-weight: 500;
-    line-height: 27px;
 }
 
-.property-detailed-comments p {
-    color: #212529;
-    font-size: 16px;
+.user-comment .user-name h5 {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.comment-date p {
+    color: var(--Gray, #6C6C6C);
+    font-size: 14px;
     font-weight: 400;
-    line-height: 24px;
+}
+
+.user-opinion p {
+    color: var(--Font-color, #1D1D1D);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.user-comment hr {
+    height: 1px;
+    color: #a09c9c;
+}
+
+.comments-all-button a {
+    color: var(--Main-green, #40918B);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.comments-all-button a::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px; 
+    background-color: #40918B; 
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease; 
+}
+
+.comments-all-button a:hover::before {
+    width: 100%;
 }

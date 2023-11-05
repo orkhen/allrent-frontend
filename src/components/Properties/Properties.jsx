@@ -1,15 +1,64 @@
-import React from 'react';
-import Star from '../../assets/star.svg'
+import React, { useState, useEffect } from 'react';
 import './properties.css';
 
-const Properties = ({ title, properties }) => {
-  const renderPropertyCards = (numColumns) => {
+import Carousel from 'react-bootstrap/Carousel';
 
+const Properties = ({ title, properties }) => {
+  const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handleCardMouseEnter = (index) => {
+    setHoveredCardIndex(index);
+    console.log(index)
+  };
+
+  const handleCardMouseLeave = () => {
+    setHoveredCardIndex(null);
+  };
+
+  const propertyPhotos = [
+    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
+    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
+    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.15.55-f8d8-decb-2c38-d3c4.webp',
+    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
+    // 'https://allrent.io/storage/medium_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
+    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
+    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
+    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.15.55-f8d8-decb-2c38-d3c4.webp',
+    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
+  ]
+  const renderPropertyCards = (numColumns) => {
     const columns = Array.from({ length: numColumns }, (_, index) => (
-      <div className="col-md-3 mb-4 properties-property" key={index}>
+      <div 
+        className="mb-4 properties-property" 
+        key={index}
+        onMouseEnter={() => handleCardMouseEnter(index)}
+        onMouseLeave={handleCardMouseLeave}
+      >
         <a href='/property/1'>
             <div className="card">
-            <img src='https://allrent.io/storage/mini_frame_house3-2fa5-b5e2-c56f-b290.webp' className="card-img-top" alt='img' />
+              <Carousel touch={true} interval={null} indicators={false} controls={hoveredCardIndex === index ? true : (windowWidth <= 768 ? true : false)}>
+                {
+                  propertyPhotos.map((photo, index) => {
+                    return (
+                    <Carousel.Item key={index}>
+                      <img src={photo} className="card-img-top" alt='img' />
+                    </Carousel.Item>
+                  )})
+                }
+              </Carousel>
             <div className="card-body">
                 <div className="card-info d-flex flex-column">
                     <div className="info-top d-flex justify-content-between">
@@ -59,24 +108,17 @@ const Properties = ({ title, properties }) => {
         </div>
 
         <div className="properties-content">
-          <div className="row">{renderPropertyCards(4)}</div>
-          <div className="row">{renderPropertyCards(4)}</div>
-          <div className="row">{renderPropertyCards(2)}</div>
+          {renderPropertyCards(10)}
+          {/* <div className="row">{renderPropertyCards(4)}</div> */}
+          {/* <div className="row">{renderPropertyCards(4)}</div>
+          <div className="row">{renderPropertyCards(2)}</div> */}
         </div>
-
-        {/* <div className="properties-more-button mt-3">
-          <div className="properties-more-button-container">
-            <a href=''>
-              Hamısına bax
-            </a>
-          </div>
-        </div> */}
 
         <div className='properties-more-button-container d-flex align-items-center justify-content-center'>
             <div className="properties-more-button red-button-animation">
-              <a href=''>
+              <a href='/  map'>
                 <div className="text-center">
-                  Hamısına bax
+                  Xəritədə bax
                 </div>
               </a>
             </div>

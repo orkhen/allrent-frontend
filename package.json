@@ -29,6 +29,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.7.7",
     "react-select-search": "^4.1.6",
+    "react-slideshow-image": "^4.3.0",
     "rsuite": "^5.40.0",
     "styled-components": "^5.3.11",
     "web-vitals": "^2.1.4"

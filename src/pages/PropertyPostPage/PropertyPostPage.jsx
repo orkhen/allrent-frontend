@@ -9,6 +9,7 @@ import PropertyPostLocation from '../../components/PropertyPost/PropertyPostLoca
 import PropertyPostCalendar from '../../components/PropertyPost/PropertyPostCalendar/PropertyPostCalendar'
 import PropertyPostPhotos from '../../components/PropertyPost/PropertyPostPhotos/PropertyPostPhotos'
 import PropertyPostPrice from '../../components/PropertyPost/PropertyPostPrice/PropertyPostPrice'
+import PropertyPostNav from '../../components/PropertyPost/PropertyPostNav/PropertyPostNav'
 
 const PropertyPostPage = ({ isLogged }) => {
   const [step, setStep] = useState(1)
@@ -24,7 +25,8 @@ const PropertyPostPage = ({ isLogged }) => {
   }
   return (
     <div className='property-post-main'>
-        <PageNav isLogged={isLogged} />
+        {/* <PageNav isLogged={isLogged} /> */}
+        <PropertyPostNav />
         <PropertyPost step={step} switchStep={switchStep} />
         <PropertyInputsGeneral step={step} switchStep={switchStep} />
         <PropertyPostRooms step={step} switchStep={switchStep} setData={setData} data={data} />

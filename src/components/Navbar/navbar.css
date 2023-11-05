@@ -18,6 +18,15 @@
     /* margin-top: 1rem; */
 }
 
+.nav-searchbar {
+    width: 50%;
+    /* margin-left: 3.5rem; */
+}
+
+.navbar-img-map {
+    margin-bottom: 2.5px;
+}
+
 .navbar-menu-toggler {
     display: none;
 }
@@ -69,7 +78,7 @@
     border-radius: 28px;
 }
 
-.side-menu-button-bottom a {
+.side-menu-button-bottom p {
     text-decoration: none;
     color: #fff;
 }
@@ -115,6 +124,7 @@
     font-size: 17px;
     text-decoration: none;
     margin: 0 1rem;
+    cursor: pointer;
 }
 
 .navbar-link.profile {
@@ -125,15 +135,18 @@
     display: flex;
 }
 
-.navbar-links-top .navbar-link {
+.navbar-links-bottom .login-account-button {
     color: #FE4343;
+    font-size: 17px;
+    text-decoration: none;
+    margin: 0 1rem;
 }
 
-.navbar-links-bottom .navbar-link {
+/* .navbar-links-bottom .navbar-link {
     color: black;
-}
+} */
 
-.navbar-links-top .create-account-button {
+.navbar-links-top .login-account-button {
     padding: 8px 10px;
     border-radius: 4px;
     background: #FE4343;
@@ -223,6 +236,10 @@ td.off.ends.off.disabled {
     .navbar-container {
         margin: 0;
         margin-top: 1rem;
+    }
+
+    .nav-searchbar {
+        width: 65%;
     }
 }
 

@@ -10,7 +10,9 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 
-const PageNav = ({ activeLink, isLogged }) => {
+import SearchbarProperty from '../SearchbarProperty/SearchbarProperty'
+
+const PageNav = ({ hideSearch, hideBottomNav, isLogged }) => {
     const navigate = useNavigate();
 
     const [menuToggled, setMenuToggled] = useState(false);
@@ -20,6 +22,14 @@ const PageNav = ({ activeLink, isLogged }) => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const handleModeSwitch = () => {
+        const ownerMode = localStorage.getItem('ownerMode') === 'true' ? true : false
+        localStorage.setItem('ownerMode', !ownerMode)
+        window.location.href = '/'
+        // console.log(localStorage.getItem('ownerMode'))
+    }
+
 
     const handleToggler = () => {
         setMenuToggled(!menuToggled);
@@ -40,7 +50,7 @@ const PageNav = ({ activeLink, isLogged }) => {
         };
       }, []);
 
-      const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(true);
 
       useEffect(() => {
         let prevScrollPos = window.pageYOffset;
@@ -65,10 +75,10 @@ const PageNav = ({ activeLink, isLogged }) => {
         };
       }, []);
 
-      const handleLogout = () => {
-        localStorage.removeItem('isLogged');
-        window.location.href = '/'
-      }
+    const handleLogout = () => {
+    localStorage.removeItem('isLogged');
+    window.location.href = '/'
+    }
 
   return (
     <div>
@@ -77,28 +87,21 @@ const PageNav = ({ activeLink, isLogged }) => {
                 <Navbar.Brand href="/" className='navbar-brand'>
                     <img className='navbar-img-logo' src='https://allrent.io/homepage/images/Loqotip_A%C4%9F%20fonda.svg' alt='logo'/>
                 </Navbar.Brand>
+                
+                <div className={`nav-searchbar ${hideSearch && 'd-none'}`}>
+                    <SearchbarProperty/>
+                </div>
 
                 <div className='navbar-links d-flex flex-column align-items-end justify-content-center navbar-state'>
-                    {!isLogged &&
                     <nav className='navbar-links-top d-flex justify-content-center align-items-center'>
-                        <a href='' className='navbar-link'>
-                            <img src='https://allrent.io/homepage/images/svg/world.svg' alt='language' className='navbar-img-language'/>
-                        </a>
-                        <a href='/login' className='navbar-link'>Daxil ol</a>
-                        <a href='/register' className='create-account-button red-button-animation'>Hesab yarat</a>
-                    </nav>
-                    }
 
-                    {isLogged &&
-                    <nav className='navbar-links-top d-flex justify-content-center align-items-center'>
-                        <a href='' className='navbar-link'>
+                        <a className='navbar-link'>
                             <img src='https://allrent.io/homepage/images/svg/world.svg' alt='language' className='navbar-img-language'/>
                         </a>
 
-                        <a href='' className='navbar-link'>
-                            <img src='https://allrent.io/homepage/images/svg/notf.svg' alt='language' className='navbar-img-notifications'/>
-                        </a>
+                        <a href='/login' className={`login-account-button red-button-animation ${isLogged && 'd-none'}`}>Daxil ol</a>
                         
+                    {isLogged &&
                         <Dropdown>
                             <Dropdown.Toggle>
                                 <div className='navbar-link profile'>
@@ -121,6 +124,24 @@ const PageNav = ({ activeLink, isLogged }) => {
                                         <path d="M12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4ZM6 8C6 4.68629 8.68629 2 12 2C15.3137 2 18 4.68629 18 8C18 11.3137 15.3137 14 12 14C8.68629 14 6 11.3137 6 8ZM8 18C6.34315 18 5 19.3431 5 21C5 21.5523 4.55228 22 4 22C3.44772 22 3 21.5523 3 21C3 18.2386 5.23858 16 8 16H16C18.7614 16 21 18.2386 21 21C21 21.5523 20.5523 22 20 22C19.4477 22 19 21.5523 19 21C19 19.3431 17.6569 18 16 18H8Z" fill="#1D1D1D"></path>
                                     </svg>
                                     <p className='mb-0'>Hesab məlumatları</p>
+                                </Dropdown.Item>
+                                <Dropdown.Item href="" className='d-flex gap-3'>
+                                    <svg width="21" height="21" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10 1.52765C7.64418 -0.583106 4.02125 -0.506535 1.75736 1.75736C-0.585786 4.1005 -0.585786 7.8995 1.75736 10.2426L8.58579 17.0711C9.36684 17.8521 10.6332 17.8521 11.4142 17.0711L18.2426 10.2426C20.5858 7.8995 20.5858 4.1005 18.2426 1.75736C15.9787 -0.506535 12.3558 -0.583106 10 1.52765ZM8.82843 3.17157L9.29289 3.63604C9.68342 4.02656 10.3166 4.02656 10.7071 3.63604L11.1716 3.17157C12.7337 1.60948 15.2663 1.60948 16.8284 3.17157C18.3905 4.73367 18.3905 7.26633 16.8284 8.82843L10 15.6569L3.17157 8.82843C1.60948 7.26633 1.60948 4.73367 3.17157 3.17157C4.73367 1.60948 7.26633 1.60948 8.82843 3.17157Z" fill="#1D1D1D"></path>
+                                    </svg>
+                                    <p className='mb-0'>Bəyənilər</p>
+                                </Dropdown.Item>
+                                <Dropdown.Item href="/hi" className='d-flex gap-3'>
+                                    <svg width="21" height="21" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.14614 1.24812C7.4433 0.516158 8.16138 0 9 0C9.83863 0 10.5567 0.516158 10.8539 1.24812C13.8202 2.06072 16 4.77579 16 8V12.6972L17.8321 15.4453C18.0366 15.7522 18.0557 16.1467 17.8817 16.4719C17.7077 16.797 17.3688 17 17 17H12.4646C12.2219 18.6961 10.7632 20 9 20C7.23677 20 5.77806 18.6961 5.53545 17H1C0.631206 17 0.292346 16.797 0.118327 16.4719C-0.0556921 16.1467 -0.0366195 15.7522 0.167951 15.4453L2 12.6972V8C2 4.77579 4.17983 2.06072 7.14614 1.24812ZM7.58535 17C7.79127 17.5826 8.34689 18 9 18C9.65311 18 10.2087 17.5826 10.4146 17H7.58535ZM9 3C6.23858 3 4 5.23858 4 8V13C4 13.1974 3.94156 13.3904 3.83205 13.5547L2.86852 15H15.1315L14.168 13.5547C14.0584 13.3904 14 13.1974 14 13V8C14 5.23858 11.7614 3 9 3Z" fill="#1D1D1D"/>
+                                    </svg>
+                                    <p className='mb-0'>Bildirişlər</p>
+                                </Dropdown.Item>
+                                <Dropdown.Item href="" className='d-flex gap-3'>
+                                    <svg width="21" height="21" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 1C4 0.447715 4.44772 0 5 0H11C11.5523 0 12 0.447715 12 1H14C15.1046 1 16 1.89543 16 3V18C16 19.1046 15.1046 20 14 20H2C0.895431 20 0 19.1046 0 18V3C0 1.89543 0.895431 1 2 1H4ZM4 3H2V18H14V3H12V4C12 4.55228 11.5523 5 11 5H5C4.44772 5 4 4.55228 4 4V3ZM10 2H6V3H10V2ZM11.7071 8.79289C12.0976 9.18342 12.0976 9.81658 11.7071 10.2071L7.70711 14.2071C7.31658 14.5976 6.68342 14.5976 6.29289 14.2071L4.29289 12.2071C3.90237 11.8166 3.90237 11.1834 4.29289 10.7929C4.68342 10.4024 5.31658 10.4024 5.70711 10.7929L7 12.0858L10.2929 8.79289C10.6834 8.40237 11.3166 8.40237 11.7071 8.79289Z" fill="#1D1D1D"></path>
+                                    </svg>
+                                    <p className='mb-0'>Rezervasiyalar</p>
                                 </Dropdown.Item>
                                 <Dropdown.Item href="" className='d-flex gap-3'>
                                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -152,47 +173,25 @@ const PageNav = ({ activeLink, isLogged }) => {
                                     <p className='mb-0'>Ödənişlər</p>
                                 </Dropdown.Item>
                                 <Dropdown.Divider />
-                                <Dropdown.Item href="" className='d-flex gap-3'>
+                                <Dropdown.Item href="" className='d-flex gap-3' onClick={handleLogout}>
                                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11 20C11 19.4477 10.5523 19 10 19H5V5H10C10.5523 5 11 4.55228 11 4C11 3.44771 10.5523 3 10 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H10C10.5523 21 11 20.5523 11 20Z" fill="#1D1D1D"></path>
                                         <path d="M21.7136 12.7005C21.8063 12.6062 21.8764 12.498 21.9241 12.3828C21.9727 12.2657 21.9996 12.1375 22 12.003L22 12L22 11.997C21.9992 11.7421 21.9016 11.4874 21.7071 11.2929L17.7071 7.29289C17.3166 6.90237 16.6834 6.90237 16.2929 7.29289C15.9024 7.68342 15.9024 8.31658 16.2929 8.70711L18.5858 11H9C8.44771 11 8 11.4477 8 12C8 12.5523 8.44771 13 9 13H18.5858L16.2929 15.2929C15.9024 15.6834 15.9024 16.3166 16.2929 16.7071C16.6834 17.0976 17.3166 17.0976 17.7071 16.7071L21.7064 12.7078L21.7136 12.7005Z" fill="#1D1D1D"></path>
                                     </svg>
-                                    <p className='mb-0' onClick={handleLogout}>Çıxış</p>
+                                    <p className='mb-0'>Çıxış</p>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
 
                         </Dropdown>
+                        }
                     </nav>
-                    }
-                    
-                    <nav className='navbar-links-bottom d-flex justify-content-center align-items-center'>
-                        <a href='/' className='navbar-link' id={activeLink === 'home' ? 'active-page' : 'none'}>Ana səhifə</a>
 
-                        <a href={isLogged ? '/map' : ''} className='navbar-link' id={activeLink === 'map' ? 'active-page' : 'none'}
-                        onClick={(e) => {
-                            if (!isLogged) {
-                                e.preventDefault();
-                                handleShow()}}}>
-                            Xəritə
-                        </a>
+                    <nav className='navbar-links-bottom d-flex justify-content-end align-items-center'>
+                        {/* <a href='/login' className={`login-account-button ${isLogged && 'd-none'}`}>Daxil ol</a>
 
-                        <a href={isLogged ? '/reservations' : ''} className='navbar-link' id={activeLink === 'reservations' ? 'active-page' : 'none'}
-                        onClick={(e) => {
-                            if (!isLogged) {
-                                e.preventDefault();
-                                handleShow()}}}>
-                            Rezervasiyalar
-                        </a>
+                        <a href='/login' className={`login-account-button red-button-animation ${isLogged && 'd-none'}`}>Daxil ol</a> */}
                         
-                        <a href={isLogged ? '/favorites' : ''} className='navbar-link' id={activeLink === 'favorites' ? 'active-page' : 'none'} 
-                        onClick={(e) => {
-                            if (!isLogged) {
-                                e.preventDefault();
-                                handleShow()}}}>
-                            Bəyənilər
-                        </a>
-                        
-                        <a href={isLogged ? '/property/post' : ''} className='post-property-button' 
+                        <a href={isLogged ? '/property/post' : ''} className={`post-property-button ${!isLogged && 'd-none'}`} 
                         onClick={(e) => {
                             if (!isLogged) {
                                 e.preventDefault();
@@ -258,6 +257,13 @@ const PageNav = ({ activeLink, isLogged }) => {
                         </div>
 
                         <div className='d-flex align-items-start home'>
+                            <svg className='mt-0 mb-0' width="20" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.14614 1.24812C7.4433 0.516158 8.16138 0 9 0C9.83863 0 10.5567 0.516158 10.8539 1.24812C13.8202 2.06072 16 4.77579 16 8V12.6972L17.8321 15.4453C18.0366 15.7522 18.0557 16.1467 17.8817 16.4719C17.7077 16.797 17.3688 17 17 17H12.4646C12.2219 18.6961 10.7632 20 9 20C7.23677 20 5.77806 18.6961 5.53545 17H1C0.631206 17 0.292346 16.797 0.118327 16.4719C-0.0556921 16.1467 -0.0366195 15.7522 0.167951 15.4453L2 12.6972V8C2 4.77579 4.17983 2.06072 7.14614 1.24812ZM7.58535 17C7.79127 17.5826 8.34689 18 9 18C9.65311 18 10.2087 17.5826 10.4146 17H7.58535ZM9 3C6.23858 3 4 5.23858 4 8V13C4 13.1974 3.94156 13.3904 3.83205 13.5547L2.86852 15H15.1315L14.168 13.5547C14.0584 13.3904 14 13.1974 14 13V8C14 5.23858 11.7614 3 9 3Z" fill="#6C6C6C"/>
+                            </svg>
+                            <a href='' className='navbar-link'>Bildirişlər</a>
+                        </div>
+
+                        <div className='d-flex align-items-start home'>
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M11.4339 21.1409C12.1601 20.679 12.8884 20.2192 13.6146 19.7573C13.9433 19.5489 14.2763 19.3427 14.5964 19.1192C15.357 18.5886 16.0703 17.9849 16.7041 17.3059C17.9587 15.9589 18.9126 14.3626 19.5164 12.6245C20.0084 11.2044 20.2189 9.70692 20.2189 8.20731V5.34774C20.2189 4.96317 19.9503 4.62802 19.5873 4.51845C19.3251 4.43895 19.0652 4.35731 18.8138 4.25204C18.8826 4.27997 18.9513 4.31005 19.0201 4.33798C18.571 4.14677 18.15 3.90184 17.7632 3.60536L17.9373 3.74071C17.5548 3.44423 17.2111 3.10263 16.9146 2.7202L17.0499 2.89423C16.7535 2.50751 16.5064 2.08427 16.3152 1.63524C16.3431 1.70399 16.3732 1.77274 16.4011 1.84149C16.3367 1.68681 16.2765 1.52782 16.225 1.36884C16.1089 1.00575 15.7845 0.737196 15.3957 0.737196H7.68491C7.33042 0.737196 6.97378 0.726454 6.61929 0.737196H6.60425C6.21323 0.737196 5.89097 1.00575 5.77495 1.36884C5.72339 1.52997 5.66538 1.68681 5.59878 1.84149C5.62671 1.77274 5.65679 1.70399 5.68472 1.63524C5.49351 2.08427 5.24644 2.50536 4.94995 2.89423L5.0853 2.7202C4.78882 3.10263 4.44507 3.44423 4.06265 3.74071L4.23667 3.60536C3.84995 3.90184 3.42671 4.14677 2.97983 4.33798C3.04858 4.31005 3.11733 4.27997 3.18608 4.25204C2.93257 4.35731 2.67476 4.43895 2.41265 4.51845C2.04956 4.62802 1.78101 4.96317 1.78101 5.34774V7.93876C1.78101 8.39423 1.78101 8.8497 1.81323 9.30516C1.88198 10.2311 2.03882 11.155 2.29878 12.0466C2.8144 13.8169 3.70815 15.4475 4.89409 16.8548C5.81577 17.9483 6.92651 18.8335 8.12964 19.5962L10.508 21.1044C10.5273 21.1173 10.5488 21.1302 10.5681 21.1431C10.9484 21.3837 11.5328 21.2354 11.7433 20.8337C11.9667 20.4083 11.84 19.9163 11.4339 19.6585C11.0472 19.4136 10.6605 19.1686 10.2759 18.9237C9.78179 18.61 9.28979 18.2985 8.79565 17.9848C8.44976 17.7657 8.11245 17.5315 7.78589 17.2823L7.95991 17.4177C7.1478 16.7882 6.41733 16.0577 5.78784 15.2456L5.92319 15.4196C5.28296 14.5882 4.75015 13.6772 4.33979 12.7104C4.36772 12.7792 4.3978 12.8479 4.42573 12.9167C4.00679 11.922 3.72104 10.8778 3.5771 9.8079C3.58784 9.88309 3.59858 9.96044 3.60718 10.0356C3.51479 9.33954 3.49976 8.64345 3.49976 7.9452V5.35634C3.28921 5.63348 3.07866 5.90848 2.86812 6.18563C3.60933 5.9622 4.3269 5.66571 4.9564 5.21239C5.7019 4.67528 6.33784 4.01356 6.8105 3.22294C7.07046 2.78895 7.27886 2.3163 7.43355 1.83505C7.1564 2.04559 6.8814 2.25614 6.60425 2.46669H14.315C14.6695 2.46669 15.0261 2.47528 15.3806 2.46669H15.3957C15.1185 2.25614 14.8435 2.04559 14.5664 1.83505C15.1056 3.51727 16.3302 4.98036 17.9373 5.73661C18.324 5.91923 18.7214 6.06102 19.1318 6.18563C18.9212 5.90848 18.7107 5.63348 18.5001 5.35634V8.40282C18.5001 8.94852 18.4636 9.49423 18.3927 10.0356C18.4035 9.96044 18.4142 9.88309 18.4228 9.8079C18.2767 10.8757 17.991 11.922 17.5742 12.9167C17.6021 12.8479 17.6322 12.7792 17.6601 12.7104C17.2498 13.6772 16.7169 14.5882 16.0767 15.4196L16.2121 15.2456C15.5826 16.0577 14.8521 16.7882 14.04 17.4177L14.214 17.2823C13.7328 17.654 13.2214 17.9741 12.7101 18.3007C12.1429 18.6616 11.5757 19.0204 11.0085 19.3813C10.8625 19.4737 10.7142 19.5682 10.5681 19.6606C10.3812 19.7788 10.233 19.9571 10.1728 20.1741C10.1169 20.3804 10.1427 20.6532 10.2587 20.8358C10.5037 21.214 11.0279 21.3987 11.4339 21.1409Z" fill="#6C6C6C"></path>
                                 <path d="M6.62154 10.9548L8.82798 13.1612L9.14166 13.4749C9.47037 13.8036 10.029 13.8036 10.3577 13.4749L12.0614 11.7712L14.7577 9.07491L15.3786 8.45401C15.6965 8.13604 15.7202 7.55167 15.3786 7.23799C15.0348 6.92217 14.502 6.89854 14.1626 7.23799L12.4588 8.94171L9.76255 11.638L9.14166 12.2589H10.3577L8.15123 10.0524L7.83755 9.73878C7.51959 9.42081 6.93521 9.39717 6.62154 9.73878C6.30572 10.0825 6.28209 10.6132 6.62154 10.9548Z" fill="#6C6C6C"></path>
@@ -286,8 +292,8 @@ const PageNav = ({ activeLink, isLogged }) => {
                                 <a href='/property/post'>Ev paylaş</a>
                             </div>
 
-                            <div className="side-menu-button-bottom text-center">
-                                <a href=''>Mənzil idarəçiliyinə keçin</a>
+                            <div className="side-menu-button-bottom text-center" onClick={handleModeSwitch}>
+                                <p className='mb-0'>{localStorage.getItem('ownerMode') === 'true' ? 'Səyahətə keçin' : 'Mənzil idarəçiliyinə keçin'}</p>
                             </div>
                         </div>
                     </div>
@@ -354,35 +360,53 @@ const PageNav = ({ activeLink, isLogged }) => {
             </Modal>
         </Navbar>
 
-        <div className={`navbar-bottom ${isVisible ? 'visible' : 'hidden'}`}>
+        <div className={`navbar-bottom ${isVisible ? 'visible' : 'hidden'} ${hideBottomNav && 'd-none'}`}>
             <div className="navbar-bottom-container">
                 <div className="navbar-bottom-nav d-flex">
                     <div className="navbar-bottom-logo">
                         <a href='/'>
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width={24} height={24} viewBox="0 0 48 48">
-                                <path d="M 23.951172 4 A 1.50015 1.50015 0 0 0 23.072266 4.3222656 L 8.859375 15.519531 C 7.0554772 16.941163 6 19.113506 6 21.410156 L 6 40.5 C 6 41.863594 7.1364058 43 8.5 43 L 18.5 43 C 19.863594 43 21 41.863594 21 40.5 L 21 30.5 C 21 30.204955 21.204955 30 21.5 30 L 26.5 30 C 26.795045 30 27 30.204955 27 30.5 L 27 40.5 C 27 41.863594 28.136406 43 29.5 43 L 39.5 43 C 40.863594 43 42 41.863594 42 40.5 L 42 21.410156 C 42 19.113506 40.944523 16.941163 39.140625 15.519531 L 24.927734 4.3222656 A 1.50015 1.50015 0 0 0 23.951172 4 z M 24 7.4101562 L 37.285156 17.876953 C 38.369258 18.731322 39 20.030807 39 21.410156 L 39 40 L 30 40 L 30 30.5 C 30 28.585045 28.414955 27 26.5 27 L 21.5 27 C 19.585045 27 18 28.585045 18 30.5 L 18 40 L 9 40 L 9 21.410156 C 9 20.030807 9.6307412 18.731322 10.714844 17.876953 L 24 7.4101562 z"></path>
+                                <path d="M 23.951172 4 A 1.50015 1.50015 0 0 0 23.072266 4.3222656 L 8.859375 15.519531 C 7.0554772 16.941163 6 19.113506 6 21.410156 L 6 40.5 C 6 41.863594 7.1364058 43 8.5 43 L 18.5 43 C 19.863594 43 21 41.863594 21 40.5 L 21 30.5 C 21 30.204955 21.204955 30 21.5 30 L 26.5 30 C 26.795045 30 27 30.204955 27 30.5 L 27 40.5 C 27 41.863594 28.136406 43 29.5 43 L 39.5 43 C 40.863594 43 42 41.863594 42 40.5 L 42 21.410156 C 42 19.113506 40.944523 16.941163 39.140625 15.519531 L 24.927734 4.3222656 A 1.50015 1.50015 0 0 0 23.951172 4 z M 24 7.4101562 L 37.285156 17.876953 C 38.369258 18.731322 39 20.030807 39 21.410156 L 39 40 L 30 40 L 30 30.5 C 30 28.585045 28.414955 27 26.5 27 L 21.5 27 C 19.585045 27 18 28.585045 18 30.5 L 18 40 L 9 40 L 9 21.410156 C 9 20.030807 9.6307412 18.731322 10.714844 17.876953 L 24 7.4101562 z" fill="#6C6C6C"></path>
                             </svg>
                         </a>
                     </div>
                     
-                    <div className="navbar-bottom-search">
-                        <a href='#searchbar'>
+                    <div className="navbar-bottom-liked">
+                        <a href=''>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false">
-                                <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"></path>
+                                <path d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z"></path>
                             </svg>
                         </a>
                     </div>
 
-                    <div className="navbar-bottom-liked">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false">
-                            <path d="M16 28c7-4.73 14-10 14-17a6.98 6.98 0 0 0-7-7c-1.8 0-3.58.68-4.95 2.05L16 8.1l-2.05-2.05a6.98 6.98 0 0 0-9.9 0A6.98 6.98 0 0 0 2 11c0 7 7 12.27 14 17z"></path>
-                        </svg>
+                    <div className="navbar-bottom-post">
+                        <a href=''>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                <path d="M8 0C8.55228 0 9 0.447715 9 1V7H15C15.5523 7 16 7.44772 16 8C16 8.55229 15.5523 9 15 9H9V15C9 15.5523 8.55228 16 8 16C7.44772 16 7 15.5523 7 15V9H1C0.447715 9 0 8.55229 0 8C0 7.44772 0.447715 7 1 7H7V1C7 0.447715 7.44772 0 8 0Z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    
+                    <div className="navbar-bottom-control">
+                        <a href=''>
+                            {localStorage.getItem('ownerMode') === 'true' ? 
+                            <svg viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 1C4 0.447715 4.44772 0 5 0H11C11.5523 0 12 0.447715 12 1H14C15.1046 1 16 1.89543 16 3V18C16 19.1046 15.1046 20 14 20H2C0.895431 20 0 19.1046 0 18V3C0 1.89543 0.895431 1 2 1H4ZM4 3H2V18H14V3H12V4C12 4.55228 11.5523 5 11 5H5C4.44772 5 4 4.55228 4 4V3ZM10 2H6V3H10V2ZM11.7071 8.79289C12.0976 9.18342 12.0976 9.81658 11.7071 10.2071L7.70711 14.2071C7.31658 14.5976 6.68342 14.5976 6.29289 14.2071L4.29289 12.2071C3.90237 11.8166 3.90237 11.1834 4.29289 10.7929C4.68342 10.4024 5.31658 10.4024 5.70711 10.7929L7 12.0858L10.2929 8.79289C10.6834 8.40237 11.3166 8.40237 11.7071 8.79289Z"></path>
+                            </svg>
+                            : 
+                            <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 0C6.55228 0 7 0.447715 7 1V2H11V1C11 0.447715 11.4477 0 12 0C12.5523 0 13 0.447715 13 1V2H16C17.1046 2 18 2.89543 18 4V17C18 18.1046 17.1046 19 16 19H2C0.895431 19 0 18.1046 0 17V4C0 2.89543 0.895431 2 2 2H5V1C5 0.447715 5.44772 0 6 0ZM5 4H2V7H16V4H13V5C13 5.55228 12.5523 6 12 6C11.4477 6 11 5.55228 11 5V4H7V5C7 5.55228 6.55228 6 6 6C5.44772 6 5 5.55228 5 5V4ZM16 9H2V17H16V9Z"/>
+                            </svg>
+                            }
+                        </a>
                     </div>
 
                     <div className="navbar-bottom-account" onClick={handleToggler}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false">
-                            <path d="M16 1a15 15 0 1 1 0 30 15 15 0 0 1 0-30zm0 8a5 5 0 0 0-2 9.58v2.1l-.15.03a11 11 0 0 0-6.94 4.59C9.26 27.59 12.46 29 16 29s6.74-1.41 9.09-3.7a11 11 0 0 0-6.93-4.59l-.16-.03v-2.1a5 5 0 0 0 3-4.35V14a5 5 0 0 0-5-5zm0-6A13 13 0 0 0 5.56 23.75a13.02 13.02 0 0 1 5.54-4.3l.35-.13-.02-.02A7 7 0 0 1 9 14.27L9 14a7 7 0 1 1 11.78 5.12l-.23.2.04.02c2.33.88 4.36 2.41 5.85 4.4A13 13 0 0 0 16 3z"></path>
-                        </svg>
+                        <a>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false">
+                                <path d="M16 1a15 15 0 1 1 0 30 15 15 0 0 1 0-30zm0 8a5 5 0 0 0-2 9.58v2.1l-.15.03a11 11 0 0 0-6.94 4.59C9.26 27.59 12.46 29 16 29s6.74-1.41 9.09-3.7a11 11 0 0 0-6.93-4.59l-.16-.03v-2.1a5 5 0 0 0 3-4.35V14a5 5 0 0 0-5-5zm0-6A13 13 0 0 0 5.56 23.75a13.02 13.02 0 0 1 5.54-4.3l.35-.13-.02-.02A7 7 0 0 1 9 14.27L9 14a7 7 0 1 1 11.78 5.12l-.23.2.04.02c2.33.88 4.36 2.41 5.85 4.4A13 13 0 0 0 16 3z"></path>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>

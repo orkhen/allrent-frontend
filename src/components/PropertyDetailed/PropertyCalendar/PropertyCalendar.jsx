@@ -9,7 +9,7 @@ const PropertyCalendar = () => {
             <h5>Giriş və çıxış saatları</h5>
         </div>
 
-        <div className="check-in-out mt-3 d-flex flex-column gap-3">
+        <div className="check-in-out mt-3 d-flex flex-wrap">
             <div className="check-in d-flex gap-5">
                 <div className="check-in-left d-flex gap-3">
                     <svg width="20" height="20" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">

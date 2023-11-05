@@ -1,0 +1,15 @@
+.property-post-nav-container {
+    margin: 1rem 8rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .property-post-nav-container {
+        margin: 1rem 6rem;
+    }   
+}
+
+@media screen and (max-width: 576px) {
+    .property-post-nav-container {
+        margin: 1rem 2rem;
+    }   
+}

@@ -26,3 +26,15 @@
 .conditions-icons p {
     margin: 0;
 }
+
+.conditions-button {
+    margin-top: 2rem;
+
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+
+    background-color: #FE4343;
+    color: #FEFEFE;
+
+    transform: all 0.3s ease;
+}

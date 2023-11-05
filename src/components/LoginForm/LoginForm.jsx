@@ -11,6 +11,8 @@ const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
 
+    const [error, setError] = useState('')
+
     const validatePassword = (e) => {
         setPassword(e.target.value)
 
@@ -51,7 +53,7 @@ const LoginForm = () => {
         window.location.href = '/'
     } else {
         setIsValid(false);
-        setEmailError('Email or password is incorrect');
+        setError('Email or password is incorrect');
     }
     };
     
@@ -88,6 +90,8 @@ const LoginForm = () => {
                 </div>
                 }
             </div>
+
+            {error && <p className="error-message mt-2 mb-0">{error}</p>}
 
         </div>
 

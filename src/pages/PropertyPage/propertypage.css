@@ -2,6 +2,11 @@
     margin-top: 1rem;
 }
 
+.property-searchbar {
+    width: 40%;
+}
+
 .property-detailed {
     margin-top: 4%;
 }
+

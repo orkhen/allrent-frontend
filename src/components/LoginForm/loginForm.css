@@ -49,7 +49,7 @@
     font-weight: 400;
 }
 
-.loginform-inputs .error-message {
+.loginform-container .error-message {
     color: red;
     font-size: 12px;
 }

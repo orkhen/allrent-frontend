@@ -6,7 +6,7 @@ import SigninForm from '../../components/SiginForm/SigninForm'
 const SigninPage = () => {
   return (
     <div>
-        <PageNav />
+        <PageNav hideSearch={true}/>
         <SigninForm />
     </div>
   )

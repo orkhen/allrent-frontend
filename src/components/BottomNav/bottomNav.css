@@ -8,7 +8,7 @@
     padding: 1.5rem;
     width: 100%;
     transition: transform 0.3s;
-    z-index: 1000;
+    z-index: 999;
 }
 
 .navbar-bottom.visible {
@@ -31,9 +31,33 @@ transform: translateY(100%);
 .navbar-bottom-nav a {
     text-decoration: none;
     color: rgb(176, 176, 176);
+    transition: all 0.3s ease;
 }
 
-.navbar-bottom-search svg,
+.navbar-bottom-nav svg {
+    transition: all 0.3s ease;
+}
+
+.navbar-bottom-nav svg:hover {
+    width: 28px;
+    height: 28px;
+}
+
+.navbar-bottom-nav a:hover {
+    color: #ee2d2d;
+}
+
+.navbar-bottom-control svg,
+.navbar-bottom-post svg {
+    display: block; 
+    fill: currentcolor; 
+    height: 24px; 
+    width: 24px; 
+    stroke: currentcolor; 
+    stroke-width: 0.5; 
+    overflow: visible;
+}
+
 .navbar-bottom-liked svg {
     display: block; 
     fill: none; 
@@ -65,5 +89,11 @@ transform: translateY(100%);
 @media screen and (max-width: 768px) {
     .navbar-bottom {
         display: flex;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .navbar-bottom-nav {
+        gap: 2.8rem;
     }
 }

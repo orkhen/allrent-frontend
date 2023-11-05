@@ -1,14 +1,10 @@
 .property-detailed-reserve {
-    margin: 1rem 0;
+    width: 100%;
     display: none;
 }
 
-.property-detailed-reserve a {
-    text-decoration: none;
-}
-
-.property-detailed-reserve-text {
-    width: 40%;
+.property-detailed-reserve-button {
+    width: 100%;
     background: #fd6164;
     padding: 0.5rem 2rem;
     border-radius: 6px;

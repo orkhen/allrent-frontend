@@ -93,23 +93,28 @@ const PropertyImages = () => {
           <Modal show={showModal} fullscreen={true} onHide={() => setShowModal(false)}>
             <ModalHeader closeButton></ModalHeader>
             <Modal.Body>
-              {/* <img src={propertyPhotos[selectedImageIndex]} alt="property image" /> */}
-              <div className="modal-image-container d-flex align-items-center">
-              <Carousel fade data-bs-theme={windowWidth > 992 ? "dark" : undefined} indicators={false} touch={true} interval={null} className="property-modal-carousel">
-                {propertySlidePhotos.map((photo, index) => (
-                  <Carousel.Item
-                    interval={10}
-                    className="property-images-carousel-item"
-                    key={index}
-                    onClick={() => handleImageClick(index)}
-                  >
-                    <div class="col d-flex align-items-center justify-content-center my-auto">
-                      <img src={photo} alt="property image" />
-                    </div>
-                  </Carousel.Item>
-                ))}
-              </Carousel>
+              <div className="modal-image-container d-flex flex-column align-items-center">
+                {/* <div className="modal-image-counter mb-3">
+                  <p>hi</p>
+                </div> */}
+
+                <Carousel fade data-bs-theme={windowWidth > 992 ? "dark" : undefined} indicators={false} touch={true} interval={null} className="property-modal-carousel">
+                  {propertySlidePhotos.map((photo, index) => (
+                    <Carousel.Item
+                      interval={10}
+                      className="property-images-carousel-item"
+                      key={index}
+                      onClick={() => handleImageClick(index)}
+                    >
+                      <div class="col d-flex align-items-center justify-content-center my-auto">
+                        <img src={photo} alt="property image" />
+                      </div>
+                    </Carousel.Item>
+                  ))}
+                </Carousel>
+                
               </div>
+              
             </Modal.Body>
           </Modal>
         </div>

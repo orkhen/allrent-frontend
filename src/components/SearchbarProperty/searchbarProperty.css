@@ -1,10 +1,10 @@
 .searchbar-property {
     width: 100%;
+    max-width: 100%;
 }
 
 .searchbar-property-container {
-    width: 40%;
-    /* margin: 0 4rem; */
+    width: 100%;
 }
 
 .searchbar-property-input-form {
@@ -17,6 +17,7 @@
     border-radius: 20px;
     border: 1px solid #E7E7E7;
     padding: 0.3rem 1rem;
+    /* padding-bottom: 1rem; */
     padding-right: 0.5rem;
 }
 
@@ -25,7 +26,33 @@
     border: none;
     outline: none;
     /* border-color: #757575; */
+}
 
+.MuiAutocomplete-root {
+    width: 100% !important;
+    height: 0px !important;
+}
+
+.MuiAutocomplete-endAdornment {
+    display: none !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border: none !important;
+}
+
+.MuiFormLabel-root,
+.MuiInputBase-input {
+    font-family: Inter !important;
+    font-size: 16px !important;
+}
+
+.MuiInputBase-input {
+    padding: 2px 4px 7.5px 5px !important;
+}
+
+.MuiAutocomplete-popper {
+    font-size: 20px !important;
 }
 
 .searchbar-property-input input,
@@ -45,8 +72,8 @@
 .searchbar-property-input svg {
     display: block; 
     fill: none; 
-    height: 14px; 
-    width: 14px; 
+    height: 18px; 
+    width: 18px; 
     stroke: currentcolor; 
     stroke-width: 4; 
     overflow: visible;
@@ -74,6 +101,12 @@
 .fixed-searchbar {
     position: static;
 }
+
+/* .css-13cymwt-control {
+    width: 100% !important;
+    border: none !important;
+    outline: none !important;
+} */
 
 @media screen and (max-width: 992px) {
     .searchbar-property-container {
