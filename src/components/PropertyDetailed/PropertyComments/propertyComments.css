@@ -41,7 +41,7 @@
 .comments-all-button a {
     color: var(--Main-green, #40918B);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 500;
 
     position: relative;
@@ -52,7 +52,7 @@
     content: "";
     position: absolute;
     width: 0;
-    height: 1px; 
+    height: 2px; 
     background-color: #40918B; 
     bottom: 0;
     left: 0;

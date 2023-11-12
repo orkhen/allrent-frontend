@@ -66,9 +66,9 @@
     /* gap: 2.5rem; */
 }
 
-.property-detailed-bottom .bottom-left {
-    /* width: 20%; */
-}
+/* .property-detailed-bottom .bottom-left {
+    width: 20%;
+} */
 
 .property-detailed-bottom .bottom-right {
     width: 50%;
@@ -98,7 +98,7 @@
     .property-detailed-bottom {
         display: flex;
     }
-    
+
     .property-detailed-main {
         flex-direction: column;
     }

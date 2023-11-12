@@ -18,7 +18,7 @@ const PropertyConditions = () => {
       ];
     
       const [showAll, setShowAll] = useState(false)
-      const conditionsToDisplay = showAll ? conditions : conditions.slice(0, 10);
+    //   const conditionsToDisplay = showAll ? conditions : conditions.slice(0, 6);
 
       const toggleShowMore = () => {
         setShowAll((prevShowAll) => !prevShowAll);
@@ -30,8 +30,8 @@ const PropertyConditions = () => {
             <h5>Şərait</h5>
         </div>
 
-        <div className="conditions-icons d-flex flex-row flex-wrap">
-            {conditionsToDisplay.map((condition, index) => (
+        <div className={`conditions-icons d-flex flex-row flex-wrap ${showAll && 'expanded'}`}>
+            {conditions.map((condition, index) => (
             <div className="conditions-icon d-flex gap-3" key={index}>
                 <img
                 src={`https://allrent.io/homepage/images/svg/home_has_d/${condition.icon}`}
@@ -42,9 +42,9 @@ const PropertyConditions = () => {
             ))}
         </div>
 
-        {conditions.length > 10 && (
-            <button className='conditions-button align-self-start' onClick={toggleShowMore}>
-            {showAll ? 'Gizlət' : 'Hamını göstər'}
+        {conditions.length > 6 && (
+            <button className='conditions-button align-self-center' onClick={toggleShowMore}>
+            {showAll ? 'Gizlət' : 'Hamısına bax'}
             </button>
         )}
     </div>

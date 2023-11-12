@@ -1,5 +1,9 @@
 .footer-main {
     background: #F6F6F6;
+    /* position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0; */
 }
 
 .footer-container {
@@ -49,8 +53,19 @@
  margin-top: 0.5rem;
 }
 
+.footer-socials a {
+    text-decoration: none;
+    /* color: #fff; */
+}
+
 .footer-socials svg {
     margin: 0 0.6rem;
+    fill: #6C6C6C;
+    transition: all 0.3s ease;
+}
+
+.footer-socials svg:hover {
+    fill: #FE4343;
 }
 /* Animations */
 

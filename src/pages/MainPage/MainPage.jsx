@@ -32,7 +32,7 @@ const MainPage = ({ isLogged }) => {
       <WhyUs/>
       <Categories/>
       <Properties title={'Bütün evlər'}/>
-      <Soon/>
+      {/* <Soon/> */}
       <Properties title={'Yaxınlıqda olan evlər'}/>
       <PageFooter/>
       {/* <BottomNav/> */}

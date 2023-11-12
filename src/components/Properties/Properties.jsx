@@ -103,7 +103,7 @@ const Properties = ({ title, properties }) => {
           </div>
 
           <div className="properties-more">
-            <a href="">Hamısına bax</a>
+            <a href="">Filter</a>
           </div>
         </div>
 
@@ -116,9 +116,9 @@ const Properties = ({ title, properties }) => {
 
         <div className='properties-more-button-container d-flex align-items-center justify-content-center'>
             <div className="properties-more-button red-button-animation">
-              <a href='/  map'>
+              <a href={`${title === 'Bütün evlər' ? '' : '/map'}`}>
                 <div className="text-center">
-                  Xəritədə bax
+                  {title === 'Bütün evlər' ? 'Hamısına bax' : 'Xəritədə bax'}
                 </div>
               </a>
             </div>

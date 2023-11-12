@@ -17,7 +17,16 @@
 .conditions-icons {
     margin-top: 1rem;
     gap: 1rem 0;
+
+    overflow: hidden;
+    transition: max-height 1s ease; /* Adjust the duration as needed */
+    max-height: 120px;
 }
+
+.conditions-icons.expanded {
+    max-height: 500px; /* Adjust to the maximum height needed */
+}
+
 
 .conditions-icon {
     width: 50%;
@@ -30,11 +39,27 @@
 .conditions-button {
     margin-top: 2rem;
 
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
+    color: var(--Main-green, #40918B);
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
 
-    background-color: #FE4343;
-    color: #FEFEFE;
+    position: relative;
+    transition: color 0.3s ease;
+}
 
-    transform: all 0.3s ease;
+.conditions-button::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px; 
+    background-color: #40918B; 
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease; 
+}
+
+.conditions-button:hover::before {
+    width: 100%;
 }

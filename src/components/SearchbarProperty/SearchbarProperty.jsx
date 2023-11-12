@@ -4,7 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import './searchbarProperty.css'
 
 const SearchbarProperty = () => {
-  const top100Films = [
+  const regions = [
     { label: 'Ağcabədi'},
     { label: 'Bakı'},
     { label: 'Lerik'},
@@ -37,15 +37,25 @@ const SearchbarProperty = () => {
         <div className="searchbar-property-input-form d-flex">
             <div className="searchbar-property-input">
                 <Autocomplete
+                  noOptionsText="Region tapılmadı"
                   disablePortal
-                  options={top100Films}
+                  options={regions}
                   // sx={{ width: 300 }}
                   sx={{
                     '& + .MuiAutocomplete-popper .MuiAutocomplete-option': {          
                       fontFamily: 'Inter'
                     }
                   }}
-                  renderInput={(params) => <TextField {...params} label="Gedəcəyiniz regionu daxil edin" />}
+                  renderInput={(params) => (
+                    <TextField 
+                      {...params} 
+                      placeholder='Gedəcəyiniz regionu daxil edin'
+                      sx={{
+                        '& .MuiInputBase-input::placeholder': {
+                          fontSize: '16px',
+                        }
+                      }}
+                    />)}
                 />
                 <button>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" >

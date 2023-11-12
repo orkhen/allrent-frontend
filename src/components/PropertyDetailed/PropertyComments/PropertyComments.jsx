@@ -168,7 +168,7 @@ const PropertyComments = () => {
           </div>
         </div>
 
-        <div className="comments-all-button d-flex justify-content-end mt-2">
+        <div className="comments-all-button d-flex justify-content-center mt-2">
           <a href=''>Hamısına bax</a>
         </div>
     </div>

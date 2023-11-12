@@ -17,15 +17,12 @@
     border-radius: 20px;
     border: 1px solid #E7E7E7;
     padding: 0.3rem 1rem;
-    /* padding-bottom: 1rem; */
     padding-right: 0.5rem;
 }
 
 .searchbar-property-input input {
-    width: 100%;
     border: none;
     outline: none;
-    /* border-color: #757575; */
 }
 
 .MuiAutocomplete-root {
@@ -63,7 +60,6 @@
 }
 
 .searchbar-property-input button {
-    /* background-color: transparent; */
     background: #40918B;
     border-radius: 50%;
     padding: 0.7rem;
