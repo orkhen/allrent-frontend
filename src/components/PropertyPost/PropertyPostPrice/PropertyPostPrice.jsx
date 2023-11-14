@@ -93,7 +93,7 @@ const PropertyPostPrice = ({ step, switchStep, data }) => {
             {/* <Modal.Header closeButton /> */}
             <Modal.Body>
               <div className="success-img">
-                <img src="https://s3-alpha-sig.figma.com/img/6741/c9dd/0af3656fbb0d09da7c323d8653052813?Expires=1698019200&Signature=R3e4j3pOplFoFBxTy6pTvGk-rjfyPdBZ0xjRE2bWTtZPg-CM0JYkGvNMAqflSqQ2yGkaeMbWRIglAegePohaFe9TXhqZQTlHdGuYXlsJdXf0fRwOPMfNXwYRf3tUy5mSTt4zpWf949BWJCcQ7Bmf1BvF7SlqxS2R0jx9yZgeycyoY8NoCZIDqXlb~nLxNqYkvDaYGpaijDmaWseOH8RrpAtoCW9kkLWDRr0hQ~4GTi60VU3WYcEgSPcO7I7-fRZTh0vPQ8STmY6coYbKKKhZUmZHZMzJK1QgOuJM0eW1jByei8Z7hzvaSCpbgjLmRT1YrVTsvveaqqEfzCie0XcTQg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" alt="success" />
+                <img src="https://s3-alpha-sig.figma.com/img/6741/c9dd/0af3656fbb0d09da7c323d8653052813?Expires=1701043200&Signature=qBd1RoGoV8sSy3uqdU9YdMwjZMZJIyPmcGzWuelaO-fPA4VE5d-cNFeKmWfSH~nzdAWF~OyMHQKzMG-LLcW2HaJl-F-kM3OiTVdnXpl1WOo~qe~WBogd-fcmP7zSm40YVKM22XuAFh0Ly2EfTjFdJS~bW8sKte8rfG9cH9ML~3pCtfwknO2gLN05mBshw8aXCc9Za6QNQAhWh2xMPOYnQOtBGnX97~66-ZpmmspMzrV3~Z1UMqvf5axQU4FLSi~OQqhdF8xzlUCa55mTM13AS0AfgoFBBSmDCDhAmM0hUdDmBIKxjRQLNHC7x98r16UBo5bT5I2M9g0PF007b~-n3A__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" alt="success" />
               </div>
 
               <div className="success-text">

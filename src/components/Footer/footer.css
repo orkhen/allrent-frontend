@@ -1,9 +1,11 @@
 .footer-main {
-    background: #F6F6F6;
-    /* position: absolute;
+    position: static;
+    top: 100%;
     bottom: 0;
     left: 0;
-    right: 0; */
+    right: 0;
+
+    background: #F6F6F6 !important;
 }
 
 .footer-container {

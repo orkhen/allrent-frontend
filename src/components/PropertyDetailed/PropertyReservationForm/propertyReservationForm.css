@@ -173,6 +173,10 @@
     width: 100%;
 } */
 
+.rdrMonthName {
+    display: none !important;
+}
+
 .rdrDateDisplayWrapper {
     background: transparent;
 }

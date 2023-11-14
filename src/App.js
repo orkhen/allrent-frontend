@@ -13,6 +13,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import SigninPage from './pages/SigninPage/SigninPage';
 import PropertyPostPage from './pages/PropertyPostPage/PropertyPostPage';
 import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
+import ReservationsPage from './pages/ReservationsPage/ReservationsPage';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/property/post" element={<PropertyPostPage isLogged={isLogged} />} />
           <Route path="/property/:id" element={<PropertyPage isLogged={isLogged} />} />
           <Route path='/favorites' element={<FavoritesPage />} />
+          <Route path='/reservations' element={<ReservationsPage />} />
         </Routes>
       </Router>
     </div>
