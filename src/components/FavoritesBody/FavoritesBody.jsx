@@ -9,6 +9,8 @@ const FavoritesBody = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [filterOpen, setFilterOpen] = useState(false)
   const [sliderVal, setSliderVal] = useState([40, 1500]);
+  const [bedrooms, setBedrooms] = useState(0)
+  const [bathrooms, setBathrooms] = useState(0)
 
   const handleChange = (event, newSliderVal) => {
     setSliderVal(newSliderVal);
@@ -221,8 +223,54 @@ const FavoritesBody = () => {
                 <div className="filter-rooms">
                   <h4>Otaqlar</h4>
 
-                  <div className="rooms-controls">
-             
+                  <div className="rooms-controls d-flex justify-content-between">
+                      <div className="room-box d-flex gap-4">
+                        <div className="room-name">
+                          <h5 className='mt-2'>Yataq otağı</h5>
+                        </div>
+
+                        <div className="room-controls d-flex gap-3 align-items-center">
+                          <div className={`controls-decrement ${bedrooms > 0 ? 'active' : 'deactive'}`}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => {bedrooms - 1 < 0 ? setBedrooms(0) : setBedrooms(bedrooms - 1)}}>
+                              <path d="M4 12C4 11.4477 4.44772 11 5 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H5C4.44772 13 4 12.5523 4 12Z" fill={bedrooms > 0 ? '#6C6C6C' : "#E7E7E7"}/>
+                            </svg>
+                          </div>
+
+                          <div className="controls-number">
+                            {bedrooms}
+                          </div>
+
+                          <div className="controls-increment active">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => setBedrooms(bedrooms + 1)}>
+                              <path d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z" fill="#6C6C6C"/>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="room-box d-flex gap-4">
+                        <div className="room-name">
+                          <h5 className='mt-2'>Hamam otağı</h5>
+                        </div>
+
+                        <div className="room-controls d-flex gap-3 align-items-center">
+                          <div className={`controls-decrement ${bathrooms > 0 ? 'active' : 'deactive'}`}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => {bathrooms - 1 < 0 ? setBathrooms(0) : setBathrooms(bathrooms - 1)}}>
+                              <path d="M4 12C4 11.4477 4.44772 11 5 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H5C4.44772 13 4 12.5523 4 12Z" fill={bathrooms > 0 ? '#6C6C6C' : "#E7E7E7"}/>
+                            </svg>
+                          </div>
+
+                          <div className="controls-number">
+                            {bathrooms}
+                          </div>
+
+                          <div className="controls-increment active">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => setBathrooms(bathrooms + 1)}>
+                              <path d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z" fill="#6C6C6C"/>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                 </div>
 

@@ -118,6 +118,36 @@
     font-weight: 600;
 }
 
+.favorites-filter-body .rooms-controls h5 {
+    color: var(--Font-color, #1D1D1D);
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.favorites-body-container .rooms-controls .deactive {
+    border-radius: 4px;
+    border: 1px solid var(--Stroke-color, #E7E7E7);
+    cursor: pointer;
+}
+
+.favorites-body-container .rooms-controls .controls-number {
+    color: var(--Font-color, #1D1D1D);
+
+    /* Body 2 medium */
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.favorites-body-container .rooms-controls .active {
+    border-radius: 4px;
+    border: 1px solid var(--Gray, #6C6C6C);
+    cursor: pointer;
+}
+
 @media screen and (max-width: 992px) {
     .favorites-body-container {
         margin: 2rem;

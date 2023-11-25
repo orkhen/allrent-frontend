@@ -27,7 +27,7 @@ const Categories = () => {
         </div>
 
           <div className='categories-buttons'>
-            <Splide options={{ type: 'slide',perPage: 2, rewind: false, drag: 'free', speed: 3000, gap: 0, arrows: false, pagination: false }}>
+            <Splide options={{ type: 'slide',perPage: 4, rewind: false, drag: 'free', speed: 3000, gap: 0, arrows: false, pagination: false }}>
               {categories.map((category, index) => (
                 <SplideSlide key={index}>
                   <a href='#'>

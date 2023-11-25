@@ -10,10 +10,11 @@ const PropertyDescription = () => {
         <div className="property-detailed-overview">
             <div className="property-detailed-overview-icons">
                 <Splide options={{ type: 'slide',perPage: 2, rewind: false, drag: 'free', speed: 3000, gap: 0, arrows: false, pagination: false, start: 0}}>
-                    <SplideSlide>
+                    <SplideSlide className='property-detailed-overview-slide'>
                         <div className="property-detailed-overview-icon">
                             <img src="https://allrent.io/homepage/images/svg/details/guest_count.svg" alt="detail icon"/>
                             <p>9</p>
+                            {/* <span className="overview-description">Maximum Guests</span> */}
                         </div>
                     </SplideSlide>
                     

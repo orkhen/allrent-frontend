@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PropertyPostContext } from '../../pages/PropertyPostPage/PropertyPostPage'
 import './propertyPost.css'
 
-const PropertyPost = ({ switchStep, step }) => {
+const PropertyPost = () => {
+    const { switchStep, step } = useContext(PropertyPostContext)
   return (
     <div className={`property-post d-flex justify-content-center ${step !== 1 && 'hide'}`}>
       <div className="property-post-container d-flex flex-column mt-5">

@@ -88,16 +88,25 @@
 }
 
 @media screen and (max-width: 992px) {
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-
-        gap: 2rem;
+    .footer-container {
+        margin: 0 1rem;
     }
 
     .footer-rights {
         margin-top: 2rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .footer-rules-links {
+        display: grid !important;
+        grid-template-columns: repeat(2, 50%);
+        gap: 5px 0;
     }
 }
 

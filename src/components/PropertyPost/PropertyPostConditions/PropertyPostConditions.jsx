@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import './propertyPostConditions.css'
 
 import Select from 'react-select';
+import { PropertyPostContext } from '../../../pages/PropertyPostPage/PropertyPostPage';
 
-const PropertyPostConditions = ({ switchStep, step }) => {
+const PropertyPostConditions = () => {
+    const { switchStep, step, setData, data } = useContext(PropertyPostContext)
+
     const conditions = [
         "Mətbəx",
         "Soyuducu",

@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import { PropertyContext } from '../PropertyContext';
+
 import './propertyReserveButton.css'
 
 const PropertyReserveButton = () => {
-  const scrollToReservationForm = () => {
+  const { setIsCalendarOpen } = useContext(PropertyContext);
+
+  const handleOpenCalendar = () => {
+    setIsCalendarOpen(true);
     const reservationForm = document.getElementById('reservation-form');
     if (reservationForm) {
       reservationForm.scrollIntoView({ behavior: 'smooth' });
@@ -12,13 +17,13 @@ const PropertyReserveButton = () => {
   return (
     <div className="property-detailed-reserve">
       <div 
-        className="property-detailed-reserve-button red-button-animation text-center"
-        onClick={scrollToReservationForm}
+        className="property-detailed-reserve-button text-center"
+        onClick={handleOpenCalendar}
       >
           Rezerv et
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PropertyReserveButton
+export default PropertyReserveButton;

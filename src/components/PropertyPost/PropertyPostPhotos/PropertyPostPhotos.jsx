@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import './propertyPostPhotos.css'
+import { PropertyPostContext } from '../../../pages/PropertyPostPage/PropertyPostPage'
 
-const PropertyPostPhotos = ({ step, switchStep }) => {
+const PropertyPostPhotos = () => {
+  const { switchStep, step, setData, data } = useContext(PropertyPostContext)
+
   const photos_1 = [
     'Örtük şəkli yükləyin*',
     'Yataq otağı şəkli yükləyin*'

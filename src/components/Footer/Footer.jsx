@@ -9,10 +9,12 @@ const PageFooter = () => {
             <div className="footer-rules d-flex flex-column">
                 <h5>Qaydalar</h5>
 
-                <a href=''>Gizlilik şərtləri</a>
-                <a href=''>İstifadəçi qaydaları</a>
-                <a href=''>Haqqımızda</a>
-                <a href=''>FAQ</a>
+                <div className="footer-rules-links d-flex flex-column">
+                  <a href=''>Gizlilik şərtləri</a>
+                  <a href=''>İstifadəçi qaydaları</a>
+                  <a href=''>Haqqımızda</a>
+                  <a href=''>FAQ</a>
+                </div>
             </div>
 
             <div className="footer-contact d-flex flex-column">

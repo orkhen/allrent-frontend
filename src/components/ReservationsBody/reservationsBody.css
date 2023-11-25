@@ -7,20 +7,34 @@
 }
 
 .reservations-body-nav {
-    gap: 2.5rem;
+    gap: 2rem;
+    position: relative;
+}
+
+.reservations-body-nav .indicator {
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    background-color: var(--Main-green, #40918B);
+    transition: left 0.3s ease, width 0.3s ease;
 }
 
 .reservations-body-nav div {
     color: var(--Font-color, #1D1D1D);
 
-    /* Body 1 semibold */
-    font-family: Inter;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
 
     cursor: pointer;
+}
+
+.reservations-body-nav .active {
+    color: var(--Main-green, #40918B);
+
+    transition: all 0.3s ease;
+    /* border-bottom: 1px solid var(--Main-green, #40918B); */
 }
 
 .reservations-body-properties {
@@ -31,6 +45,12 @@
     border-radius: 6px;
     background: var(--BG-color, #FEFEFE);
     box-shadow: 0px 4px 10px 0px rgba(153, 153, 153, 0.10);
+
+    cursor: pointer;
+}
+
+.reservation-card-left {
+    width: 80%;
 }
 
 .reservation-card-img img {
@@ -43,7 +63,6 @@
 .reservations-body-properties .reservation-card-info {
     margin-left: 2rem;
     width: 60%;
-
 }
 
 .reservation-card-info h5 {
@@ -85,7 +104,13 @@
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
+    line-height: 1.2rem;
+    height: 2.4rem;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 
 }
 
@@ -105,7 +130,7 @@
 }
 
 .reservations-body-properties .price-more-button {
-    color: var(--LG-color, #E6E6E6);
+    color: var(--LG-color, #FEFEFE);
 
     /* Body 2 bold */
     font-family: Inter;
@@ -142,16 +167,115 @@
     line-height: normal;
 }
 
+.reservations-body-container .reservation-card-lg {
+    border-radius: 6px;
+    background: var(--BG-color, #FEFEFE);
+    box-shadow: 0px 2px 4px 0px rgba(155, 154, 154, 0.10);
+    padding: 10px;
+}
+
+.reservations-body-properties .reservation-card-lg img {
+    width: 100%;
+    /* height: 360px; */
+    object-fit: cover;
+}
+
+.reservations-body-properties .reservation-card-lg h5 {
+    color: var(--Font-color, #1D1D1D);
+    
+    /* Body 2 semibold */
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+}
+
+.reservations-body-container .card-lg-rating p {
+    color: var(--Font-color, #1D1D1D);
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.reservations-body-container .card-lg-title p {
+    color: var(--Font-color, #1D1D1D);
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.reservations-body-container .card-lg-title span {
+    color: var(--Main-color, #FE4343);
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.reservations-body-container .card-lg-overview p {
+    color: var(--Gray, #6C6C6C);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.reservations-body-container .card-lg-description p {
+    color: var(--Gray, #6C6C6C);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 145%;
+}
+
+.reservations-body-container .card-lg-note p {
+    color: var(--Main-green, #40918B);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.reservations-body-container .card-lg-more {
+    margin-top: 1rem;
+
+    text-align: center;
+    color: var(--BG-color, #FEFEFE);
+    font-size: 16px;
+    font-weight: 700;
+
+    padding: 12px 26px;
+    border-radius: 27px;
+    background: var(--Main-green, #40918B);
+}
+
 @media screen and (max-width: 992px) {
     .reservations-body-container {
         margin: 2rem;
     }
 
+    .reservation-card-info {
+        width: 65% !important;
+    }
+
+    .reservation-card-info .info-note p {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* .reservations-body-properties .reservation-card-info {
+        width: 70% !important;
+        margin-left: 0.5rem;
+    } */
 }
 
 @media screen and (max-width: 672px) {
     .reservations-body-container {
-        margin: 4rem 1rem;
+        margin: 4rem 0rem;
     }   
 
+    .reservations-body-nav div {
+        font-size: 14px;
+    }
+
+    .reservations-body-nav {
+        margin-left: 1rem;
+    }
 }

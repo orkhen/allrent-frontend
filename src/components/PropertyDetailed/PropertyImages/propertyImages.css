@@ -55,23 +55,64 @@
     padding-bottom: 0; */
 }
 
+.modal-close-svg {
+    margin-top: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
 .modal-header button {
     margin: 4rem;
 }
 
-.modal-image-container {
-    height: 65%;
-    margin: 0rem 8rem;
+.property-modal-carousel {
+    width: 100% !important;
+    margin-top: 1rem;
+}
+
+.property-modal-carousel .carousel-control-prev {
+    left: 15%;
+}
+
+.property-modal-carousel .carousel-control-next {
+    right: 15%;
 }
 
 .property-modal-carousel img {
-    margin: 0 auto;
-    width: 65%;
+    /* margin: 0 auto; */
+    /* width: 1920px; */
+    object-fit: cover;
+
     /* height: 100%; */
 }
 
 .property-modal-carousel {
     width: 100%;
+}
+
+.modal-slide-pagination {
+    width: 55%;
+    /* gap: 0 20px !important; */
+    /* background-color: black; */
+}
+
+.modal-slide-pagination .splide {
+    width: 100% !important;
+}
+
+.modal-slide-pagination .splide__list {
+    gap: 0 5px;
+}
+
+.modal-slide-pagination .splide__slide {
+    width: auto !important;
+}
+
+.modal-slide-pagination img {
+    width: 9vw;
+    height: 16vh;
+
+    cursor: pointer;
 }
 
 /* .property-modal-carousel .carousel-control-prev span,
@@ -80,18 +121,39 @@
 } */
 
 @media screen and (max-width: 992px) {
-    .modal-image-container {
-        margin: 6rem 0;
-        /* margin-top: 2rem; */
+    .modal-slide-pagination {
+        width: 100%;
     }
-    
-    /* .property-modal-carousel {
-        height: 100%;
-    } */
+    .modal-slide-pagination img {
+        width: 9vh;
+        height: 6vh;
+    }
 
     .property-modal-carousel img {
-        margin: 0 auto;
         width: 100%;
-        height: 100%;
+    }
+
+    .property-detailed-images-modal-main {
+        margin: 15% 0;
+    }
+
+    .property-modal-carousel .carousel-control-prev {
+        left: 0;
+    }
+    
+    .property-modal-carousel .carousel-control-next {
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .property-detailed-images-modal-main {
+        margin: 20% 0;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .property-detailed-images-modal-main {
+        margin: 40% 0;
     }
 }

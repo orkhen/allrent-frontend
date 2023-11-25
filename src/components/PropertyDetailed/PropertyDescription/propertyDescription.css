@@ -10,6 +10,10 @@
     width: auto !important;
 }
 
+.property-detailed-overview-slide {
+    position: relative;
+}
+
 .property-detailed-overview-icon {
     display: flex;
 
@@ -22,6 +26,32 @@
     border: 1px solid #E7E7E7;
 
     cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.property-detailed-overview-icon:hover {
+    background-color: #ffffff;
+}
+
+.overview-description {
+    display: none;
+    position: absolute;
+    top: 100%;
+    /* bottom: 0; */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+
+    z-index: 214798076;
+}
+
+.property-detailed-overview-icon:hover .overview-description {
+    display: block;
 }
 
 .propert-detailed-description-text {

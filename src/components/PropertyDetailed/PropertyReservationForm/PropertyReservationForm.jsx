@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
+import { PropertyContext } from '../PropertyContext';
 import './propertyReservationForm.css'
 
 import { DateRange } from 'react-date-range';
@@ -6,7 +7,7 @@ import { range } from 'lodash';
 
 const PropertyReservationForm = () => {
     const [guests, setGuests] = useState(1)
-    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+    const { isCalendarOpen, setIsCalendarOpen } = useContext(PropertyContext);
     const [selectedDates, setSelectedDates] = useState([
     {
         startDate: new Date(),

@@ -1,10 +1,13 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useContext } from 'react'
 import './propertyPostLocation.css'
 
 import Select from 'react-select';
 import { GoogleMap, LoadScript, Marker, Autocomplete  } from '@react-google-maps/api';
+import { PropertyPostContext } from '../../../pages/PropertyPostPage/PropertyPostPage';
 
-const PropertyPostLocation = ({ step, switchStep, setData, data }) => {
+const PropertyPostLocation = () => {
+  const { switchStep, step, setData, data } = useContext(PropertyPostContext)
+
     const [location, setLocation] = useState('')
 
     const valuesList = [

@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+.noscroll {
+  overflow: hidden;
+}
+
 .page {
   width: 100hv;
   font-family: Inter;
@@ -20,6 +24,15 @@
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+.green-button-animation {
+  transition: all 0.3s ease;
+}
+
+.green-button-animation:hover {
+  background: var(--Main-green, #3a8883);
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.234);
 }
 
 .red-button-animation {
@@ -38,4 +51,10 @@
 .red-button-subtle-animation:hover {
   background-color: #ed3c3c !important;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.234);
+}
+
+.no-wrap {
+  white-space: nowrap;
+  overflow: hidden; /* Optional: hides text that overflows the container's width */
+  text-overflow: ellipsis; /* Optional: adds an ellipsis (...) to indicate text overflow */
 }

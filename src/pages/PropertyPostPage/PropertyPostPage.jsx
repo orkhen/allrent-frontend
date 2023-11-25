@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState, createContext } from 'react'
+import { AppContext } from '../../App'
+
 import './propertyPostPage.css'
 import PageNav from '../../components/Navbar/Navbar'
 import PropertyPost from '../../components/PropertyPost/PropertyPost'
@@ -11,7 +13,9 @@ import PropertyPostPhotos from '../../components/PropertyPost/PropertyPostPhotos
 import PropertyPostPrice from '../../components/PropertyPost/PropertyPostPrice/PropertyPostPrice'
 import PropertyPostNav from '../../components/PropertyPost/PropertyPostNav/PropertyPostNav'
 
-const PropertyPostPage = ({ isLogged }) => {
+export const PropertyPostContext = createContext(null);
+
+const PropertyPostPage = () => {
   const [step, setStep] = useState(1)
   const [data, setData] = useState({
     rooms: 0,
@@ -24,18 +28,19 @@ const PropertyPostPage = ({ isLogged }) => {
     setStep(step + val)
   }
   return (
-    <div className='property-post-main'>
-        {/* <PageNav isLogged={isLogged} /> */}
-        <PropertyPostNav />
-        <PropertyPost step={step} switchStep={switchStep} />
-        <PropertyInputsGeneral step={step} switchStep={switchStep} />
-        <PropertyPostRooms step={step} switchStep={switchStep} setData={setData} data={data} />
-        <PropertyPostConditions step={step} switchStep={switchStep} />
-        <PropertyPostLocation step={step} switchStep={switchStep} setData={setData} data={data} />
-        <PropertyPostCalendar step={step} switchStep={switchStep} />
-        <PropertyPostPhotos step={step} switchStep={switchStep} />
-        <PropertyPostPrice step={step} switchStep={switchStep} data={data} />
-    </div>
+    <PropertyPostContext.Provider value={{ step, switchStep, setData, data }} >
+      <div className='property-post-main'>
+          <PropertyPostNav />
+          <PropertyPost />
+          <PropertyInputsGeneral />
+          <PropertyPostRooms />
+          <PropertyPostConditions />
+          <PropertyPostLocation />
+          <PropertyPostCalendar />
+          <PropertyPostPhotos />
+          <PropertyPostPrice />
+      </div>
+    </PropertyPostContext.Provider>
   )
 }
 

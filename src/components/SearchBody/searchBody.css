@@ -1,0 +1,445 @@
+.search-body-container {
+    margin: 2rem 8rem;
+}
+
+.search-body-title h5 {
+    color: var(--Font-color, #1D1D1D);
+
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.search-body-filter {
+    cursor: pointer;
+}
+
+.search-body-filter h5 {
+    color: var(--Font-color, #1D1D1D);
+
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.search-body-properties .search-card {
+    border-radius: 6px;
+    background: var(--BG-color, #FEFEFE);
+    box-shadow: 0px 4px 10px 0px rgba(153, 153, 153, 0.10);
+
+    cursor: pointer;
+}
+
+.search-card-left {
+    width: 80%;
+}
+
+.search-card-img img {
+    width: 210px;
+    height: 150px;
+
+    border-radius: 4.749px;
+}
+
+.search-card-more .controls-share {
+    z-index: 900;
+    border-radius: 24px;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+
+.search-card-more .controls-like     {
+    z-index: 900;
+    border-radius: 24px;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.search-card-more .controls-share:hover, 
+.search-card-more .controls-like:hover {
+    background-color: #1d1d1d19;
+}
+.search-body-properties .search-card-info {
+    margin-left: 2rem;
+    width: 60%;
+}
+
+.search-card-info h5 {
+    color: var(--Font-color, #1D1D1D);
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.search-card-info .info-rating p {
+    color: var(--Font-color, #1D1D1D);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    margin-top: 3px;
+}
+
+.search-card-info .info-rooms p {
+    color: var(--Gray, #6C6C6C);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.search-body-properties .price-more-button {
+    color: var(--LG-color, #FEFEFE);
+
+    /* Body 2 bold */
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    padding: 12px 26px;
+    border-radius: 27px;
+    background: var(--Main-green, #40918B);
+
+    cursor: pointer;
+}
+
+.search-body-properties .card-more-price p {
+    color: var(--Gray, #6C6C6C);
+
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.search-body-properties .card-more-price p span {
+    color: var(--Main-color, #FE4343);
+
+    /* Body 2 semibold */
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.filter-window {
+    position: fixed;
+    top: 0;
+    right: -50%; /* Initially off-screen */
+    width: 50%;
+    height: 100%;
+    background-color: white; /* Change as needed */
+    transition: right 0.3s ease-in-out;
+    z-index: 999; /* Ensure it's above other content */
+
+    overflow-y: scroll;
+}
+
+.filter-window.open {
+    right: 0; /* Slide in */
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 989; /* Below the filter window, above other content */
+}
+
+.overlay.open {
+    display: block;
+}
+
+.filter-container {
+    margin: 1rem 1.5rem;
+}
+
+.filter-container h4 {
+    color: var(--Dark-green, #1E4B4A);
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.filter-container .filter-header h5 {
+    color: var(--Font-color, #1D1D1D);
+
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.filter-container .filter-checkboxes {
+    display: grid;
+    margin-top: 14px;
+    grid-template-columns: repeat(4, auto);
+    gap: 10px 20px;
+}
+
+.filter-container .filter-checkbox {
+    display: flex;
+    gap: 5px;
+}
+
+.filter-container .filter-checkboxes input {
+    accent-color: #1f8078;
+    width: 20px;
+    height: 20px;
+}
+
+.filter-container .price-slider {
+    width: 60%;
+}
+
+.filter-apply-button {
+    /* width: 520px; */
+    padding: 8px 0px;
+    border-radius: 6px;
+    background: var(--Main-green, #40918B);
+
+    color: var(--BG-color, #FEFEFE);
+
+    font-size: 18px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.price-informational {
+    color: var(--Font-color, #1D1D1D);
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.price-min-max {
+    color: var(--Font-color, #1D1D1D);
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.filter-container .rooms-controls {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+}
+
+.filter-container .rooms-controls .room-box {
+    width: 90%;
+    justify-content: space-between;
+}
+
+.filter-container .rooms-controls h5 {
+    color: var(--Font-color, #1D1D1D);
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.filter-container .rooms-controls .deactive {
+    border-radius: 4px;
+    border: 1px solid var(--Stroke-color, #E7E7E7);
+    cursor: pointer;
+}
+
+.filter-container .rooms-controls .controls-number {
+    color: var(--Font-color, #1D1D1D);
+
+    /* Body 2 medium */
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.filter-container .rooms-controls .active {
+    border-radius: 4px;
+    border: 1px solid var(--Gray, #6C6C6C);
+    cursor: pointer;
+}
+
+.filter-container .filter-permits .filter-checkboxes {
+    display: flex;
+    gap: 0.5rem 4rem;
+    flex-wrap: wrap;
+}
+
+#dropdown-basic {
+    border: none !important;
+
+    color: var(--Dark-red, #BA3029);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.filter-header-right .dropdown-menu {
+    box-shadow: 0px 4px 9px 0px rgb(177 177 177);
+    transition: 0.6s width cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.filter-header-right .dropdown-item:active {
+    background-color: #c8cacb !important;
+    color: #212529 !important;
+}
+
+.search-body-container .search-card-lg {
+    border-radius: 6px;
+    background: var(--BG-color, #FEFEFE);
+    box-shadow: 0px 2px 4px 0px rgba(155, 154, 154, 0.10);
+    padding: 10px;
+}
+
+.search-body-properties .search-card-lg img {
+    width: 100%;
+    /* height: 360px; */
+    object-fit: cover;
+}
+
+.search-body-properties .search-card-lg h5 {
+    color: var(--Font-color, #1D1D1D);
+    
+    /* Body 2 semibold */
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+}
+
+.search-body-container .card-lg-rating p {
+    color: var(--Font-color, #1D1D1D);
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.search-body-container .card-lg-title p {
+    color: var(--Font-color, #1D1D1D);
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.search-body-container .card-lg-title span {
+    color: var(--Main-color, #FE4343);
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.search-body-container .card-lg-overview p {
+    color: var(--Gray, #6C6C6C);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.search-body-container .card-lg-description p {
+    color: var(--Gray, #6C6C6C);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 145%;
+}
+
+.search-body-container .card-lg-note p {
+    color: var(--Main-green, #40918B);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.search-body-container .card-lg-more {
+    margin-top: 1rem;
+
+    text-align: center;
+    color: var(--BG-color, #FEFEFE);
+    font-size: 16px;
+    font-weight: 700;
+
+    padding: 12px 26px;
+    border-radius: 27px;
+    background: var(--Main-green, #40918B);
+}
+
+.search-body-container .search-card-lg .card-lg-img img {
+    position: relative;
+}
+
+.card-lg-controls {
+    position: absolute;
+    top: 6.5%;
+    right: 10%;
+    /* bottom: 50%; */
+}
+
+@media screen and (max-width: 992px) {
+    .search-body-container {
+        margin: 2rem;
+        margin-bottom: 8rem;
+    }
+
+    /* .favorites-cards {
+        grid-template-columns: repeat(4, 23%);
+    } */
+    .filter-window {
+        position: fixed;
+        top: 0;
+        right: -70%; /* Initially off-screen */
+        width: 70%;
+        height: 100%;
+        background-color: white; /* Change as needed */
+        transition: right 0.3s ease-in-out;
+        z-index: 999; /* Ensure it's above other content */
+    
+        overflow-y: scroll;
+    }
+
+    .filter-container .filter-checkboxes {
+        display: grid;
+        margin-top: 14px;
+        grid-template-columns: repeat(2, auto);
+        gap: 10px 20px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .search-body-container {
+        margin: 4rem 0rem;
+        margin-bottom: 8rem;
+    }  
+
+    .search-body-header {
+        margin: 0 1rem;
+        margin-top: 4rem !important;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .search-body-title h5 {
+        font-size: 20px;
+    }
+
+    .filter-window {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Initially off-screen */
+        width: 100%;
+        height: 100%;
+        background-color: white; /* Change as needed */
+        transition: right 0.3s ease-in-out;
+        z-index: 999; /* Ensure it's above other content */
+    
+        overflow-y: scroll;
+    }
+
+    .filter-container .filter-checkboxes {
+        grid-template-columns: repeat(1, auto);
+        gap: 10px 20px;
+    }
+}

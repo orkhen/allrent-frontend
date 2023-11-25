@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './propertyPostPrice.css'
 
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
+import { PropertyPostContext } from '../../../pages/PropertyPostPage/PropertyPostPage';
 
-const PropertyPostPrice = ({ step, switchStep, data }) => {
+const PropertyPostPrice = () => {
+  const { switchStep, step, setData, data } = useContext(PropertyPostContext)
+
   const [price, setPrice] = useState(40)
   const [error, setError] = useState('')
   const [show, setShow] = useState(false)

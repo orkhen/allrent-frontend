@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { PropertyPostContext } from '../../../pages/PropertyPostPage/PropertyPostPage'
 import './propertyPostRooms.css'
 
-const PropertyPostRooms = ({ switchStep, step, setData, data }) => {
+const PropertyPostRooms = () => {
+    const { switchStep, step, setData, data } = useContext(PropertyPostContext)
+
     const [maxGuests, setMaxGuests] = useState(0)
     const [bedrooms, setBedrooms] = useState(0)
     const [doubleBed, setDoubleBed] = useState(0)

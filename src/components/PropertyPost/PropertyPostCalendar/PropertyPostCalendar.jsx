@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import './propertyPostCalendar.css'
 
 import * as locales from 'react-date-range/dist/locale';
 import { Calendar } from 'react-date-range';
+import { PropertyPostContext } from '../../../pages/PropertyPostPage/PropertyPostPage';
 
-const PropertyPostCalendar = ({ step, switchStep }) => {
+const PropertyPostCalendar = () => {
+  const { switchStep, step, setData, data } = useContext(PropertyPostContext)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   

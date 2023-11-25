@@ -1,26 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import PageNav from '../../components/Navbar/Navbar'
 import PageFooter from '../../components/Footer/Footer'
 import FavoritesBody from '../../components/FavoritesBody/FavoritesBody'
 import SearchbarProperty from '../../components/SearchbarProperty/SearchbarProperty'
+import { AppContext } from '../../App'
+
+import './favoritesPage.css'
 
 const FavoritesPage = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-      function handleResize() {
-        setWindowWidth(window.innerWidth);
-      }
-  
-      window.addEventListener('resize', handleResize);
-  
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }, []);
+  const { windowWidth } = useContext(AppContext)
   return (
     <div className='favorites-page'>
-        <PageNav isLogged hideSearch />
+        <PageNav hideSearch />
         {windowWidth <= 768 && <SearchbarProperty />}
         <FavoritesBody />
         <PageFooter />

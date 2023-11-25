@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import './propertyInputsGeneral.css'
+import { PropertyPostContext } from '../../../pages/PropertyPostPage/PropertyPostPage'
 
-const PropertyInputsGeneral = ({ switchStep, step }) => {
+const PropertyInputsGeneral = () => {
+    const { switchStep, step } = useContext(PropertyPostContext)
+
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [checkedCheckboxes, setCheckedCheckboxes] = useState('')

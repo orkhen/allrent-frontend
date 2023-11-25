@@ -1,6 +1,7 @@
 .navbar-main {
     box-shadow: none;
     transition: all 0.3s ease;
+    /* height: 200px; */
 }
 
 .fixed-navbar {
@@ -14,13 +15,40 @@
 }
 
 .navbar-container {
+    position: relative;
     margin: 0 2rem;
     /* margin-top: 1rem; */
 }
 
 .nav-searchbar {
+    position: absolute;
+    left: 25%;
+    right: 25%;
     width: 50%;
     /* margin-left: 3.5rem; */
+}
+
+.search-expanded {
+    margin-top: 3rem;
+}
+
+.nav-searchbar-expanded {
+    border-radius: 20px;
+    border: 1px solid #E7E7E7;
+        
+}
+
+.nav-searchbar-expanded input {
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    width: 100%;
+}
+
+.nav-searchbar-expanded .nav-searchbar-dates {
+    border-right: 1px solid #E7E7E7;
+    width: 80%;
 }
 
 .navbar-img-map {
