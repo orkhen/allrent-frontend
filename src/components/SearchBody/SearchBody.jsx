@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import { AppContext } from '../../App';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { searchContext } from '../../pages/SearchPage/SearchPage';
 
 const SearchBody = () => {
     const { scroll, setScroll, windowWidth } = useContext(AppContext)
@@ -22,7 +23,7 @@ const SearchBody = () => {
         1, 2, 3, 4
     ];
 
-    const [filterOpen, setFilterOpen] = useState(false)
+    const { filterOpen, setFilterOpen } = useContext(searchContext)
 
     useEffect(() => {
         setLiked(new Array(cards.length).fill(false));

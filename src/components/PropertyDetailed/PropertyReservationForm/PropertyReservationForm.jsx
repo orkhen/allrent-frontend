@@ -2,8 +2,7 @@ import React, { useState, useRef, useContext } from 'react'
 import { PropertyContext } from '../PropertyContext';
 import './propertyReservationForm.css'
 
-import { DateRange } from 'react-date-range';
-import { range } from 'lodash';
+import { DateRange } from 'react-date-range'
 
 const PropertyReservationForm = () => {
     const [guests, setGuests] = useState(1)

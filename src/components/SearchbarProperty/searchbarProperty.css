@@ -25,30 +25,30 @@
     outline: none;
 }
 
-.MuiAutocomplete-root {
+.searchbar-property .MuiAutocomplete-root {
     width: 100% !important;
     height: 0px !important;
 }
 
-.MuiAutocomplete-endAdornment {
+.searchbar-property .MuiAutocomplete-endAdornment {
     display: none !important;
 }
 
-.MuiOutlinedInput-notchedOutline {
+.searchbar-property .MuiOutlinedInput-notchedOutline {
     border: none !important;
 }
 
-.MuiFormLabel-root,
-.MuiInputBase-input {
+.searchbar-property .MuiFormLabel-root,
+.searchbar-property .MuiInputBase-input {
     font-family: Inter !important;
     font-size: 16px !important;
 }
 
-.MuiInputBase-input {
+.searchbar-property .MuiInputBase-input {
     padding: 2px 4px 7.5px 5px !important;
 }
 
-.MuiAutocomplete-popper {
+.searchbar-property .MuiAutocomplete-popper {
     font-size: 20px !important;
 }
 

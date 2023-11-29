@@ -13,6 +13,10 @@
     cursor: pointer;
 }
 
+.filter-header-left {
+    cursor: pointer;
+}
+
 .search-body-filter h5 {
     color: var(--Font-color, #1D1D1D);
 
