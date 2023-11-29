@@ -390,7 +390,7 @@ const SearchBody = () => {
             cards.map((_, index) => (
             <div key={index} className="search-card d-flex justify-content-between">
                 <div className="search-card-img">
-                    <img src="https://s3-alpha-sig.figma.com/img/d12f/a656/e99bd4984ba1e25bc6075ac43c6690d7?Expires=1701043200&Signature=hq6uae89OZd3Dv2-x3EPC3OjOCzs9EyR71nmIemTup8u9rV5J6P7a3OjVBhyHDRRSfLl1OCRDQMaD3cLoaHuhWDNzC1pOQ1oFotFjeF3DEMw~J5iR9WOWc2eVTyruN5XRLVOTq7tMwrqNRJLZ1u54rD7ToGCBCbU4o~gk37l1~6koK2gpBtqfekPTFbGYDklJgon3-T3COo2jVE8XBlEXnZrJjr3fAj9KYTCIi6KLkmly3jOu9ibU-utxeXg-0MHJVlTOqZYQ-hm~YfLi6cS2Nw139OZ8ghKMNJIGCYqWC~vG~rrFdxDUxCo-bjed5BVgdMldCOI8sh34AOiIG336Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" alt="" />
+                    <img src="https://allrent.io/storage/mini_frame_01-f8e8-da86-4b22-e131.webp" alt="" />
                 </div>
 
                 <div className="search-card-left d-flex justify-content-between">
@@ -454,7 +454,7 @@ const SearchBody = () => {
             cards.map((_, index) => (
             <div key={index} className="search-card-lg">
                 <div className="card-lg-img">
-                    <img src="https://s3-alpha-sig.figma.com/img/d12f/a656/e99bd4984ba1e25bc6075ac43c6690d7?Expires=1701043200&Signature=hq6uae89OZd3Dv2-x3EPC3OjOCzs9EyR71nmIemTup8u9rV5J6P7a3OjVBhyHDRRSfLl1OCRDQMaD3cLoaHuhWDNzC1pOQ1oFotFjeF3DEMw~J5iR9WOWc2eVTyruN5XRLVOTq7tMwrqNRJLZ1u54rD7ToGCBCbU4o~gk37l1~6koK2gpBtqfekPTFbGYDklJgon3-T3COo2jVE8XBlEXnZrJjr3fAj9KYTCIi6KLkmly3jOu9ibU-utxeXg-0MHJVlTOqZYQ-hm~YfLi6cS2Nw139OZ8ghKMNJIGCYqWC~vG~rrFdxDUxCo-bjed5BVgdMldCOI8sh34AOiIG336Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" alt="" />
+                    <img src="https://allrent.io/storage/mini_frame_01-f8e8-da86-4b22-e131.webp" alt="" />
                 </div>
                 
                 {/* <div className="card-lg-controls d-flex gap-2">
