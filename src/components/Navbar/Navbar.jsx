@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, createContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../../App';
 
 import Container from 'react-bootstrap/Container';
@@ -13,11 +13,8 @@ import SearchbarProperty from '../SearchbarProperty/SearchbarProperty'
 import ProfileDropdown from './ProfileDropdown/ProfileDropdown';
 import BottomNav from './BottomNav/BottomNav';
 
-export const NavContext = createContext(null);
-
 const PageNav = ({ hideSearch, hideBottomNav }) => {
     const { isLogged, scroll, setScroll } = useContext(AppContext)
-    const [expanded, setExpanded] = useState(false)
 
     const navigate = useNavigate();
 
@@ -82,7 +79,6 @@ const PageNav = ({ hideSearch, hideBottomNav }) => {
     }
 
   return (
-    <NavContext.Provider value={{ expanded, setExpanded }}>
     <div>
         <Navbar className={`navbar-main mx-0 mx-md-auto ${isNavbarFixed ? 'fixed-navbar' : ''}`}>
             <Container fluid className='navbar-container justify-content-between'>
@@ -90,23 +86,8 @@ const PageNav = ({ hideSearch, hideBottomNav }) => {
                     <img className='navbar-img-logo' src='https://allrent.io/homepage/images/Loqotip_A%C4%9F%20fonda.svg' alt='logo'/>
                 </Navbar.Brand>
                 
-                <div className={`nav-searchbar d-flex flex-column gap-2 ${hideSearch && 'd-none'} ${expanded && 'search-expanded'}`}>
+                <div className={`nav-searchbar d-flex flex-column gap-2 ${hideSearch && 'd-none'}`}>
                     <SearchbarProperty />
-                    {expanded &&
-                        <div className="nav-searchbar-expanded d-flex">
-                            <div className="nav-searchbar-dates">
-                                <div className="searchbar-box">
-                                    <input type='text' />
-                                </div>
-                            </div>
-
-                            <div className="nav-searchbar-guests">
-                                <div className="searchbar-box">
-                                    <input type='text' />
-                                </div>
-                            </div>
-                        </div>  
-                    }
                 </div>
 
                 <div className='navbar-links d-flex flex-column align-items-center justify-content-center navbar-state'>
@@ -266,7 +247,6 @@ const PageNav = ({ hideSearch, hideBottomNav }) => {
 
         <BottomNav isVisible={isVisible} hideBottomNav={hideBottomNav} handleToggler={handleToggler} />
     </div>
-    </NavContext.Provider>
   )
 }
 

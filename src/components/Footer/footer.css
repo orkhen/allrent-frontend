@@ -71,13 +71,12 @@
 }
 /* Animations */
 
-.footer-rules a::before {
+/* .footer-rules a::before {
     content: "";
     position: absolute;
     width: 0;
     height: 1.5px; 
     background-color: #40918B; 
-    /* top: 0; */
     bottom: 0;
     left: 0;
     transition: width 0.3s ease; 
@@ -85,7 +84,7 @@
 
 .footer-rules a:hover::before {
     width: 100%;
-}
+} */
 
 @media screen and (max-width: 992px) {
     .footer-container {

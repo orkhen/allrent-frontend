@@ -29,6 +29,7 @@
     background: var(--BG-color, #FEFEFE);
     box-shadow: 0px 4px 10px 0px rgba(153, 153, 153, 0.10);
 
+    transition: 0.3s all ease;
     cursor: pointer;
 }
 
@@ -297,6 +298,9 @@
     background: var(--BG-color, #FEFEFE);
     box-shadow: 0px 2px 4px 0px rgba(155, 154, 154, 0.10);
     padding: 10px;
+
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .search-body-properties .search-card-lg img {
@@ -379,6 +383,11 @@
     top: 6.5%;
     right: 10%;
     /* bottom: 50%; */
+}
+
+.search-card:hover,
+.search-card-lg:hover {
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.234);
 }
 
 @media screen and (max-width: 992px) {

@@ -11,6 +11,11 @@
     width: 100%;
 }
 
+.searchbar-property-inputs {
+    width: 100%;
+    /* display: flex; */
+}
+
 .searchbar-property-input {
     width: 100%;
     display: flex;
@@ -19,6 +24,7 @@
     padding: 0.3rem 1rem;
     padding-right: 0.5rem;
 }
+
 
 .searchbar-property-input input {
     border: none;
@@ -42,10 +48,12 @@
 .searchbar-property .MuiInputBase-input {
     font-family: Inter !important;
     font-size: 16px !important;
+    /* width: 60px !important; */
 }
 
 .searchbar-property .MuiInputBase-input {
     padding: 2px 4px 7.5px 5px !important;
+    /* width: 100% !important; */
 }
 
 .searchbar-property .MuiAutocomplete-popper {
@@ -98,19 +106,100 @@
     position: static;
 }
 
-/* .css-13cymwt-control {
-    width: 100% !important;
-    border: none !important;
-    outline: none !important;
-} */
+.searchbar-input-region {
+    flex: 2;
+}
+
+.searchbar-input-dates {
+    flex: 2;
+    border-left: 1px solid #E7E7E7;
+    padding-left: 8px;
+}
+
+.searchbar-input-guests {
+    flex: 1.5;
+    border-left: 1px solid #E7E7E7;
+    padding-left: 8px;
+}
+
+.searchbar-input-dates input,
+.searchbar-input-guests input {
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid black; */
+    padding: 2px 5px 2px 5px;
+    font-size: 16px;
+    color: #757575;
+    font-weight: 400;
+}
+
+.searchbar-input-dates input::placeholder,
+.searchbar-input-guests input::placeholder {
+    font-size: 16px;
+    color: #c5c6c7;
+    font-weight: 400;
+}
+
+.searchbar-input-dates, .searchbar-input-guests {
+    transition: all 0.3s ease; /* Adjust duration and easing function as needed */
+    opacity: 0; /* Start invisible */
+    transform: translateY(20px); /* Start slightly below the final position */
+    max-height: 0;
+    overflow: hidden;
+  }
+  
+.search-expanded {
+    opacity: 1; /* End visible */
+    transform: translateY(0); /* End at the final position */
+    max-height: 100px; /* Adjust based on the content size */
+}
+
+/* Ensure that the collapsed state is defined after the expanded state 
+    to properly apply the transition when toggling */
+.search-collapsed {
+    opacity: 0;
+    transform: translateY(20px);
+    max-height: 0;
+}
+
+.searchbar-input-dates {
+    position: relative;
+}
+
+.searchbar-property-container .daterange-custom {
+    position: absolute !important;
+    width: 320px;
+    left: 140px;
+    top: 68px;
+    z-index: 999;
+}
+
+.searchbar-property-container .rdrDayToday .rdrDayNumber span:after {
+    background-color: #40918B;
+}
+
 
 @media screen and (max-width: 992px) {
-    .searchbar-property-container {
-        width: 60%;
+    .searchbar-property {
+        align-items: start !important;
     }
+
+    .searchbar-property-container {
+        width: 70%;
+    }
+
+    .searchbar-property-container .daterange-custom {
+        left: 50px;
+        top: 68px;
+    }
+
 }
 
 @media screen and (max-width: 768px) {
+    .searchbar-property {
+        align-items: center !important;
+    }
+
     .searchbar-property-container {
         width: 80%;
     }
@@ -125,6 +214,11 @@
         box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.234);   
     
         padding: 2rem 0;
+    }
+
+    .searchbar-property-container .daterange-custom {
+        left: 200px;
+        top: 90px;
     }
 }
 
@@ -145,5 +239,10 @@
         margin: 1rem auto;
         width: 40%;
         height: 35px;
+    }
+
+    .searchbar-property-container .daterange-custom {
+        left: 110px;
+        top: 90px;
     }
 }

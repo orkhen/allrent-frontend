@@ -22,6 +22,8 @@ function App() {
   const [scroll, setScroll] = useState(true)
   const [isLogged, setIsLogged] = useState(false);
 
+  const [searchExpanded, setSearchExpanded] = useState(false)
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -55,7 +57,7 @@ function App() {
   }, [scroll])
 
   return (
-    <AppContext.Provider value={{ isLogged, setIsLogged, windowWidth, scroll, setScroll }}>
+    <AppContext.Provider value={{ isLogged, setIsLogged, windowWidth, scroll, setScroll, searchExpanded, setSearchExpanded }}>
       <div className='page'>
         <Router>
           <Routes>

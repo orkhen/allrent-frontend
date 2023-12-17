@@ -75,3 +75,15 @@
     /* display: block; */
     opacity: 1;
 }
+
+@media screen and (max-width: 576px) {
+    .permits-icons > *:last-child .permits-description {
+        left: auto;
+        right: 0;
+    }
+    
+    .permits-icons > *:nth-last-child(2) .permits-description {
+        left: auto;
+        right: 0;
+    }
+}

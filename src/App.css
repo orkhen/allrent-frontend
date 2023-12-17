@@ -58,3 +58,7 @@
   overflow: hidden; /* Optional: hides text that overflows the container's width */
   text-overflow: ellipsis; /* Optional: adds an ellipsis (...) to indicate text overflow */
 }
+
+.clickable {
+  cursor: pointer;
+}

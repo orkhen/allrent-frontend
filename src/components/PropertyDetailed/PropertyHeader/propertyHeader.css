@@ -61,3 +61,11 @@
         transform: translate(-50%, -50%);
     }
 }
+
+@media screen and (max-width: 576px) {
+    .property-detailed-rating img {
+        width: 17px;
+        height: 17px;
+        margin-bottom: 11px;
+    }
+}

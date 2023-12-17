@@ -28,29 +28,6 @@
     /* margin-left: 3.5rem; */
 }
 
-.search-expanded {
-    margin-top: 3rem;
-}
-
-.nav-searchbar-expanded {
-    border-radius: 20px;
-    border: 1px solid #E7E7E7;
-        
-}
-
-.nav-searchbar-expanded input {
-    outline: none;
-    border: none;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    width: 100%;
-}
-
-.nav-searchbar-expanded .nav-searchbar-dates {
-    border-right: 1px solid #E7E7E7;
-    width: 80%;
-}
-
 .navbar-img-map {
     margin-bottom: 2.5px;
 }

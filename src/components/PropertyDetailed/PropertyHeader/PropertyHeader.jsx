@@ -35,7 +35,7 @@ const PropertyHeader = () => {
             <div className='d-flex justify-content-between'>
                 <div><h5>3 Gozel Qebele A-Frame Villa</h5></div> 
                 
-                <div className='property-detailed-rating d-flex'>
+                <div className='property-detailed-rating d-flex align-items-center'>
                     <h5>5.0</h5>
                     <img src="https://allrent.io/homepage/images/svg/details/active_fav.svg" alt="favorite svg"></img>
                 </div>

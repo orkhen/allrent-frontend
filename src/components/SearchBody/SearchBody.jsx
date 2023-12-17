@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
 import './searchBody.css'
 import SearchInput from './SearchInput/SearchInput'
 
@@ -10,6 +11,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { searchContext } from '../../pages/SearchPage/SearchPage';
 
 const SearchBody = () => {
+    const navigate = useNavigate()
+
     const { scroll, setScroll, windowWidth } = useContext(AppContext)
     const [liked, setLiked] = useState([])
     const [showShare, setShowShare] = useState(false);
@@ -29,11 +32,15 @@ const SearchBody = () => {
         setLiked(new Array(cards.length).fill(false));
     }, [cards.length]);
 
-    const handleLikeClick = (index) => {
+    const handleLikeClick = (index, event) => {
+        event.stopPropagation();
         setLiked(liked.map((item, i) => (i === index ? !item : item)));
     };
 
-    const handleShareClick = () => setShowShare(true)
+    const handleShareClick = (event) => {
+        event.stopPropagation();
+        setShowShare(true)
+    }
 
     const handleCloseModal = () => setShowShare(false)
 
@@ -388,7 +395,7 @@ const SearchBody = () => {
             {windowWidth > 768 
             ?
             cards.map((_, index) => (
-            <div key={index} className="search-card d-flex justify-content-between">
+            <div key={index} className="search-card d-flex justify-content-between" onClick={() => navigate('/property/1')}>
                 <div className="search-card-img">
                     <img src="https://allrent.io/storage/mini_frame_01-f8e8-da86-4b22-e131.webp" alt="" />
                 </div>
@@ -422,7 +429,7 @@ const SearchBody = () => {
 
                     <div className="search-card-more d-flex flex-column justify-content-between mt-2">
                         <div className="card-more-controls d-flex gap-1 justify-content-end">
-                            <div className="controls-share" onClick={() => handleShareClick()}>
+                            <div className="controls-share" onClick={(e) => handleShareClick(e)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
                                     <path d="M6.08398 14.5471C7.76673 14.5471 9.13086 13.183 9.13086 11.5002C9.13086 9.8175 7.76673 8.45337 6.08398 8.45337C4.40124 8.45337 3.03711 9.8175 3.03711 11.5002C3.03711 13.183 4.40124 14.5471 6.08398 14.5471Z" stroke="#1D1D1D" stroke-width="1.73333" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M16.917 19.9636C18.5997 19.9636 19.9639 18.5995 19.9639 16.9167C19.9639 15.234 18.5997 13.8699 16.917 13.8699C15.2342 13.8699 13.8701 15.234 13.8701 16.9167C13.8701 18.5995 15.2342 19.9636 16.917 19.9636Z" stroke="#1D1D1D" stroke-width="1.73333" stroke-linecap="round" stroke-linejoin="round"/>
@@ -431,7 +438,7 @@ const SearchBody = () => {
                                 </svg>
                             </div>
 
-                            <div className="controls-like" onClick={() => handleLikeClick(index)} >
+                            <div className="controls-like" onClick={(e) => handleLikeClick(index, e)} >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className={liked[index] && 'd-none'}>
                                     <path d="M12 4.52765C9.64418 2.41689 6.02125 2.49347 3.75736 4.75736C1.41421 7.1005 1.41421 10.8995 3.75736 13.2426L10.5858 20.0711C11.3668 20.8521 12.6332 20.8521 13.4142 20.0711L20.2426 13.2426C22.5858 10.8995 22.5858 7.1005 20.2426 4.75736C17.9787 2.49347 14.3558 2.41689 12 4.52765ZM10.8284 6.17157L11.2929 6.63604C11.6834 7.02656 12.3166 7.02656 12.7071 6.63604L13.1716 6.17157C14.7337 4.60948 17.2663 4.60948 18.8284 6.17157C20.3905 7.73367 20.3905 10.2663 18.8284 11.8284L12 18.6569L5.17157 11.8284C3.60948 10.2663 3.60948 7.73367 5.17157 6.17157C6.73367 4.60948 9.26633 4.60948 10.8284 6.17157Z" fill="#1D1D1D"/>
                                 </svg>
@@ -452,7 +459,7 @@ const SearchBody = () => {
             )) 
             : 
             cards.map((_, index) => (
-            <div key={index} className="search-card-lg">
+            <div key={index} className="search-card-lg" onClick={() => navigate('/property/1')}>
                 <div className="card-lg-img">
                     <img src="https://allrent.io/storage/mini_frame_01-f8e8-da86-4b22-e131.webp" alt="" />
                 </div>

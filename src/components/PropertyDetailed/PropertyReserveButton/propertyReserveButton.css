@@ -5,9 +5,9 @@
 
 .property-detailed-reserve-button {
     width: 100%;
-    background: #fd6164;
+    background: #ee2d2d;
     padding: 0.5rem 2rem;
     border-radius: 6px;
     color: white;
-    border: 2px solid #fd6164;
+    border: 2px solid #ee2d2d;
 }
