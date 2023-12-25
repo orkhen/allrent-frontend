@@ -17,6 +17,7 @@ import PropertyHeader from './PropertyHeader/PropertyHeader'
 
 const PropertyDetailed = () => {
   const { windowWidth } = useContext(AppContext)
+
   return (
     <div className='property-detailed'>
       <div className="property-detailed-container">
@@ -26,7 +27,6 @@ const PropertyDetailed = () => {
             <div className="property-detailed-content">
                 <PropertyImages/>
                 <PropertyCategory/>
-                {/* <PropertyOpinion/> */}
                 <PropertyDescription/>
                 <PropertyPermits/>
                 <PropertyConditions/>

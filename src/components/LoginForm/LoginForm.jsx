@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+
 import './loginForm.css'
 
 const LoginForm = () => {
@@ -45,16 +47,31 @@ const LoginForm = () => {
         validateEmail(email);
       };
 
-    const handleLogin = () => {
-    if (email === 'user@example.com' && password === 'user1234') {
-        setIsValid(true);
-        localStorage.setItem('isLogged', 'true');
-        // navigate('/')
+    const handleLogin = async () => {
+    // if (email === 'user@example.com' && password === 'user1234') {
+    //     setIsValid(true);
+    //     localStorage.setItem('isLogged', 'true');
+    //     // navigate('/')
+    //     window.location.href = '/'
+    // } else {
+    //     setIsValid(false);
+    //     setError('Email or password is incorrect');
+    // }
+
+    try {
+        const response = await axios.post('https://allrent.io/api/api-login', {
+          email,
+          password
+        });
+  
+        console.log(response)
+        // const { token } = response.data;
+        // localStorage.setItem('userToken', token);  
+        localStorage.setItem('isLogged', true);
         window.location.href = '/'
-    } else {
-        setIsValid(false);
-        setError('Email or password is incorrect');
-    }
+      } catch (err) {
+        setError('Email və ya şifrə yanlışdır')
+      }
     };
     
   return (

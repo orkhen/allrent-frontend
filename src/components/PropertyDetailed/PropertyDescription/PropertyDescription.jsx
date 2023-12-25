@@ -1,10 +1,26 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import axios from 'axios'
 import './propertyDescription.css'
 
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';    
+import { PropertyContext } from '../PropertyContext'
 
 const PropertyDescription = () => {
+    const { property } = useContext(PropertyContext);
+    const [owner, setOwner] = useState(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const response = await axios.get(`https://allrent.io/api/api-users?id=${property.user.uniq_id}`);
+            setOwner(response.data.users[0])
+            // console.log(response)
+            // console.log(owner)
+        };
+
+        fetchUser()
+    }, [])
+
   return (
     <div className="property-detailed-description mt-4">
         <div className="property-detailed-overview">
@@ -13,7 +29,7 @@ const PropertyDescription = () => {
                     <SplideSlide className='property-detailed-overview-slide'>
                         <div className="property-detailed-overview-icon">
                             <img src="https://allrent.io/homepage/images/svg/details/guest_count.svg" alt="detail icon"/>
-                            <p>9</p>
+                            <p>{property.max_qonaq_sayi}</p>
                             {/* <span className="overview-description">Maximum Guests</span> */}
                         </div>
                     </SplideSlide>
@@ -21,35 +37,35 @@ const PropertyDescription = () => {
                     <SplideSlide>
                         <div className='property-detailed-overview-icon'>
                             <img src="https://allrent.io/homepage/images/svg/details/bedroom_count.svg" alt="detail icon"/>
-                            <p>3</p>
+                            <p>{property.yatag_otagi}</p>
                         </div>
                     </SplideSlide>
 
                     <SplideSlide>
                         <div className='property-detailed-overview-icon'>
                             <img src="https://allrent.io/homepage/images/svg/details/bed_count.svg" alt="detail icon"/>
-                            <p>0</p>
+                            <p>{property.bir_nefer_carpayi}</p>
                         </div>
                     </SplideSlide>
 
                     <SplideSlide>
                         <div className='property-detailed-overview-icon'>
                             <img src="https://allrent.io/homepage/images/svg/details/double_bed_count.svg" alt="detail icon"/>
-                            <p>3</p>
+                            <p>{property.iki_nefer_carpayi}</p>
                         </div>
                     </SplideSlide>
 
                     <SplideSlide>
                         <div className='property-detailed-overview-icon'>
                             <img src="https://allrent.io/homepage/images/svg/details/bathroom_count.svg" alt="detail icon"/>
-                            <p>1</p>
+                            <p>{property.tualet}</p>
                         </div>
                     </SplideSlide>
 
                     <SplideSlide>
                         <div className='property-detailed-overview-icon'>
                             <img src="https://allrent.io/homepage/images/svg/details/additional_room_count.svg" alt="detail icon"/>
-                            <p>2</p>
+                            <p>{property.elave_yataq}</p>
                         </div>
                     </SplideSlide>
                 </Splide>
@@ -58,22 +74,10 @@ const PropertyDescription = () => {
 
         <div className="propert-detailed-description-text">
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quod pariatur et at velit aperiam, omnis nemo dicta ipsa quaerat, esse animi ex recusandae quas cum delectus est? Ex quae ipsa placeat.
-            </p>
-
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quod pariatur et at velit aperiam, omnis nemo dicta ipsa quaerat, esse animi ex recusandae quas cum delectus est? Ex quae ipsa placeat.
-            </p>
-
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quod pariatur et at velit aperiam, omnis nemo dicta ipsa quaerat, esse animi ex recusandae quas cum delectus est? Ex quae ipsa placeat.
-            </p>
-
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quod pariatur et at velit aperiam, omnis nemo dicta ipsa quaerat, esse animi ex recusandae quas cum delectus est? Ex quae ipsa placeat.
+                {property.info}
             </p>
         </div>
-
+        {owner !== null &&
         <div className="property-detailed-owner d-flex">
             <div className="owner-profile my-auto">
                 <svg width="50" height="50" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +88,7 @@ const PropertyDescription = () => {
 
             <div className="owner-info">
                 <div className="owner-name">
-                    Üç Gözəl Qəbələ
+                    {owner.username}
                 </div>
 
                 <div className="owner-rating d-flex">
@@ -97,6 +101,7 @@ const PropertyDescription = () => {
                 </div>
             </div>
         </div>
+        }
     </div>
   )
 }

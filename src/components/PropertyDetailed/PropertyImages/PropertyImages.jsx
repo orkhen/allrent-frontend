@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
+import { PropertyContext } from '../PropertyContext'
 import './propertyImages.css'
 import '@splidejs/react-splide/css';
 
@@ -11,6 +12,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { AppContext } from '../../../App';
 
 const PropertyImages = () => {
+    const { property } = useContext(PropertyContext)
     const { windowWidth } = useContext(AppContext)
 
     const [showModal, setShowModal] = useState(false);
@@ -25,18 +27,27 @@ const PropertyImages = () => {
       setSelectedImageIndex(selectedIndex);
     };
 
-    const propertyPhotos = [
-        'https://allrent.io/storage/medium_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
-        'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
-        'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
-        'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.15.55-f8d8-decb-2c38-d3c4.webp',
-        'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
-        // 'https://allrent.io/storage/medium_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
-        'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
-        'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
-        'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.15.55-f8d8-decb-2c38-d3c4.webp',
-        'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
-    ]
+    const [propertyPhotos, setPropertyPhotos] = useState([]);
+
+    useEffect(() => {
+      if (property?.gallery && Array.isArray(property.gallery)) {
+        // Map over the gallery to extract image URLs
+        const imageUrls = property.gallery.map(item => item.image_name);
+        setPropertyPhotos(imageUrls);
+      }
+    }, [property])
+    // const propertyPhotos = [
+    //     'https://allrent.io/storage/medium_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
+    //     'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
+    //     'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
+    //     'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.15.55-f8d8-decb-2c38-d3c4.webp',
+    //     'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
+    //     // 'https://allrent.io/storage/medium_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
+    //     'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
+    //     'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
+    //     'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.15.55-f8d8-decb-2c38-d3c4.webp',
+    //     'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
+    // ]
 
     const propertySlidePhotos = propertyPhotos.slice(1, propertyPhotos.length - 1)
 
@@ -91,7 +102,7 @@ const PropertyImages = () => {
               </svg>
             <Modal.Body className='property-detailed-images-modal-main'>
               <div className="modal-slide-count text-center">
-                <h5>{selectedImageIndex + 1} / 7</h5>
+                <h5>{selectedImageIndex + 1} / {propertyPhotos.length}</h5>
               </div>
 
               <div className="modal-image-container d-flex flex-column align-items-center">

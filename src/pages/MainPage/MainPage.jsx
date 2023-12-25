@@ -13,6 +13,7 @@ import './mainpage.css'
 
 const MainPage = () => {
   const { windowWidth } = useContext(AppContext)
+
   return (
     <div>
       <PageNav />

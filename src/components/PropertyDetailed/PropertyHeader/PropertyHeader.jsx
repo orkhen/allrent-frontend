@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './propertyHeader.css'
-
-// import { Modal } from 'react-bootstrap'
 import { Modal, Box, Typography, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'
+import { PropertyContext } from '../PropertyContext'
 
 const PropertyHeader = () => {
+    const { property } = useContext(PropertyContext);
+
     const [liked, setLiked] = useState(false)
     const [showShare, setShowShare] = useState(false);
 
@@ -26,17 +27,14 @@ const PropertyHeader = () => {
         animation: 'slide-up 0.5s ease',
     };
 
-    const propertyImg = 'https://allrent.io/storage/medium_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp'
-    const propertyTitle = '3 Gozel Qebele A-Frame Villa'
-
   return (
     <div className="property-detailed-header d-flex justify-content-between">
         <div className="property-detailed-title">
             <div className='d-flex justify-content-between'>
-                <div><h5>3 Gozel Qebele A-Frame Villa</h5></div> 
+                <div><h5>{property.title}</h5></div> 
                 
                 <div className='property-detailed-rating d-flex align-items-center'>
-                    <h5>5.0</h5>
+                    <h5>{property.rating}</h5>
                     <img src="https://allrent.io/homepage/images/svg/details/active_fav.svg" alt="favorite svg"></img>
                 </div>
             </div>
@@ -99,15 +97,15 @@ const PropertyHeader = () => {
                     <h5>Bu elanı paylaşın</h5>
                     
                     <div className="modal-property d-flex gap-3 align-items-center">
-                        <img src={propertyImg} className='modal-property-image' />
+                        <img src={property.cover_image} className='modal-property-image' />
 
                         <div className='d-flex align-items-center gap-4'>
                             <div>
-                                <p className='mb-0'>{propertyTitle}</p>
+                                <p className='mb-0'>{property.title}</p>
                             </div>
 
                             <div className='property-detailed-rating d-flex'>
-                                <p className='modal-rating mb-0'>5.0</p>
+                                <p className='modal-rating mb-0'>{property.rating}</p>
                                 <img src="https://allrent.io/homepage/images/svg/details/active_fav.svg" alt="favorite svg"></img>
                             </div>
                         </div>

@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './propertyPermits.css'
+import { PropertyContext } from '../PropertyContext';
 
 const PropertyPermits = () => {
+    const { property } = useContext(PropertyContext);
+    // const permissions = []
+
   return (
     <div className="property-detailed-permits">
         <div className="permits-header">

@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios'
 import PageNav from '../../components/Navbar/Navbar';
 import SearchbarProperty from '../../components/SearchbarProperty/SearchbarProperty';
 
@@ -12,13 +14,40 @@ import { PropertyProvider } from '../../components/PropertyDetailed/PropertyCont
 
 const PropertyPage = () => {
   const { windowWidth } = useContext(AppContext)
-  console.log(windowWidth)
+  const { propertyId } = useParams();
+
+  const [property, setProperty] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.get(`https://allrent.io/api/api-properties?id=${propertyId}`);
+        setProperty(response.data.properties[0])
+        console.log(property)
+      } catch (error) {
+        console.error('Error fetching properties:', error);
+      } finally {
+        setIsLoading(false);
+      };
+    };
+
+    fetchData();
+  }, []);
+
+  if (property === null) {
+    return
+  }
+
+  console.log(property)
+
   return (
     <div>
       <PageNav hideBottomNav={true} />
       {windowWidth <= 768 && <SearchbarProperty/>}
 
-      <PropertyProvider>
+      <PropertyProvider property={property}>
         <PropertyDetailed/>
       </PropertyProvider>
 

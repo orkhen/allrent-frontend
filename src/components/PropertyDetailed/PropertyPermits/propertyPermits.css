@@ -86,4 +86,9 @@
         left: auto;
         right: 0;
     }
+    
+    .permits-icons > *:nth-last-child(3) .permits-description {
+        left: -150%;
+        /* right: 0; */
+    }
 }

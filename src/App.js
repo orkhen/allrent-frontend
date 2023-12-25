@@ -56,6 +56,8 @@ function App() {
     }
   }, [scroll])
 
+  console.warn = () => {};
+  
   return (
     <AppContext.Provider value={{ isLogged, setIsLogged, windowWidth, scroll, setScroll, searchExpanded, setSearchExpanded }}>
       <div className='page'>
@@ -65,7 +67,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<SigninPage />} />
             <Route path="/property/post" element={<PropertyPostPage />} />
-            <Route path="/property/:id" element={<PropertyPage />} />
+            <Route path="/property/:propertyId" element={<PropertyPage />} />
             <Route path='/favorites' element={<FavoritesPage />} />
             <Route path='/reservations' element={<ReservationsPage />} />
             <Route path='/search' element={<SearchPage />} />

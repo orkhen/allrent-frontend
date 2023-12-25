@@ -80,7 +80,7 @@
 
 .property-modal-carousel img {
     /* margin: 0 auto; */
-    /* width: 1920px; */
+    width: 50%;
     object-fit: cover;
 
     /* height: 100%; */
@@ -122,19 +122,31 @@
 
 @media screen and (max-width: 992px) {
     .modal-slide-pagination {
-        width: 100%;
+        width: 70%;
     }
+    
     .modal-slide-pagination img {
         width: 9vh;
         height: 6vh;
     }
 
     .property-modal-carousel img {
-        width: 100%;
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .property-detailed-images-modal-main {
+        margin-top: 8%;
     }
 
-    .property-detailed-images-modal-main {
-        margin: 15% 0;
+    .property-modal-carousel img {
+        width: 80%;
+    }
+
+
+    .modal-slide-pagination {
+        width: 80%;
     }
 
     .property-modal-carousel .carousel-control-prev {
@@ -146,14 +158,8 @@
     }
 }
 
-@media screen and (max-width: 768px) {
-    .property-detailed-images-modal-main {
-        margin: 20% 0;
-    }
-}
-
 @media screen and (max-width: 576px) {
     .property-detailed-images-modal-main {
-        margin: 40% 0;
+        margin-top: 14%;
     }
 }

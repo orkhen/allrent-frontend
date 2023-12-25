@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import axios from 'axios'
+
 import './signinForm.css'
 
 const SigninForm = () => {
@@ -38,8 +40,8 @@ const SigninForm = () => {
                 error = "Daxil etdiyiniz E-mail yanlışdır"
                 break;
             case 'phone':
-                format = /^\+994\d{6}$/
-                error = "Daxil etdiyiniz Mobil nömrə yanlışdır"
+                format = /^\+994\d{9}$/
+                error = "Daxil etdiyiniz mobil nömrə yanlışdır"
                 break;
             default:
                 break;
@@ -55,6 +57,26 @@ const SigninForm = () => {
     const handleInput = (e, func) => {
         const newVal = e.target.value
         func(newVal)
+    }
+
+    const handleSubmit = async () => {
+        try {
+            const formData = {
+                name,
+                email,
+                phone,
+                password
+            };
+            const response = await axios.post('https://allrent.io/api/api-register', formData, {
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            console.log('Registration successful:', response.data);
+            // Handle successful registration (e.g., show a message, redirect, etc.)
+        } catch (err) {
+            // setError(err.response ? err.response.data.message : 'An error occurred. Please try again later.');
+            console.log(err)
+        }
     }
     
   return (
@@ -88,9 +110,9 @@ const SigninForm = () => {
                 <div className="number-input-header d-flex justify-content-between">
                     <label htmlFor="number">Mobil nömrə *</label>
 
-                    {/* {emailError && <p className="error-message m-0">{emailError}</p>} */}
                 </div>
-                <input className='mt-2' type="text" name='number' value={() => {}} onChange={() => {}} />
+                <input className='mt-2' type="text" name='number' placeholder='+994' value={phone} onChange={(e) => {handleInput(e, setPhone)}} />
+                {<p className="error-message mt-2 mb-0">{validateInput(phone, 'phone')}</p>}
             </div>
             
             <div className="password-input">
@@ -113,7 +135,7 @@ const SigninForm = () => {
         </div>
 
         <div className="signinform-buttons d-flex flex-column mt-4 noselect">
-            <div className={`signin-button signin red-button-subtle-animation ${'active-button'}`}>
+            <div className={`signin-button signin red-button-subtle-animation ${'active-button'}`} onClick={() =>   handleSubmit()} >
                 Hesab yarat
             </div>
 
