@@ -19,7 +19,7 @@ const PropertyReservationForm = () => {
     // const calendarRef = useRef(null);
 
     const handleIncrement = () => {
-        if (guests < 9) {
+        if (guests < property.max_qonaq_sayi) {
           setGuests(guests + 1);
         }
       };

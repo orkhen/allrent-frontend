@@ -4,7 +4,9 @@ import { PropertyContext } from '../PropertyContext';
 
 const PropertyPermits = () => {
     const { property } = useContext(PropertyContext);
-    // const permissions = []
+    const permissions = property.permissions;
+
+    // console.log(permissions)
 
   return (
     <div className="property-detailed-permits">

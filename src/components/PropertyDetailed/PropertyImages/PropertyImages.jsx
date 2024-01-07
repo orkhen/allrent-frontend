@@ -49,7 +49,7 @@ const PropertyImages = () => {
     //     'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
     // ]
 
-    const propertySlidePhotos = propertyPhotos.slice(1, propertyPhotos.length - 1)
+    const propertySlidePhotos = propertyPhotos.slice(0, propertyPhotos.length)
 
     const propertyPhotosSecondary = propertyPhotos.slice(1, 4)
 

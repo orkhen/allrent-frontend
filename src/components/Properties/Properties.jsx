@@ -38,9 +38,9 @@ const Properties = ({ title }) => {
     };
   }, []);
   
-  if (properties.length === 0) {
-    return
-  }
+  // if (properties.length === 0) {
+  //   return
+  // }
 
   const handleCardMouseEnter = (index) => {
     setHoveredCardIndex(index);
@@ -49,6 +49,26 @@ const Properties = ({ title }) => {
 
   const handleCardMouseLeave = () => {
     setHoveredCardIndex(null);
+  };
+
+  const renderPlaceholder = () => {
+    return Array.from({ length: 10 }).map((_, index) => (
+      <div key={index} className="mb-4 properties-property">
+        <div className="card">
+          <Placeholder as="div" animation="glow">
+            <Placeholder xs={12} className="card-img-top" />
+          </Placeholder>
+          <div className="card-body">
+            <Placeholder as="h5" animation="glow">
+              <Placeholder xs={7} />
+            </Placeholder>
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={4} /> <Placeholder xs={8} />
+            </Placeholder>
+          </div>
+        </div>
+      </div>
+    ));
   };
 
   return (
@@ -66,7 +86,7 @@ const Properties = ({ title }) => {
 
         <div className="properties-content">
           {/* {renderPropertyCards(10)} */}
-          {properties.map((property, index) => (
+          {isLoading ? renderPlaceholder() :properties.map((property, index) => (
             <div 
             className="mb-4 properties-property" 
             key={index}
