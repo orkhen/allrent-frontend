@@ -26,7 +26,6 @@ const PropertyPage = () => {
         setIsLoading(true);
         const response = await axios.get(`https://allrent.io/api/api-properties?id=${propertyId}`);
         setProperty(response.data.properties[0])
-        // console.log(property)
       } catch (error) {
         console.error('Error fetching properties:', error);
       } finally {
@@ -41,7 +40,7 @@ const PropertyPage = () => {
     return
   }
 
-  // console.log(property)
+  console.log(property)
   const renderPlaceholder = () => {
     return (
       <div className="mb-4 properties-property">

@@ -1,21 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { PropertyContext } from '../PropertyContext'
 import './propertyConditions.css'
 
 const PropertyConditions = () => {
-    const conditions = [
-        { icon: 'kitchen.svg', text: 'Mətbəx' },
-        { icon: 'soba.svg', text: 'Soba' },
-        { icon: 'boil.svg', text: 'Qazan' },
-        { icon: 'fridge.svg', text: 'Soyuducu' },
-        { icon: 'laundry.svg', text: 'Paltaryuyan' },
-        { icon: 'barbecue.svg', text: 'Manqal' },
-        { icon: 'kitchen.svg', text: 'Mətbəx' },
-        { icon: 'soba.svg', text: 'Soba' },
-        { icon: 'boil.svg', text: 'Qazan' },
-        { icon: 'fridge.svg', text: 'Soyuducu' },
-        { icon: 'laundry.svg', text: 'Paltaryuyan' },
-        { icon: 'barbecue.svg', text: 'Manqal' },
-      ];
+    const { property } = useContext(PropertyContext)
+    const conditions = property.conditions
     
       const [showAll, setShowAll] = useState(false)
     //   const conditionsToDisplay = showAll ? conditions : conditions.slice(0, 6);
@@ -34,10 +23,10 @@ const PropertyConditions = () => {
             {conditions.map((condition, index) => (
             <div className="conditions-icon d-flex gap-3" key={index}>
                 <img
-                src={`https://allrent.io/homepage/images/svg/home_has_d/${condition.icon}`}
-                alt={condition.text}
+                src={condition.img_1}
+                alt={condition.name_az}
                 />
-                <p>{condition.text}</p>
+                <p>{condition.name_az}</p>
             </div>
             ))}
         </div>

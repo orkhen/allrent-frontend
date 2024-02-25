@@ -1,9 +1,13 @@
 .favorites-body {
-    margin-bottom: 8rem;
+    margin-bottom: 24rem;
 }
 
 .favorites-body-container {
     margin: 2rem 8rem;
+}
+
+.favorites-no-liked {
+    margin-top: 8rem;
 }
 
 .favorites-title h5 {

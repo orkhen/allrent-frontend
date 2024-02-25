@@ -117,7 +117,7 @@
 }
 
 .searchbar-input-guests {
-    flex: 1.5;
+    flex: 1.25;
     border-left: 1px solid #E7E7E7;
     padding-left: 8px;
 }
@@ -242,7 +242,7 @@
     }
 
     .searchbar-property-container .daterange-custom {
-        left: 110px;
+        left: 30px;
         top: 90px;
     }
 }

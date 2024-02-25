@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './propertyCalendar.css'
+import { PropertyContext } from '../PropertyContext'
 import Calendar from './Calendar'
 
 const PropertyCalendar = () => {
+    const { property } = useContext(PropertyContext)
+
   return (
     <div className="property-detailed-dates mt-5">
         <div className="dates-header">
@@ -20,7 +23,7 @@ const PropertyCalendar = () => {
                 </div>
 
                 <div className="check-in-right d-flex gap-2">
-                    <p>14:00</p>
+                    <p>{property.start_date}</p>
                     
                     <div className="green-line"></div>
                     
@@ -42,7 +45,7 @@ const PropertyCalendar = () => {
                         
                         <div className="red-line"></div>
                         
-                        <p>12:00</p>
+                        <p>{property.exit_date}</p>
                     </div>
             </div>
         </div>

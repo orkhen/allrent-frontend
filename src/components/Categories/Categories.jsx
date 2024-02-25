@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './categories.css';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
@@ -19,6 +20,12 @@ const Categories = () => {
     'Hovuzlu həyət evləri'
   ];
 
+  const navigate = useNavigate();
+
+  const navigateToCategory = useCallback((category) => {
+    navigate(`/search?category=${encodeURIComponent(category)}`);
+  }, [navigate]);
+
   return (
     <div className='categories'>
       <div className='categories-container'>
@@ -30,7 +37,7 @@ const Categories = () => {
             <Splide options={{ type: 'slide',perPage: 4, rewind: false, drag: 'free', speed: 3000, gap: 0, arrows: false, pagination: false }}>
               {categories.map((category, index) => (
                 <SplideSlide key={index}>
-                  <a href='#'>
+                  <a href='#' onClick={(e) => {e.preventDefault();navigateToCategory(category)}}>
                     <div className='categories-button'>{category}</div>
                   </a>
                 </SplideSlide>

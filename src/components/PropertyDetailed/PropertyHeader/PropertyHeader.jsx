@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import axios from 'axios';
 import './propertyHeader.css'
 import { Modal, Box, Typography, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'
@@ -6,13 +7,64 @@ import { PropertyContext } from '../PropertyContext'
 
 const PropertyHeader = () => {
     const { property } = useContext(PropertyContext);
-
     const [liked, setLiked] = useState(false)
     const [showShare, setShowShare] = useState(false);
+
+    useEffect(() => {
+        const checkIfLiked = async () => {
+            const userID = localStorage.getItem('userID');
+            try {
+                const response = await axios.get(`https://allrent.io/api/api-favorites?user_uniq_id=${userID}`);
+                // Use the correct property key for comparison
+                const isLiked = response.data.favorites.some(favorite => favorite.home_id === property.uniq_id);
+                setLiked(isLiked);
+            } catch (error) {
+                console.error('Error fetching favorites:', error);
+            }
+        };
+    
+        checkIfLiked();
+    }, []);
 
     const handleShareClick = () => setShowShare(true)
 
     const handleCloseModal = () => setShowShare(false)
+
+    const addFavorite = async () => {
+        setLiked(true);
+
+        const userID = localStorage.getItem('userID');
+        try {
+            const response = await axios.post('https://allrent.io/api/api-favorite-add', {
+                user_uniq_id: userID,
+                home_uniq_id: property.uniq_id,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+        } catch (error) {
+            console.error('Error adding to favorites:', error);
+        }
+    };
+
+    const removeFavorite = async () => {
+        const userID = localStorage.getItem('userID');
+        try {
+            setLiked(false);
+
+            const response = await axios.post('https://allrent.io/api/api-favorite-remove', {
+                user_uniq_id: userID,
+                home_uniq_id: property.uniq_id,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+        } catch (error) {
+            console.error('Error removing from favorites:', error);
+        }
+    };
 
     const style = {
         position: 'absolute',
@@ -31,7 +83,7 @@ const PropertyHeader = () => {
     <div className="property-detailed-header d-flex justify-content-between">
         <div className="property-detailed-title">
             <div className='d-flex justify-content-between'>
-                <div><h5>{property.title}</h5></div> 
+                <div><h5>{property.title ? property.title : `${property.category} / ${property.city}`}</h5></div> 
                 
                 <div className='property-detailed-rating d-flex align-items-center'>
                     <h5>{property.rating}</h5>
@@ -43,11 +95,11 @@ const PropertyHeader = () => {
         <div className="property-detailed-options d-flex">
             <div className="property-detailed-like">
                 
-                <svg width="20" height="20" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg" className={liked && 'd-none'} onClick={() => setLiked(true)}>
+                <svg width="20" height="20" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg" className={liked && 'd-none'} onClick={() => addFavorite()}>
                     <path d="M10 1.52765C7.64418 -0.583106 4.02125 -0.506535 1.75736 1.75736C-0.585786 4.1005 -0.585786 7.8995 1.75736 10.2426L8.58579 17.0711C9.36684 17.8521 10.6332 17.8521 11.4142 17.0711L18.2426 10.2426C20.5858 7.8995 20.5858 4.1005 18.2426 1.75736C15.9787 -0.506535 12.3558 -0.583106 10 1.52765ZM8.82843 3.17157L9.29289 3.63604C9.68342 4.02656 10.3166 4.02656 10.7071 3.63604L11.1716 3.17157C12.7337 1.60948 15.2663 1.60948 16.8284 3.17157C18.3905 4.73367 18.3905 7.26633 16.8284 8.82843L10 15.6569L3.17157 8.82843C1.60948 7.26633 1.60948 4.73367 3.17157 3.17157C4.73367 1.60948 7.26633 1.60948 8.82843 3.17157Z" fill="#1D1D1D"></path>
                 </svg>
 
-                <svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className={!liked && 'd-none'} onClick={() => setLiked(false)}>
+                <svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className={!liked && 'd-none'} onClick={() => removeFavorite()}>
                     <path d="M13.7454 2.9917C12.1331 2.9917 10.7554 4.14093 9.99845 4.93324C9.24153 4.14093 7.86691 2.9917 6.25538 2.9917C3.47768 2.9917 1.53845 4.92785 1.53845 7.69939C1.53845 10.7532 3.94691 12.7271 6.27691 14.6363C7.37691 15.5386 8.51538 16.4709 9.38845 17.5048C9.53538 17.6779 9.75076 17.7779 9.97691 17.7779H10.0215C10.2485 17.7779 10.4631 17.6771 10.6092 17.5048C11.4838 16.4709 12.6215 15.5379 13.7223 14.6363C16.0515 12.7279 18.4615 10.754 18.4615 7.69939C18.4615 4.92785 16.5223 2.9917 13.7454 2.9917Z" fill="#FE4343"></path>
                 </svg>
                 
@@ -65,15 +117,6 @@ const PropertyHeader = () => {
                 <p>Paylaş</p>
             </div>
         </div>
-
-        {/* <Modal show={showShare} onHide={handleCloseModal}>
-            <Modal.Header closeButton>
-                <Modal.Title>Share This Property</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                hi
-            </Modal.Body>
-        </Modal> */}
 
         <Modal
             open={showShare}

@@ -15,9 +15,10 @@ const Properties = ({ title }) => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get('https://allrent.io/api/api-properties');
+        const response = (title === 'Bütün evlər') ? await axios.get('https://allrent.io/api/api-properties?home=1') : await axios.get('https://allrent.io/api/api-properties?location=1');
         setProperties(response.data.properties.slice(0, 10));
         // console.log('API fetched');
+        console.log(properties)
       } catch (error) {
         console.error('Error fetching properties:', error);
       } finally {
@@ -109,7 +110,7 @@ const Properties = ({ title }) => {
                       <div className="card-info d-flex flex-column">
                           <div className="info-top d-flex justify-content-between">
                               {/* <Placeholder xs={6} bg='secondary' as={'div'} animation='glow' className='h-50 p-2' > */}
-                                <h5 className="card-title">{property.title ? property.title : `${property.city} / ${property.category}`}</h5>
+                                <h5 className="card-title">{property.title ? property.title : `${property.category} / ${property.city}`}</h5>
                               {/* </Placeholder> */}
 
                               <div className="card-rating d-flex">

@@ -64,10 +64,11 @@ const LoginForm = () => {
           password
         });
   
-        console.log(response)
+        // console.log(response.data)
         // const { token } = response.data;
         // localStorage.setItem('userToken', token);  
         localStorage.setItem('isLogged', true);
+        localStorage.setItem('userID', response.data.userInfo.uniq_id);
         window.location.href = '/'
       } catch (err) {
         setError('Email və ya şifrə yanlışdır')

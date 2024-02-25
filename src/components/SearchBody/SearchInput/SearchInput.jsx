@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import './searchInput.css'
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { DateRange } from 'react-date-range'
+import { DateRange } from 'react-date-range';
+import { searchContext } from '../../../pages/SearchPage/SearchPage';
+
 
 const SearchInput = () => {
+    const { region, startDate, endDate, guests } = useContext(searchContext)
+
     const regions = [
         { label: 'Ağcabədi'},
         { label: 'Bakı'},
@@ -13,13 +17,17 @@ const SearchInput = () => {
         { label: 'Quba'},
         { label: "Qusar"},
         { label: 'Qəbələ'},
+        { label: 'Xızı'},
+        { label: 'Zaqatala'},
+        { label: 'İsmayıllı'},
+        { label: 'Şəki'},
       ]
-    const [guests, setGuests] = useState(1);
+    const [inputGuests, setInputGuests] = useState(guests ? guests : 1);
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
     const [selectedDates, setSelectedDates] = useState([
       {
-          startDate: new Date(),
-          endDate: new Date(),
+          startDate: startDate ? new Date(startDate) : new Date(),
+          endDate: endDate ? new Date(endDate) : new Date(),
           key: 'selection'
       }
       ]);
@@ -28,25 +36,17 @@ const SearchInput = () => {
         // const value = event.target.value;
         // const numericValue = value.replace(/[^0-9]/g, ''); // Keep only numbers
         // numericValue <= 0 ? setGuests(1) : setGuests(numericValue);
-        setGuests(event.target.value)
+        setInputGuests(event.target.value)
     };
 
     const handleDateSelect = (ranges) => {
       setSelectedDates([ranges.selection])
-      if ([ranges.selection][0].startDate != [ranges.selection][0].endDate) {
+      if ([ranges.selection][0].startDate !== [ranges.selection][0].endDate) {
           setIsCalendarOpen(false)
       }
   };
 
   var today = new Date();
-  const diffDays = () => {
-      var start = new Date(selectedDates[0].endDate.toLocaleDateString())
-      var end = new Date(selectedDates[0].startDate.toLocaleDateString())
-      
-      const diffTime = Math.abs(end - start);
-      console.log(diffTime)
-      return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-  }
 
   const formatDateRange = () => {
     const formatSingleDate = (date) => {
@@ -72,6 +72,7 @@ const SearchInput = () => {
                     noOptionsText="Region tapılmadı"
                     disablePortal
                     options={regions}
+                    defaultValue={region}
                     sx={{
                       '& + .MuiAutocomplete-popper .MuiAutocomplete-option': {          
                         fontFamily: 'Inter'
@@ -80,7 +81,7 @@ const SearchInput = () => {
                     renderInput={(params) => (
                       <TextField 
                         {...params} 
-                        placeholder='Gedəcəyiniz regionu daxil edin'
+                        placeholder='Gedəcəyiniz region'
                         sx={{
                           '& .MuiInputBase-input': {
                             position: 'absolute',
@@ -126,7 +127,7 @@ const SearchInput = () => {
 
                   <div className="guests-inp w-100 d-flex">
                     <input type='text' 
-                        value={`${guests}`} 
+                        value={`${inputGuests}`} 
                         onChange={handleGuestsChange}
                         placeholder='Qonaq sayı'
                     />

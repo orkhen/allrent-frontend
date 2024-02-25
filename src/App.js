@@ -42,6 +42,8 @@ function App() {
     // Check if the user is authenticated in localStorage
     const authenticated = localStorage.getItem('isLogged') === 'true';
     setIsLogged(authenticated);
+
+    
   }, []);
 
   useEffect(() => {

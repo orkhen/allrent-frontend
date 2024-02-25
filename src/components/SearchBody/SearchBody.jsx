@@ -1,56 +1,147 @@
 import React, { useState, useEffect, useContext } from 'react'
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './searchBody.css'
+import './searchBody.css';
 import SearchInput from './SearchInput/SearchInput'
 
-import { Modal, Box, Slider, IconButton } from '@mui/material';
+import { Modal, Box, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'
 import { AppContext } from '../../App';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import { searchContext } from '../../pages/SearchPage/SearchPage';
+import SearchFilter from './SearchFilter/SearchFilter';
+import Placeholder from 'react-bootstrap/Placeholder';
 
 const SearchBody = () => {
     const navigate = useNavigate()
 
-    const { scroll, setScroll, windowWidth } = useContext(AppContext)
-    const [liked, setLiked] = useState([])
-    const [showShare, setShowShare] = useState(false);
-    const [sliderVal, setSliderVal] = useState([40, 1500]);
-    const [bedrooms, setBedrooms] = useState(0)
-    const [bathrooms, setBathrooms] = useState(0)
-    const [singleBed, setSingleBed] = useState(0)
-    const [doubleBed, setDoubleBed] = useState(0)
+    const { scroll, setScroll, windowWidth } = useContext(AppContext);
 
-    const cards = [
-        1, 2, 3, 4
-    ];
+    const [showShare, setShowShare] = useState(false);
+    const [properties, setProperties] = useState([])
+    const [favorites, setFavorites] = useState([]);
+    const [currentItem, setCurrentItem] = useState({ title: '', rating: '', coverImage: '' });
+
+    const [totalCount, setTotalCount] = useState(0);
+    const [page, setPage] = useState(1);
+    const { region, startDate, endDate, guests, category } = useContext(searchContext);
+    const params = new URLSearchParams({
+        city: region || '',
+        guest: guests || '',
+        category: category || '',
+        count: 10,
+        page: page
+      }).toString();
+
+    const [totalCountLoading, setTotalCountLoading] = useState(true);
+
+    const loadMoreProperties = () => {
+        setPage(prevPage => prevPage + 1);
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await axios.get(`https://allrent.io/api/api-search?${params}`);
+            
+            setProperties(prevProperties => [...prevProperties, ...response.data.properties]);
+            console.log('hi');
+          } catch (error) {
+            console.error('Error fetching properties:', error);
+          }
+        };
+    
+        fetchData();
+    }, [page]);
+
+    useEffect(() => {
+        const getTotalCount = async () => {
+            try {
+                setTotalCountLoading(true);
+                const response = await axios.get(`https://allrent.io/api/api-search?city=${region ? region : ''}&guest=${guests ? guests : ''}&category=${category ? category : ''}`);
+                setTotalCount(response.data.properties.length)
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setTotalCountLoading(false);
+            }
+        }
+
+        const fetchData = async () => {
+          const userID = localStorage.getItem('userID');
+          try {
+            const response = await axios.get(`https://allrent.io/api/api-favorites?user_uniq_id=${userID}`);
+    
+            // Temporary array to store new properties
+            // const newProperties = [];
+            const newFavorites = [];
+            
+            for (let index = 0; index < response.data.favorites.length; index++) {
+            //   const propertiesResponse = await axios.get(`https://allrent.io/api/api-properties?id=${response.data.favorites[index].home_id}`);
+              // Push the new properties to the temporary array instead of state
+              newFavorites.push(response.data.favorites[index].home_id);
+            //   newProperties.push(propertiesResponse.data.properties);
+            }
+    
+            // Update the state once with all new properties
+            // setProperties(newProperties);
+            setFavorites(newFavorites);
+    
+          } catch (err) {
+            console.log(err)
+          }
+        }
+        
+        fetchData();
+        getTotalCount();
+      }, []);
+
+    const removeFavorite = async (propertyID) => {
+    const newFavorites = favorites.filter(element => (element !== propertyID));
+    setFavorites(newFavorites);
+    const userID = localStorage.getItem('userID');
+    try {
+        const response = await axios.post('https://allrent.io/api/api-favorite-remove', {
+            user_uniq_id: userID,
+            home_uniq_id: propertyID,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+    } catch (error) {
+        console.error('Error removing from favorites:', error);
+    }
+    };
+
+    const addFavorite = async (propertyID) => {
+    const newFavorites = [...favorites];
+    newFavorites.push(propertyID);
+    setFavorites(newFavorites);
+
+    const userID = localStorage.getItem('userID');
+    try {
+        const response = await axios.post('https://allrent.io/api/api-favorite-add', {
+            user_uniq_id: userID,
+            home_uniq_id: propertyID,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+    } catch (error) {
+        console.error('Error adding to favorites:', error);
+    }
+    };
 
     const { filterOpen, setFilterOpen } = useContext(searchContext)
 
-    useEffect(() => {
-        setLiked(new Array(cards.length).fill(false));
-    }, [cards.length]);
-
-    const handleLikeClick = (index, event) => {
+    const handleShareClick = (event, item) => {
         event.stopPropagation();
-        setLiked(liked.map((item, i) => (i === index ? !item : item)));
-    };
-
-    const handleShareClick = (event) => {
-        event.stopPropagation();
-        setShowShare(true)
+        setCurrentItem({ title: item.title ? item.title : `${item.category} / ${item.city}`, rating: item.rating, coverImage: item.cover_image });
+        setShowShare(true);
     }
 
     const handleCloseModal = () => setShowShare(false)
-
-    const handleCheckboxes = () => {
-    
-    }
-
-    const handleChange = (event, newSliderVal) => {
-        setSliderVal(newSliderVal);
-      };
 
     const style = {
         position: 'absolute',
@@ -65,16 +156,17 @@ const SearchBody = () => {
         animation: 'slide-up 0.5s ease',
     };
 
-    const propertyImg = 'https://allrent.io/storage/medium_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp'
-    const propertyTitle = '3 Gozel Qebele A-Frame Villa'
-
   return (
     <div className='search-body'>
       <div className="search-body-container">
         <SearchInput />
         <div className="search-body-header d-flex justify-content-between mt-4">
             <div className="search-body-title">
-                <h5>Axtarışda 4 ev tapıldı</h5>
+                {totalCountLoading
+                ? ( <Placeholder as="h5" animation="glow">
+                        <Placeholder xs={7} />
+                    </Placeholder>) 
+                : (<h5>Axtarışda {totalCount} ev tapıldı</h5>)}
             </div>
             
             <div className="search-body-filter d-flex gap-2 noselect" onClick={() => {setFilterOpen(!filterOpen); setScroll(false)}}>
@@ -89,347 +181,50 @@ const SearchBody = () => {
             <div className={`overlay ${filterOpen ? 'open' : ''}`} onClick={() => {setFilterOpen(false); setScroll(true)}}></div>
 
             {/* Filter window */}
-            <div className={`filter-window ${filterOpen ? 'open' : ''}`}>
-                <div className="filter-container d-flex flex-column gap-4">
-                    <div className="filter-header d-flex justify-content-between mt-2">
-                        <div className="filter-header-left d-flex gap-2" onClick={() => {setFilterOpen(false); setScroll(true)}}>
-                            {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M9 5C8.44772 5 8 5.44772 8 6C8 6.55228 8.44772 7 9 7C9.55228 7 10 6.55228 10 6C10 5.44772 9.55228 5 9 5ZM6.17071 5C6.58254 3.83481 7.69378 3 9 3C10.3062 3 11.4175 3.83481 11.8293 5H19C19.5523 5 20 5.44772 20 6C20 6.55228 19.5523 7 19 7H11.8293C11.4175 8.16519 10.3062 9 9 9C7.69378 9 6.58254 8.16519 6.17071 7H5C4.44772 7 4 6.55228 4 6C4 5.44772 4.44772 5 5 5H6.17071ZM15 11C14.4477 11 14 11.4477 14 12C14 12.5523 14.4477 13 15 13C15.5523 13 16 12.5523 16 12C16 11.4477 15.5523 11 15 11ZM12.1707 11C12.5825 9.83481 13.6938 9 15 9C16.3062 9 17.4175 9.83481 17.8293 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H17.8293C17.4175 14.1652 16.3062 15 15 15C13.6938 15 12.5825 14.1652 12.1707 13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H12.1707ZM9 17C8.44772 17 8 17.4477 8 18C8 18.5523 8.44772 19 9 19C9.55228 19 10 18.5523 10 18C10 17.4477 9.55228 17 9 17ZM6.17071 17C6.58254 15.8348 7.69378 15 9 15C10.3062 15 11.4175 15.8348 11.8293 17H19C19.5523 17 20 17.4477 20 18C20 18.5523 19.5523 19 19 19H11.8293C11.4175 20.1652 10.3062 21 9 21C7.69378 21 6.58254 20.1652 6.17071 19H5C4.44772 19 4 18.5523 4 18C4 17.4477 4.44772 17 5 17H6.17071Z" fill="#1D1D1D"/>
-                            </svg>
-                            <h5>Filterlər</h5> */}
-                            <CloseIcon />
-                        </div>
-
-                        <div className="filter-header-right">
-                            <Dropdown>
-                                <Dropdown.Toggle variant='none' id="dropdown-basic">
-                                    Çeşidlə
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    <Dropdown.Item href="#/action-1">Ucuzdan bahaya</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Bahadan ucuza</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Yüksək reytinqli</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </div>
-                    </div>
-
-                    <div className="filter-categories">
-                        <h4>Kateqoriyalar</h4>
-
-                        <div className="filter-checkboxes">
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Villa" name="category" onChange={handleCheckboxes} />
-                                <label>Villa</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Konteyner" name="category" onChange={handleCheckboxes} />
-                                <label>Konteyner</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Kooperativ" name="category" onChange={handleCheckboxes} />
-                                <label>Kooperativ</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Lüks villa" name="category" onChange={handleCheckboxes} />
-                                <label>Lüks villa</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Şənlik üçün ev" name="category" onChange={handleCheckboxes} />
-                                <label>Şənlik üçün ev</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Hotel" name="category" onChange={handleCheckboxes} />
-                                <label>Hotel</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Hovuzlu villa" name="category" onChange={handleCheckboxes} />
-                                <label>Hovuzlu villa</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Kənd evi" name="category" onChange={handleCheckboxes} />
-                                <label>Kənd evi</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="filter-price">
-                        <h4>Qiymət</h4>
-                        <p className='price-informational mb-0'>1 gecə üçün</p>
-                        <div className='price-min-max d-flex align-items-center gap-1 mt-2'>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 16" fill="none">
-                            <path d="M1 15V8C1 6.67392 1.52678 5.40215 2.46447 4.46447C3.40215 3.52678 4.67392 3 6 3C7.32608 3 8.59785 3.52678 9.53553 4.46447C10.4732 5.40215 11 6.67392 11 8V15M6 1V15" stroke="#1D1D1D" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <p className='mb-0'>40</p> 
-                            
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M4 12C4 11.4477 4.44772 11 5 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H5C4.44772 13 4 12.5523 4 12Z" fill="#1D1D1D"/>
-                            </svg>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 16" fill="none">
-                            <path d="M1 15V8C1 6.67392 1.52678 5.40215 2.46447 4.46447C3.40215 3.52678 4.67392 3 6 3C7.32608 3 8.59785 3.52678 9.53553 4.46447C10.4732 5.40215 11 6.67392 11 8V15M6 1V15" stroke="#1D1D1D" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-
-                            <p className='mb-0'>1500</p>
-                        </div>
-
-                        <div className="price-slider mt-2">
-                            <Slider
-                            value={sliderVal}
-                            onChange={handleChange}
-                            valueLabelDisplay="auto"
-                            aria-labelledby="range-slider"
-                            min={40}
-                            max={1500}
-                            sx={{
-                                color: '#40918B', // Line color
-                                '& .MuiSlider-thumb': {
-                                backgroundColor: '#FEFEFE', // Thumb color
-                                border: '2px solid #40918B', // Border color
-                                },
-                                '& .MuiSlider-valueLabel': {
-                                color: 'white', // Label color
-                                },
-                            }}
-                            />
-                        </div>
-                    </div>
-                    
-                    <div className="filter-rooms">
-                        <h4>Otaqlar</h4>
-
-                        <div className="rooms-controls">
-                            <div className="room-box d-flex gap-4">
-                                <div className="room-name">
-                                <h5 className='mt-2'>Yataq otağı</h5>
-                                </div>
-
-                                <div className="room-controls d-flex gap-3 align-items-center">
-                                <div className={`controls-decrement ${bedrooms > 0 ? 'active' : 'deactive'}`}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => {bedrooms - 1 < 0 ? setBedrooms(0) : setBedrooms(bedrooms - 1)}}>
-                                    <path d="M4 12C4 11.4477 4.44772 11 5 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H5C4.44772 13 4 12.5523 4 12Z" fill={bedrooms > 0 ? '#6C6C6C' : "#E7E7E7"}/>
-                                    </svg>
-                                </div>
-
-                                <div className="controls-number">
-                                    {bedrooms}
-                                </div>
-
-                                <div className="controls-increment active">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => setBedrooms(bedrooms + 1)}>
-                                    <path d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z" fill="#6C6C6C"/>
-                                    </svg>
-                                </div>
-                                </div>
-                            </div>
-
-                            <div className="room-box d-flex gap-4">
-                                <div className="room-name">
-                                <h5 className='mt-2'>Hamam otağı</h5>
-                                </div>
-
-                                <div className="room-controls d-flex gap-3 align-items-center">
-                                <div className={`controls-decrement ${bathrooms > 0 ? 'active' : 'deactive'}`}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => {bathrooms - 1 < 0 ? setBathrooms(0) : setBathrooms(bathrooms - 1)}}>
-                                    <path d="M4 12C4 11.4477 4.44772 11 5 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H5C4.44772 13 4 12.5523 4 12Z" fill={bathrooms > 0 ? '#6C6C6C' : "#E7E7E7"}/>
-                                    </svg>
-                                </div>
-
-                                <div className="controls-number">
-                                    {bathrooms}
-                                </div>
-
-                                <div className="controls-increment active">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => setBathrooms(bathrooms + 1)}>
-                                    <path d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z" fill="#6C6C6C"/>
-                                    </svg>
-                                </div>
-                                </div>
-                            </div>
-
-                            <div className="room-box d-flex gap-4">
-                                <div className="room-name">
-                                <h5 className='mt-2'>İki nəfərlik çarpayı</h5>
-                                </div>
-
-                                <div className="room-controls d-flex gap-3 align-items-center">
-                                <div className={`controls-decrement ${doubleBed > 0 ? 'active' : 'deactive'}`}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => {doubleBed - 1 < 0 ? setDoubleBed(0) : setDoubleBed(doubleBed - 1)}}>
-                                    <path d="M4 12C4 11.4477 4.44772 11 5 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H5C4.44772 13 4 12.5523 4 12Z" fill={doubleBed > 0 ? '#6C6C6C' : "#E7E7E7"}/>
-                                    </svg>
-                                </div>
-
-                                <div className="controls-number">
-                                    {doubleBed}
-                                </div>
-
-                                <div className="controls-increment active">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => setDoubleBed(doubleBed + 1)}>
-                                    <path d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z" fill="#6C6C6C"/>
-                                    </svg>
-                                </div>
-                                </div>
-                            </div>
-
-                            <div className="room-box d-flex gap-4">
-                                <div className="room-name">
-                                <h5 className='mt-2'>Bir nəfərlik çarpayı</h5>
-                                </div>
-
-                                <div className="room-controls d-flex gap-3 align-items-center">
-                                <div className={`controls-decrement ${singleBed > 0 ? 'active' : 'deactive'}`}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => {singleBed - 1 < 0 ? setSingleBed(0) : setSingleBed(singleBed - 1)}}>
-                                    <path d="M4 12C4 11.4477 4.44772 11 5 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H5C4.44772 13 4 12.5523 4 12Z" fill={singleBed > 0 ? '#6C6C6C' : "#E7E7E7"}/>
-                                    </svg>
-                                </div>
-
-                                <div className="controls-number">
-                                    {singleBed}
-                                </div>
-
-                                <div className="controls-increment active">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={() => setSingleBed(singleBed + 1)}>
-                                    <path d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z" fill="#6C6C6C"/>
-                                    </svg>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="filter-permits">
-                        <h4>İcazələr</h4>
-
-                        <div className="filter-checkboxes">
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Villa" name="category" onChange={handleCheckboxes} />
-                                <label>Ev heyvanı</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Tütün" name="category" onChange={handleCheckboxes} />
-                                <label>Tütün</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Kooperativ" name="category" onChange={handleCheckboxes} />
-                                <label>Uşaq</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Parti" name="category" onChange={handleCheckboxes} />
-                                <label>Parti</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Parti" name="category" onChange={handleCheckboxes} />
-                                <label>Nikah şəhadətnaməsi zəruridir</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="filter-conditions">
-                        <h4>Şərait</h4>
-
-                        <div className="filter-checkboxes">
-                            <div className="filter-checkbox">
-                                <input type="checkbox" value="Mətbəx" onChange={handleCheckboxes} />
-                                <label>Mətbəx</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input type="checkbox" value="Tütün" onChange={handleCheckboxes} />
-                                <label>Parkinq</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Kooperativ" name="category" onChange={handleCheckboxes} />
-                                <label>Playstation</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Parti" name="category" onChange={handleCheckboxes} />
-                                <label>Soyuducu</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Parti" name="category" onChange={handleCheckboxes} />
-                                <label>Netflix</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Parti" name="category" onChange={handleCheckboxes} />
-                                <label>Saçquruducu</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Parti" name="category" onChange={handleCheckboxes} />
-                                <label>Paltaryuyan</label>
-                            </div>
-
-                            <div className="filter-checkbox">
-                                <input id="category1" type="checkbox" value="Parti" name="category" onChange={handleCheckboxes} />
-                                <label>Hovuz</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="filter-apply-button green-button-animation d-flex justify-content-center mt-4" onClick={() => {setFilterOpen(false); setScroll(true)}}>
-                        Axtar
-                    </div>
-
-                </div>
-            </div>
+            <SearchFilter />
 
         </div>
         
         <div className="search-body-properties d-flex flex-column gap-3 mt-4">
             {windowWidth > 768 
             ?
-            cards.map((_, index) => (
-            <div key={index} className="search-card d-flex justify-content-between" onClick={() => navigate('/property/1')}>
+            properties.map((property, index) => (
+            <div key={index} className="search-card d-flex justify-content-between" onClick={() => navigate(`/property/${property.uniq_id}`)}>
                 <div className="search-card-img">
-                    <img src="https://allrent.io/storage/mini_frame_01-f8e8-da86-4b22-e131.webp" alt="" />
+                    <img src={property.cover_image} alt="" />
                 </div>
 
                 <div className="search-card-left d-flex justify-content-between">
                     <div className="search-card-info d-flex flex-column">
                         <div className="search-info-header d-flex gap-4 mt-2">
-                            <div className="info-title">
-                                <h5>Quba/Azərbaycan</h5>
-                            </div>
-
                             <div className="info-rating d-flex">
-                                <p className='mb-0'>4.7</p>
+                                <p className='mb-0'>{property.rating}</p>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 20" fill="none">
                                     <path d="M10.3333 14.416L7.25001 16.7702C7.09723 16.8952 6.93057 16.9541 6.75001 16.9468C6.56946 16.9402 6.40973 16.8882 6.27084 16.791C6.13196 16.6938 6.02446 16.5618 5.94834 16.3952C5.87168 16.2285 5.86807 16.048 5.93751 15.8535L7.12501 11.9993L4.10418 9.85352C3.93751 9.7424 3.83334 9.59657 3.79168 9.41602C3.75001 9.23546 3.75696 9.06879 3.81251 8.91602C3.86807 8.76324 3.96529 8.62768 4.10418 8.50935C4.24307 8.39157 4.40973 8.33268 4.60418 8.33268H8.33334L9.54168 4.33268C9.61112 4.13824 9.7189 3.98879 9.86501 3.88435C10.0106 3.78046 10.1667 3.72852 10.3333 3.72852C10.5 3.72852 10.6561 3.78046 10.8017 3.88435C10.9478 3.98879 11.0556 4.13824 11.125 4.33268L12.3333 8.33268H16.0625C16.257 8.33268 16.4236 8.39157 16.5625 8.50935C16.7014 8.62768 16.7986 8.76324 16.8542 8.91602C16.9097 9.06879 16.9167 9.23546 16.875 9.41602C16.8333 9.59657 16.7292 9.7424 16.5625 9.85352L13.5417 11.9993L14.7292 15.8535C14.7986 16.048 14.7953 16.2285 14.7192 16.3952C14.6425 16.5618 14.5347 16.6938 14.3958 16.791C14.257 16.8882 14.0972 16.9402 13.9167 16.9468C13.7361 16.9541 13.5695 16.8952 13.4167 16.7702L10.3333 14.416Z" fill="#40918B"/>
                                 </svg>
                             </div>
+
+                            <div className="info-title">
+                                <h5>{property.title ? property.title : `${property.category} / ${property.city}`}</h5>
+                            </div>
+
                         </div>
 
                         <div className="info-description d-flex flex-column justify-content-between">
                             <div className="info-rooms">
-                                <p className='mb-0'>8 nəfər | 4 otaq | 2 tualet</p>
+                                <p className='mb-0'>{property.max_qonaq_sayi} nəfər | {property.yatag_otagi} otaq | {property.tualet} tualet</p>
                             </div>
 
                             <div className="card-more-price d-flex mt-5">
-                                <p className='mb-0 mt-2'><span>124 azn</span> | Günlük</p>
+                                <p className='mb-0 mt-2'><span>{property.price} azn</span> | Günlük</p>
                             </div>
                         </div>
                     </div>
 
                     <div className="search-card-more d-flex flex-column justify-content-between mt-2">
                         <div className="card-more-controls d-flex gap-1 justify-content-end">
-                            <div className="controls-share" onClick={(e) => handleShareClick(e)}>
+                            <div className="controls-share" onClick={(e) => handleShareClick(e, property)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
                                     <path d="M6.08398 14.5471C7.76673 14.5471 9.13086 13.183 9.13086 11.5002C9.13086 9.8175 7.76673 8.45337 6.08398 8.45337C4.40124 8.45337 3.03711 9.8175 3.03711 11.5002C3.03711 13.183 4.40124 14.5471 6.08398 14.5471Z" stroke="#1D1D1D" stroke-width="1.73333" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M16.917 19.9636C18.5997 19.9636 19.9639 18.5995 19.9639 16.9167C19.9639 15.234 18.5997 13.8699 16.917 13.8699C15.2342 13.8699 13.8701 15.234 13.8701 16.9167C13.8701 18.5995 15.2342 19.9636 16.917 19.9636Z" stroke="#1D1D1D" stroke-width="1.73333" stroke-linecap="round" stroke-linejoin="round"/>
@@ -438,12 +233,12 @@ const SearchBody = () => {
                                 </svg>
                             </div>
 
-                            <div className="controls-like" onClick={(e) => handleLikeClick(index, e)} >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className={liked[index] && 'd-none'}>
+                            <div className="controls-like" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className={favorites.includes(property.uniq_id) && 'd-none'} onClick={(e) => { e.preventDefault(); e.stopPropagation(); addFavorite(property.uniq_id) }}>
                                     <path d="M12 4.52765C9.64418 2.41689 6.02125 2.49347 3.75736 4.75736C1.41421 7.1005 1.41421 10.8995 3.75736 13.2426L10.5858 20.0711C11.3668 20.8521 12.6332 20.8521 13.4142 20.0711L20.2426 13.2426C22.5858 10.8995 22.5858 7.1005 20.2426 4.75736C17.9787 2.49347 14.3558 2.41689 12 4.52765ZM10.8284 6.17157L11.2929 6.63604C11.6834 7.02656 12.3166 7.02656 12.7071 6.63604L13.1716 6.17157C14.7337 4.60948 17.2663 4.60948 18.8284 6.17157C20.3905 7.73367 20.3905 10.2663 18.8284 11.8284L12 18.6569L5.17157 11.8284C3.60948 10.2663 3.60948 7.73367 5.17157 6.17157C6.73367 4.60948 9.26633 4.60948 10.8284 6.17157Z" fill="#1D1D1D"/>
                                 </svg>
 
-                                <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className={!liked[index] && 'd-none'}>
+                                <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className={!favorites.includes(property.uniq_id) && 'd-none'} onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeFavorite(property.uniq_id) }}>
                                     <path d="M13.7454 2.9917C12.1331 2.9917 10.7554 4.14093 9.99845 4.93324C9.24153 4.14093 7.86691 2.9917 6.25538 2.9917C3.47768 2.9917 1.53845 4.92785 1.53845 7.69939C1.53845 10.7532 3.94691 12.7271 6.27691 14.6363C7.37691 15.5386 8.51538 16.4709 9.38845 17.5048C9.53538 17.6779 9.75076 17.7779 9.97691 17.7779H10.0215C10.2485 17.7779 10.4631 17.6771 10.6092 17.5048C11.4838 16.4709 12.6215 15.5379 13.7223 14.6363C16.0515 12.7279 18.4615 10.754 18.4615 7.69939C18.4615 4.92785 16.5223 2.9917 13.7454 2.9917Z" fill="#FE4343"></path>
                                 </svg>
                             </div>
@@ -458,10 +253,10 @@ const SearchBody = () => {
             </div>
             )) 
             : 
-            cards.map((_, index) => (
-            <div key={index} className="search-card-lg" onClick={() => navigate('/property/1')}>
+            properties.map((property, index) => (
+            <div key={index} className="search-card-lg" onClick={() => navigate(`/property/${property.uniq_id}`)}>
                 <div className="card-lg-img">
-                    <img src="https://allrent.io/storage/mini_frame_01-f8e8-da86-4b22-e131.webp" alt="" />
+                    <img src={property.cover_image} alt="" />
                 </div>
                 
                 {/* <div className="card-lg-controls d-flex gap-2">
@@ -487,24 +282,25 @@ const SearchBody = () => {
 
                 <div className="card-lg-header mt-2">
                     <div className="card-lg-title d-flex justify-content-between mt-3">
-                        <div className="title-name d-flex gap-3">
-                            <h5>Quba/Azərbaycan</h5>
-
+                        <div className="title-name d-flex gap-2">
                             <div className="card-lg-rating d-flex">
-                                <p className='mb-0'>4.7</p>
+                                <p className='mb-0'>{property.rating}</p>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
                                     <path d="M10.3332 14.416L7.24989 16.7702C7.09711 16.8952 6.93044 16.9541 6.74989 16.9468C6.56933 16.9402 6.40961 16.8882 6.27072 16.791C6.13183 16.6938 6.02433 16.5618 5.94822 16.3952C5.87156 16.2285 5.86794 16.048 5.93739 15.8535L7.12489 11.9993L4.10406 9.85352C3.93739 9.7424 3.83322 9.59657 3.79156 9.41602C3.74989 9.23546 3.75683 9.06879 3.81239 8.91602C3.86795 8.76324 3.96517 8.62768 4.10406 8.50935C4.24295 8.39157 4.40961 8.33268 4.60406 8.33268H8.33322L9.54156 4.33268C9.611 4.13824 9.71878 3.98879 9.86489 3.88435C10.0104 3.78046 10.1666 3.72852 10.3332 3.72852C10.4999 3.72852 10.656 3.78046 10.8016 3.88435C10.9477 3.98879 11.0554 4.13824 11.1249 4.33268L12.3332 8.33268H16.0624C16.2568 8.33268 16.4235 8.39157 16.5624 8.50935C16.7013 8.62768 16.7985 8.76324 16.8541 8.91602C16.9096 9.06879 16.9166 9.23546 16.8749 9.41602C16.8332 9.59657 16.7291 9.7424 16.5624 9.85352L13.5416 11.9993L14.7291 15.8535C14.7985 16.048 14.7952 16.2285 14.7191 16.3952C14.6424 16.5618 14.5346 16.6938 14.3957 16.791C14.2568 16.8882 14.0971 16.9402 13.9166 16.9468C13.736 16.9541 13.5693 16.8952 13.4166 16.7702L10.3332 14.416Z" fill="#40918B"/>
                                 </svg>
                             </div>
+
+                            <h5>{property.title ? property.title : `${property.category} / ${property.city}`}</h5>
+
                         </div>
 
-                        <p className='mb-0'><span>124 azn</span> / Günlük</p>
+                        <p className='mb-0'><span>{property.price} azn</span> / Günlük</p>
                     </div>
                 </div>
 
                 <div className="card-lg-info">
                     <div className="card-lg-overview">
-                        <p className='mb-0'>8 nəfər | 4 otaq | 2 tualet</p>
+                        <p className='mb-0'>{property.max_qonaq_sayi} nəfər | {property.yatag_otagi} otaq | {property.tualet} tualet</p>
                     </div>
                 </div>
 
@@ -512,6 +308,12 @@ const SearchBody = () => {
                     Ətraflı
                 </div>
             </div>)
+            )}
+
+            {page < properties.length && (
+                <button onClick={loadMoreProperties} className="load-more-btn">
+                    Daha çoxunu göstər
+                </button>
             )}
         </div>
 
@@ -539,23 +341,24 @@ const SearchBody = () => {
                     <h5>Bu elanı paylaşın</h5>
                     
                     <div className="modal-property d-flex gap-3 align-items-center">
-                        <img src={propertyImg} className='modal-property-image' />
+                        <img src={currentItem.coverImage} className='modal-property-image' />
 
                         <div className='d-flex align-items-center gap-4'>
-                            <div>
-                                <p className='mb-0'>{propertyTitle}</p>
-                            </div>
-
                             <div className='property-detailed-rating d-flex'>
-                                <p className='modal-rating mb-0'>5.0</p>
+                                <p className='modal-rating mb-0'>{currentItem.rating}</p>
                                 <img src="https://allrent.io/homepage/images/svg/details/active_fav.svg" alt="favorite svg"></img>
                             </div>
+
+                            <div>
+                                <p className='mb-1'>{currentItem.title}</p>
+                            </div>
+
                         </div>
                     </div>
 
                     <div className="modal-socials mt-4">
                         <div className="modal-social-box d-flex gap-3 align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width={24   } height={24} viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false">
                                 <path d="M25 5a4 4 0 0 1 4 4v17a5 5 0 0 1-5 5H12a5 5 0 0 1-5-5V10a5 5 0 0 1 5-5h13zm0 2H12a3 3 0 0 0-3 3v16a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V9a2 2 0 0 0-2-2zm-3-6v2H11a6 6 0 0 0-6 5.78V22H3V9a8 8 0 0 1 7.75-8H22z"></path>
                             </svg>
 

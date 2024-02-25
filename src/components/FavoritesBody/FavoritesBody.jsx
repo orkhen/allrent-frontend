@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import './favoritesBody.css'
 
 import Carousel from 'react-bootstrap/Carousel';
 import { Slider } from '@mui/material';
+import Placeholder from 'react-bootstrap/Placeholder';
 
 const FavoritesBody = () => {
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [filterOpen, setFilterOpen] = useState(false)
   const [sliderVal, setSliderVal] = useState([40, 1500]);
-  const [bedrooms, setBedrooms] = useState(0)
-  const [bathrooms, setBathrooms] = useState(0)
+  const [bedrooms, setBedrooms] = useState(0);
+  const [bathrooms, setBathrooms] = useState(0);
+  const [favorites, setFavorites] = useState([]);
+  const [properties, setProperties] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleChange = (event, newSliderVal) => {
     setSliderVal(newSliderVal);
@@ -28,6 +33,40 @@ const FavoritesBody = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const userID = localStorage.getItem('userID');
+      console.log(userID)
+
+      try {
+        setIsLoading(true);
+        const response = await axios.get(`https://allrent.io/api/api-favorites?user_uniq_id=${userID}`);
+
+        // Temporary array to store new properties
+        const newProperties = [];
+        const newFavorites = [];
+        
+        for (let index = 0; index < response.data.favorites.length; index++) {
+          const propertiesResponse = await axios.get(`https://allrent.io/api/api-properties?id=${response.data.favorites[index].home_id}`);
+          // Push the new properties to the temporary array instead of state
+          newFavorites.push(response.data.favorites[index].home_id);
+          newProperties.push(propertiesResponse.data.properties);
+        }
+
+        // Update the state once with all new properties
+        setProperties(newProperties);
+        setFavorites(newFavorites);
+
+      } catch (err) {
+        console.log(err)
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    
+    fetchData();
+  }, []);
+  
   const handleCardMouseEnter = (index) => {
     setHoveredCardIndex(index);
     console.log(index)
@@ -36,64 +75,114 @@ const FavoritesBody = () => {
   const handleCardMouseLeave = () => {
     setHoveredCardIndex(null);
   };
-  
-  const propertyPhotos = [
-    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
-    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
-    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.15.55-f8d8-decb-2c38-d3c4.webp',
-    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
-    // 'https://allrent.io/storage/medium_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
-    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-08-18%20at%2017.07.25-f8d8-decb-2c38-d3c4.webp',
-    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
-    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.15.55-f8d8-decb-2c38-d3c4.webp',
-    'https://allrent.io/storage/mini_frame_WhatsApp%20Image%202023-07-08%20at%2022.16.02%20(1)-f8d8-decb-2c38-d3c4.webp',
-  ]
 
-  const renderPropertyCards = (numColumns) => {
-    const columns = Array.from({ length: numColumns }, (_, index) => (
+  const removeFavorite = async (propertyID) => {
+    const newFavorites = favorites.filter(element => (element !== propertyID));
+    setFavorites(newFavorites);
+    const userID = localStorage.getItem('userID');
+    try {
+        const response = await axios.post('https://allrent.io/api/api-favorite-remove', {
+            user_uniq_id: userID,
+            home_uniq_id: propertyID,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+    } catch (error) {
+        console.error('Error removing from favorites:', error);
+    }
+  };
+
+  const addFavorite = async (propertyID) => {
+    const newFavorites = [...favorites];
+    newFavorites.push(propertyID);
+    setFavorites(newFavorites);
+
+    const userID = localStorage.getItem('userID');
+    try {
+        const response = await axios.post('https://allrent.io/api/api-favorite-add', {
+            user_uniq_id: userID,
+            home_uniq_id: propertyID,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+    } catch (error) {
+        console.error('Error adding to favorites:', error);
+    }
+  };
+
+  const renderPlaceholder = () => {
+    return Array.from({ length: 4 }).map((_, index) => (
+      <div key={index} className="mb-4 properties-property">
+        <div className="card">
+          <Placeholder as="div" animation="glow">
+            <Placeholder xs={12} className="card-img-top" />
+          </Placeholder>
+          <div className="card-body">
+            <Placeholder as="h5" animation="glow">
+              <Placeholder xs={7} />
+            </Placeholder>
+            <Placeholder as="p" animation="glow">
+              <Placeholder xs={4} /> <Placeholder xs={8} />
+            </Placeholder>
+          </div>
+        </div>
+      </div>
+    ));
+  };
+
+  const renderPropertyCards = (property, index) =>
+    (
       <div 
         className="mb-4 properties-property" 
         key={index}
         onMouseEnter={() => handleCardMouseEnter(index)}
         onMouseLeave={handleCardMouseLeave}
       >
-        <a href='/property/1'>
+        <a href={`/property/${property.uniq_id}`}>
             <div className="card">
               <Carousel touch={true} interval={null} indicators={false} controls={hoveredCardIndex === index ? true : (windowWidth <= 768 ? true : false)}>
                 {
-                  propertyPhotos.map((photo, index) => {
+                  property.gallery.map((photo, index) => {
                     return (
                     <Carousel.Item key={index}>
-                      <img src={photo} className="card-img-top" alt='img' />
+                      <img src={photo.image_name} className="card-img-top" alt={photo.image_type} />
                     </Carousel.Item>
                   )})
                 }
               </Carousel>
               
               <div className="card-favorite-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20" fill="none" onClick={(e) => {e.preventDefault(); }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20" fill="none" className={!favorites.includes(property.uniq_id) && 'd-none'} onClick={(e) => { e.preventDefault(); removeFavorite(property.uniq_id) }}>
                   <path d="M13.7454 2.9917C12.1331 2.9917 10.7554 4.14093 9.99845 4.93324C9.24153 4.14093 7.86691 2.9917 6.25538 2.9917C3.47768 2.9917 1.53845 4.92785 1.53845 7.69939C1.53845 10.7532 3.94691 12.7271 6.27691 14.6363C7.37691 15.5386 8.51538 16.4709 9.38845 17.5048C9.53538 17.6779 9.75076 17.7779 9.97691 17.7779H10.0215C10.2485 17.7779 10.4631 17.6771 10.6092 17.5048C11.4838 16.4709 12.6215 15.5379 13.7223 14.6363C16.0515 12.7279 18.4615 10.754 18.4615 7.69939C18.4615 4.92785 16.5223 2.9917 13.7454 2.9917Z" fill={true ? '#FE4343' : "#FEFEFE"}/>
+                </svg>
+
+                <svg width="24" height="24" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg" className={favorites.includes(property.uniq_id) && 'd-none'} onClick={(e) => { e.preventDefault(); addFavorite(property.uniq_id) }}>
+                    <path d="M10 1.52765C7.64418 -0.583106 4.02125 -0.506535 1.75736 1.75736C-0.585786 4.1005 -0.585786 7.8995 1.75736 10.2426L8.58579 17.0711C9.36684 17.8521 10.6332 17.8521 11.4142 17.0711L18.2426 10.2426C20.5858 7.8995 20.5858 4.1005 18.2426 1.75736C15.9787 -0.506535 12.3558 -0.583106 10 1.52765ZM8.82843 3.17157L9.29289 3.63604C9.68342 4.02656 10.3166 4.02656 10.7071 3.63604L11.1716 3.17157C12.7337 1.60948 15.2663 1.60948 16.8284 3.17157C18.3905 4.73367 18.3905 7.26633 16.8284 8.82843L10 15.6569L3.17157 8.82843C1.60948 7.26633 1.60948 4.73367 3.17157 3.17157C4.73367 1.60948 7.26633 1.60948 8.82843 3.17157Z" fill="#fff"></path>
                 </svg>
               </div>
 
               <div className="card-body">
                   <div className="card-info d-flex flex-column">
                       <div className="info-top d-flex justify-content-between">
-                          <h5 className="card-title">Property Title</h5>
+                          <h5 className="card-title">{property.title ? property.title : `${property.category} / ${property.city}`}</h5>
 
                           <div className="card-rating d-flex">
-                              <p>5.0</p>
+                              <p>{property.rating}</p>
                               <svg className='card-rating-star' xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 17 16" fill="none"><path d="M8.83002 13.4221L5.02586 15.7137C4.8578 15.8207 4.68211 15.8665 4.49877 15.8512C4.31544 15.836 4.15502 15.7749 4.01752 15.6679C3.88002 15.561 3.77308 15.4274 3.69669 15.2673C3.6203 15.1066 3.60502 14.9269 3.65086 14.7283L4.65919 10.3971L1.29044 7.48668C1.13766 7.34919 1.04233 7.19243 1.00444 7.01643C0.965937 6.84105 0.977243 6.66932 1.03835 6.50127C1.09947 6.33321 1.19113 6.19571 1.31335 6.08877C1.43558 5.98182 1.60363 5.91307 1.81752 5.88252L6.26336 5.49293L7.98211 1.41377C8.0585 1.23044 8.17705 1.09294 8.33777 1.00127C8.49789 0.909603 8.66197 0.86377 8.83002 0.86377C8.99808 0.86377 9.16247 0.909603 9.32319 1.00127C9.4833 1.09294 9.60155 1.23044 9.67794 1.41377L11.3967 5.49293L15.8425 5.88252C16.0564 5.91307 16.2245 5.98182 16.3467 6.08877C16.4689 6.19571 16.5606 6.33321 16.6217 6.50127C16.6828 6.66932 16.6944 6.84105 16.6565 7.01643C16.618 7.19243 16.5224 7.34919 16.3696 7.48668L13.0008 10.3971L14.0092 14.7283C14.055 14.9269 14.0397 15.1066 13.9633 15.2673C13.8869 15.4274 13.78 15.561 13.6425 15.6679C13.505 15.7749 13.3446 15.836 13.1613 15.8512C12.9779 15.8665 12.8022 15.8207 12.6342 15.7137L8.83002 13.4221Z" fill="#40918B"/></svg>
                           </div>
                       </div>
 
                       <div className="info-mid">
-                          <p>5 nəfər • 4 otaq • 3 tualet</p>
+                          <p>{property.max_qonaq_sayi} nəfər • {property.yatag_otagi} otaq • {property.tualet} tualet</p>
                       </div>
 
                       <div className="info-bottom d-flex justify-content-between">
                           <p className='m-0'>
-                              <span className='card-price'>150 azn</span> 
+                              <span className='card-price'>{property.price} azn</span> 
                               <span className='card-price-per'>Günlük</span>
                           </p>
                       </div>
@@ -106,10 +195,7 @@ const FavoritesBody = () => {
             </div>
         </a>
       </div>
-    ));
-
-    return columns;
-  };
+    )
 
   const handleCheckboxes = () => {
     
@@ -117,7 +203,7 @@ const FavoritesBody = () => {
 
   return (
     <div className='favorites-body'>
-      <div className="favorites-body-container">
+      <div className="favorites-body-container d-flex flex-column">
         <div className="favorites-top d-flex align-items-center justify-content-between">
             <div className="favorites-title">
               <h5>Bəyənilənlər</h5>
@@ -353,11 +439,19 @@ const FavoritesBody = () => {
               </div>
             </div>
         </div>
-
-        <div className="favorites-cards mt-4">
-            {/* <h5>Bəyənilən evləriniz yoxdur. Bütün evlərə baxmaq üçün Ana səhifəyə keçin.</h5> */}
-            {renderPropertyCards(4)}
-        </div>
+        
+        {(properties.length === 0 && !isLoading) 
+        ? ( <div className="favorites-no-liked">
+              <h5 className='text-center'>Bəyənilən evləriniz yoxdur. Bütün evlərə baxmaq üçün Ana səhifəyə keçin.</h5>
+            </div>)
+        :  (<div className="favorites-cards mt-4">
+              {isLoading 
+              ? renderPlaceholder()
+              : properties.map((property, index) => (
+                renderPropertyCards(property[0], index)
+              ))}
+          </div>)
+        }
       </div>
     </div>
   )
