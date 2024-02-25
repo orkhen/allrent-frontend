@@ -128,6 +128,9 @@ const SearchbarProperty = () => {
                         '& .MuiInputBase-root': {
                           cursor: !searchExpanded ? 'pointer' : '',
                           width: '100%',
+                        },
+                        '& .MuiAutocomplete-inputRoot .MuiAutocomplete-input': {
+                          minWidth: '50px',
                         }
                       }}
                     />
@@ -135,7 +138,12 @@ const SearchbarProperty = () => {
                 />
               </div>
               <div className={`searchbar-input-dates ${!searchExpanded ? 'search-collapsed' : 'search-expanded'}`} onClick={() => setIsCalendarOpen(!isCalendarOpen)}>
-                <input type='text' placeholder='Tarix?' value={formatDateRange()} className='clickable noselect' readOnly />
+                <input type='text' 
+                  placeholder='Tarix?' 
+                  // value={formatDateRange()} 
+                  className='clickable noselect' 
+                  readOnly 
+                />
               </div>
               <div className={`searchbar-input-guests ${!searchExpanded ? 'search-collapsed' : 'search-expanded'}`}>
                 <input type='text' value={guestsNumber} onChange={(e) => setGuestsNumber(e.target.value)} placeholder='Say?' />
